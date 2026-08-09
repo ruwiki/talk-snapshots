@@ -37,10 +37,14 @@ def main() -> int:
     noms = fetch_page_threads(api, wiki, page="Википедия:К удалению/1 июля 2026")
     results.append(check("DiscussionTools отдаёт треды", bool(noms), f"номинаций {len(noms)}"))
 
-    results.append(check("реплики баз доступны", revs.on_toolforge(),
-                         "вне Toolforge это ожидаемо и не ошибка"
-                         if not revs.on_toolforge() else ""))
-    if revs.on_toolforge():
+    if revs.replicas_available():
+        results.append(check("креды реплик на месте", True))
+    elif revs.on_toolforge():
+        results.append(check("креды реплик на месте", False,
+                             "на Toolforge их обязана подставлять платформа"))
+    else:
+        print("[проп] реплики — запуск вне Toolforge, проверять нечего")
+    if revs.replicas_available():
         rows = revs.fetch(wiki, "Википедия:К удалению/1 июля 2026")
         tagged = sum(1 for r in rows if r.added_comment)
         results.append(check("история правок читается", bool(rows),

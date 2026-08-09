@@ -42,8 +42,18 @@ SELECT ct.ct_rev_id, ctd.ctd_name
 """
 
 
+def replicas_available() -> bool:
+    """Есть ли доступ к репликам.
+
+    Проверять надо креды, а не файл `~/replica.my.cnf`: образы build service
+    запускаются без смонтированного NFS-дома, и файла там нет — зато
+    TOOL_REPLICA_USER и TOOL_REPLICA_PASSWORD платформа подставляет сама.
+    """
+    return bool(os.environ.get("TOOL_REPLICA_USER") and os.environ.get("TOOL_REPLICA_PASSWORD"))
+
+
 def on_toolforge() -> bool:
-    return os.path.exists(os.path.expanduser("~/replica.my.cnf"))
+    return replicas_available() or bool(os.environ.get("TOOL_TOOLSDB_USER"))
 
 
 def _split_title(title: str) -> tuple[int, str]:
@@ -148,6 +158,6 @@ def from_api(api: Api, wiki: Wiki, title: str, limit: int = 500) -> list[Revisio
 
 def fetch(wiki: Wiki, title: str, api: Api | None = None) -> list[Revision]:
     """Реплика на Toolforge, API снаружи — выход одинаковый."""
-    if on_toolforge():
+    if replicas_available():
         return from_replica(wiki, title)
     return from_api(api or Api(wiki.host), wiki, title)
