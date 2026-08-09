@@ -114,7 +114,7 @@ RUWIKI = Wiki(
         r"\{\{КУ-Навигация\}\}",
         r"\{\{(?:subst:)?Пропущенный итог[^}]*\}\}",
     ),
-    known_bots=frozenset({"QBA-II-bot", "KrBot", "Bot", "ClaymoreBot"}),
+    known_bots=frozenset({"QBA-II-bot", "KrBot", "BotDR", "Bot", "ClaymoreBot"}),
 )
 
 ENWIKI = Wiki(
@@ -128,9 +128,11 @@ ENWIKI = Wiki(
     day_page=False,  # дневной лог только транклюдирует номинации-подстраницы
     nomination_level=3,
     outcome_headings=(),
+    # «Comment» сюда не входит: это пометка «просто замечание», а не позиция.
+    # С ним доля реплик с позицией завышалась на 4 процентных пункта.
     vote_words=(
         "Keep", "Delete", "Merge", "Redirect", "Speedy keep", "Speedy delete",
-        "Speedy close", "Draftify", "Userfy", "Comment", "Weak keep", "Weak delete",
+        "Speedy close", "Draftify", "Userfy", "Weak keep", "Weak delete",
         "Strong keep", "Strong delete",
     ),
     noise_patterns=(r"delsort-notice", r"xfd_relist", r"class=\"?xfd_relist"),

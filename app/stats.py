@@ -1,9 +1,9 @@
 """Отчёты по загруженным обсуждениям.
 
 Часть метрик считается по репликам, часть — только по истории правок.
-Второе важнее: правка в чужой секции без собственной реплики — это
-подведение итога, перенос или вмешательство в чужой текст, и в тексте
-обсуждения такого следа нет.
+Второе важнее: правка внутри номинации, не оставившая реплики, в тексте
+обсуждения не видна вовсе — это оформление, перенос, простановка шаблона
+или правка чужих слов.
 """
 
 from __future__ import annotations
@@ -97,31 +97,31 @@ def closers(db: DB, limit: int = 15) -> None:
         print(f"{wiki:<8} {author[:30]:<30} {n:>7}")
 
 
-def silent_editors(db: DB, limit: int = 15) -> None:
-    """Правил секцию, но не оставил в ней ни одной реплики.
+def edits_without_comment(db: DB, limit: int = 15) -> None:
+    """Правки внутри номинации от того, кто не оставил в ней ни одной реплики.
 
-    Ровно тот случай, ради которого нужна история правок: в тексте
-    обсуждения этих людей не видно вообще.
+    Не обвинение: обычно это оформление, простановка шаблона, зачёркивание
+    заголовка или перенос. Смысл в том, что такой активности нет в тексте
+    обсуждения вообще — её видно только в истории правок.
+
+    Секция сопоставляется с существующей номинацией, а не сравнивается со
+    строкой: иначе служебные подзаголовки («Итог», «По всем») дают четверть
+    ложных строк, потому что названием номинации они не являются.
     """
-    revs = db.execute(
-        """SELECT wiki, actor, section FROM revisions
-            WHERE section IS NOT NULL AND section <> ''"""
+    rows = db.execute(
+        """SELECT r.wiki, r.actor, COUNT(*) n
+             FROM revisions r
+             JOIN nominations nm
+               ON nm.wiki = r.wiki AND nm.title = r.section
+            WHERE r.section IS NOT NULL AND r.section <> ''
+              AND NOT EXISTS (
+                    SELECT 1 FROM comments c
+                     WHERE c.nomination_id = nm.id AND c.author = r.actor)
+            GROUP BY r.wiki, r.actor ORDER BY n DESC"""
     ).fetchall()
-    spoke = {
-        (w, a, t)
-        for w, a, t in db.execute(
-            """SELECT c.wiki, c.author, n.title FROM comments c
-                 JOIN nominations n ON n.id = c.nomination_id
-                WHERE c.author IS NOT NULL"""
-        ).fetchall()
-    }
-    silent: Counter = Counter()
-    for wiki, actor, section in revs:
-        if (wiki, actor, section) not in spoke:
-            silent[(wiki, actor)] += 1
-    print(f"{'раздел':<8} {'правил молча':<30} {'правок':>7}")
-    for (wiki, actor), n in silent.most_common(limit):
-        print(f"{wiki:<8} {actor[:30]:<30} {n:>7}")
+    print(f"{'раздел':<8} {'участник':<30} {'правок без реплики':>19}")
+    for wiki, actor, n in rows[:limit]:
+        print(f"{wiki:<8} {actor[:30]:<30} {n:>19}")
 
 
 def tag_breakdown(db: DB, limit: int = 12) -> None:
@@ -142,7 +142,7 @@ REPORTS = {
     "edges": reply_edges,
     "pairs": co_participation,
     "closers": closers,
-    "silent": silent_editors,
+    "unspoken": edits_without_comment,
     "tags": tag_breakdown,
 }
 

@@ -39,7 +39,7 @@ python -m app.stats --db ts.sqlite --report top        # participation ranking
 python -m app.stats --db ts.sqlite --report edges      # who replies to whom
 python -m app.stats --db ts.sqlite --report pairs      # who meets whom
 python -m app.stats --db ts.sqlite --report closers    # who closes discussions
-python -m app.stats --db ts.sqlite --report silent     # edited a section, never spoke in it
+python -m app.stats --db ts.sqlite --report unspoken   # edited a nomination without commenting in it
 python -m app.stats --db ts.sqlite --report tags       # how edits were made
 ```
 
