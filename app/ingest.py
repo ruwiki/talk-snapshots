@@ -31,6 +31,32 @@ def daterange(start: dt.date, end: dt.date):
         start += step
 
 
+def purge_page(db: DB, wiki: wikis.Wiki, title: str) -> None:
+    """Стереть ранее загруженное по странице.
+
+    Вставки идемпотентны, поэтому повторная загрузка сама по себе НЕ обновляет
+    старые строки: `vote`, `is_bot` и разбор итогов вычисляются в момент
+    загрузки. После изменения правил разбора данные надо перезалить, иначе
+    отчёты продолжат показывать прежние числа.
+    """
+    row = db.execute(
+        "SELECT id FROM pages WHERE wiki = ? AND title = ?", (wiki.dbname, title)
+    ).fetchone()
+    if row:
+        page_id = row[0]
+        db.execute(
+            """DELETE FROM comments WHERE nomination_id IN
+               (SELECT id FROM nominations WHERE page_id = ? AND wiki = ?)""",
+            (page_id, wiki.dbname),
+        )
+        db.execute(
+            "DELETE FROM nominations WHERE page_id = ? AND wiki = ?", (page_id, wiki.dbname)
+        )
+    db.execute(
+        "DELETE FROM revisions WHERE wiki = ? AND page_title = ?", (wiki.dbname, title)
+    )
+
+
 def store_page(db: DB, wiki: wikis.Wiki, title: str, day: dt.date) -> int:
     db.execute(
         db.ignore("INSERT INTO pages (wiki, title, day, fetched_at) VALUES (?, ?, ?, ?)"),
@@ -95,12 +121,17 @@ def store_revisions(db: DB, rows: list[Revision]) -> None:
     )
 
 
-def ingest_day(db: DB, wiki: wikis.Wiki, api: Api, day: dt.date, with_revisions: bool = True):
+def ingest_day(
+    db: DB, wiki: wikis.Wiki, api: Api, day: dt.date,
+    with_revisions: bool = True, refresh: bool = False,
+):
     title = day_page_title(wiki, day)
     noms = fetch_page_threads(api, wiki, page=title)
     if not noms:
         return dict(day=day.isoformat(), page=title, nominations=0, comments=0, revisions=0)
 
+    if refresh:
+        purge_page(db, wiki, title)
     page_id = store_page(db, wiki, title, day)
     n_comments = store_nominations(db, wiki, page_id, day, noms)
     n_revs = 0
@@ -123,6 +154,8 @@ def main() -> None:
     ap.add_argument("--to", dest="end", help="ГГГГ-ММ-ДД, по умолчанию = --from")
     ap.add_argument("--db", default=None, help="файл SQLite или toolsdb:<база>")
     ap.add_argument("--no-revisions", action="store_true", help="только треды, без истории правок")
+    ap.add_argument("--refresh", action="store_true",
+                    help="перезалить дни заново: нужно после изменения правил разбора")
     args = ap.parse_args()
 
     if args.recent:
@@ -139,7 +172,8 @@ def main() -> None:
     with open_db(args.db) as db:
         db.init_schema()
         for day in daterange(start, end):
-            res = ingest_day(db, wiki, api, day, with_revisions=not args.no_revisions)
+            res = ingest_day(db, wiki, api, day, with_revisions=not args.no_revisions,
+                             refresh=args.refresh)
             print(
                 f"{res['day']}  номинаций {res['nominations']:>3}  "
                 f"реплик {res['comments']:>4}  правок {res['revisions']:>4}  {res['page']}"
