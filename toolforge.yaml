@@ -1,0 +1,6 @@
+config_version: v1beta1
+components:
+  daily:
+    component_type: scheduled
+    schedule: "17 4 * * *"
+    command: daily
