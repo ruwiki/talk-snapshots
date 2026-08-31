@@ -54,16 +54,19 @@ class OutcomeSection:
             if c.is_outcome and c.author and not c.is_bot:
                 by_page.setdefault(c.page, []).append(c)
         for page, comments in by_page.items():
-            last = max(comments, key=lambda c: c.ts or _MIN)
-            first = min(comments, key=lambda c: c.ts or _MIN)
+            ordered = sorted(comments, key=lambda c: c.ts or _MIN)
+            last = ordered[-1]
+            # решающее слово — обычно в конце последней реплики итога; дополнения
+            # («для бота», «оспорено») идут следом, поэтому классифицируем весь текст секции
+            joined = " ".join(c.text for c in ordered)
             nom.outcomes.append(
                 DiscussionOutcome(
-                    kind=_classify(first.text, self.kinds),
+                    kind=_classify(joined, self.kinds),
                     page=page,
                     closer=last.author,
                     closed_at=last.ts,
                     source="section",
-                    raw=first.text[:200],
+                    raw=joined[-240:] if len(joined) > 240 else joined,
                 )
             )
 
