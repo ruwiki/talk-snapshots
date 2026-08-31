@@ -43,8 +43,8 @@ def compute(db: DB, wiki: str, since: dt.date) -> list[Metric]:
     ).fetchone()
     bots = db.execute(
         """SELECT COUNT(DISTINCT author) FROM comments
-            WHERE wiki=? AND is_bot=0 AND author IS NOT NULL AND LOWER(author) LIKE '%bot'""",
-        (wiki,),
+            WHERE wiki=? AND is_bot=0 AND author IS NOT NULL AND LOWER(author) LIKE ?""",
+        (wiki, "%bot"),
     ).fetchone()[0]
     old = (dt.datetime.now(dt.UTC).date() - dt.timedelta(days=30)).isoformat()
     n_old, n_old_open = db.execute(
