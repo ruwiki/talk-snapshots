@@ -30,7 +30,7 @@ class Api:
         params.setdefault("formatversion", 2)
         params.setdefault("maxlag", 5)
         delay = 1.0
-        for attempt in range(5):
+        for _attempt in range(5):
             resp = self.session.get(self.url, params=params, timeout=self.timeout)
             if resp.status_code in (429, 502, 503, 504):
                 time.sleep(delay)

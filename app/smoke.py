@@ -8,10 +8,11 @@ from __future__ import annotations
 
 import sys
 
-from .api import Api
-from .db import open_db
-from . import revisions as revs
 from . import wikis
+from .api import Api
+from .core import revisions as revs
+from .core.threads import fetch_page_threads
+from .db import open_db
 
 
 def check(label: str, ok: bool, detail: str = "") -> bool:
@@ -30,9 +31,8 @@ def main() -> int:
         results.append(check("база отвечает и схема на месте", True,
                              f"номинаций {n_noms}, реплик {n_comments}, правок {n_revs}"))
 
-    wiki = wikis.RUWIKI
+    wiki = wikis.get("ruwiki")
     api = Api(wiki.host)
-    from .threads import fetch_page_threads
 
     noms = fetch_page_threads(api, wiki, page="Википедия:К удалению/1 июля 2026")
     results.append(check("DiscussionTools отдаёт треды", bool(noms), f"номинаций {len(noms)}"))

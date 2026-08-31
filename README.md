@@ -1,72 +1,90 @@
 # talk-snapshots
 
-Who argues with whom, about which topics, in deletion discussions — across
-Russian and English Wikipedia with one codebase.
+Who argues with whom, about which pages, in deletion discussions — and what
+happens to those pages afterwards — across Wikipedias with one codebase.
 
-The participation layer (who spoke, when, replying to whom) is
-format-independent and works on any wiki. Stances are a per-wiki plugin,
-because the formats genuinely differ: English Wikipedia bolds `Keep`/`Delete`,
-Russian Wikipedia has no formal voting in deletion discussions at all.
-Measured on 1,940 loaded comments: **35% of comments carry a formal stance on
-enwiki against 1.4% on ruwiki**.
+Seven wikis are wired in: `ruwiki`, `enwiki`, `dewiki`, `ukwiki`, `zhwiki`,
+`itwiki`, `jawiki`. Adding one more is a single declarative file, see below.
+
+## Two things that are universal, and everything that is not
+
+**Universal.** The participation layer (who spoke, when, replying to whom)
+comes from the DiscussionTools API and works on any wiki. The fate of a page
+(exists / redirect / deleted, when, by whom, on which grounds / moved /
+recreated) comes from the `page` and `logging` tables of the database
+replicas — the same schema on every wiki, one query for all of them.
+
+**Per wiki.** Where the discussions live, how nominations are separated on a
+page, which pages a nomination is about, where the closing decision is written
+and how a comment expresses a stance. None of this is hard-coded: each axis is
+a small strategy in `app/core/`, and a wiki is a composition of strategies in
+`app/wikis/<dbname>.py`.
+
+| Axis | Strategies | Used by |
+|---|---|---|
+| listing | `DayPage`, `DailyLog` | ru/de/uk/zh · en/it/ja |
+| pages (1:N) | `Subsections`, `HeadingLinks`, `TitleFromHeading`, `TitleAfterPrefix` | group nominations, headings, per-nomination pages |
+| outcome | `OutcomeSection`, `HeadingSuffix`, `ClosingTemplate`, `CommentPattern`, `NoOutcome` | ru/uk · de · en/zh · ja · it |
+| stance | `VoteWords`, `SectionStance`, `NoStance` | en/de/uk/zh/ja · it · — |
+| reason | `ReasonClass` regexes over the deletion-log comment | all |
+
+Discussion outcome and page state are stored separately
+(`discussion_outcome` vs `page_state`): a page can be kept by the discussion
+and speedily deleted a month later, or deleted and recreated — those are
+different facts.
+
+A nomination may concern several pages (`nomination_pages`): Russian
+Wikipedia groups articles under one heading with sub-headings per article,
+and a fifth of nominations there are such groups or non-article pages.
 
 ## Three sources, not one
 
 | Source | What it provides | Module |
 |---|---|---|
-| **DiscussionTools API** | thread structure as MediaWiki itself sees it: author, timestamp, nesting, `transcludedfrom` | `app/threads.py` |
-| **Revision history** (wiki replicas on Toolforge, API elsewhere) | what the text cannot show: who edited someone else's comment, who closed the discussion, who moved a nomination; plus engine tags such as `discussiontools-added-comment` | `app/revisions.py` |
-| **Wikitext parsing** | fallback for dump processing, where an API call per page is not affordable | `app/parse.py` |
+| **DiscussionTools API** | thread structure as MediaWiki itself sees it: author, timestamp, nesting, sub-headings, `transcludedfrom` | `core/threads.py` |
+| **Database replicas** (Toolforge; API elsewhere) | revision history of the discussion page, page state and deletion log, categories and Wikidata item snapshot | `core/revisions.py`, `core/state.py`, `core/topics.py` |
+| **Wikitext parsing** | fallback for dump processing, where an API call per page is not affordable; also the closing templates | `core/parse.py` |
 
-That order is deliberate. Signature parsing is the fallback, not the
-foundation: on the ruwiki deletion log for 1 July 2026 the engine finds 121
-comments where the hand-rolled parser finds 102 (**84%**), with 95% agreement
-on participants. The gap is pinned by `tests/test_vs_engine.py` so it cannot
-grow unnoticed.
+Topics are snapshotted **at nomination time**: after deletion the categories
+are gone from every source (replicas, Wikidata sitelinks, even the enwiki
+DELSORT categories vanish when the AfD is closed).
 
 ## Usage
 
 ```bash
 pip install -r requirements.txt
+export TS_DB=ts.sqlite            # or toolsdb:<db> on Toolforge (set by envvars)
+export TS_WIKIS=ruwiki,enwiki,dewiki
 
-# load a few days into SQLite
-python -m app.ingest --wiki ruwiki --from 2026-07-01 --to 2026-07-03 --db ts.sqlite
-python -m app.ingest --wiki enwiki --from 2026-07-01 --to 2026-07-03 --db ts.sqlite
-
-# reports
-python -m app.stats --db ts.sqlite --report overview   # per-wiki summary
-python -m app.stats --db ts.sqlite --report top        # participation ranking
-python -m app.stats --db ts.sqlite --report edges      # who replies to whom
-python -m app.stats --db ts.sqlite --report pairs      # who meets whom
-python -m app.stats --db ts.sqlite --report closers    # who closes discussions
-python -m app.stats --db ts.sqlite --report unspoken   # edited a nomination without commenting in it
-python -m app.stats --db ts.sqlite --report tags       # how edits were made
+python -m app.cli ingest --from 2026-07-01 --to 2026-07-03   # all TS_WIKIS
+python -m app.cli --wiki dewiki ingest --recent 3 --refresh-changed
+python -m app.cli state                                      # page fate from logs, whole volume
+python -m app.cli quality                                    # metrics vs thresholds, non-zero exit on breach
+python -m app.cli daily                                      # what the cron runs: the three above
+python -m app.stats --report top                             # participation reports
 ```
 
-On Toolforge the database comes from the environment:
-`TS_DB=toolsdb:$TOOL_TOOLSDB_USER__talk_snapshots`. Replica and Toolsdb
-credentials are injected by the platform and must never live in the repository.
-
-## Deployment
-
-`Procfile` declares three processes: `migrate` (schema), `daily` (last three
-days of both wikis), `smoke` (post-deploy check). `toolforge.yaml` puts `daily`
-on a schedule.
-
-The post-deploy check deliberately does **not** live in GitHub Actions: wiki
-replicas and Toolsdb are unreachable outside Cloud VPS, so CI runs only the
-offline tests and `smoke` runs as a one-off job on Toolforge.
+`--refresh-changed` re-reads a day page only if its latest revision on the
+wiki differs from the stored one: fixing a discussion on-wiki is the trigger,
+there is no management UI. Page state is recomputed over the whole volume on
+every run — it has no window.
 
 ## Adding a wiki
 
-One entry in `app/wikis.py`: month names, user-namespace aliases, where
-deletion discussions live, and — optionally — the stance markers that wiki
-uses. Everything else is shared.
+1. Create `app/wikis/<dbname>.py` with a `WIKI = WikiSpec(...)`: locale
+   (months, user-namespace aliases, namespace prefixes, bots, signature
+   format), and one strategy per axis. `dewiki.py` is the shortest example.
+2. Save one day of DiscussionTools output as
+   `tests/fixtures/<dbname>/dt_<day>.json` and pin counts in
+   `expected_<day>.json`. The registry test refuses wikis without a fixture.
+3. Add the dbname to `TS_WIKIS`. Nothing in `app/core/` changes — a test
+   asserts the core never mentions a wiki name.
 
-## Status
+## Deployment
 
-Working and verified on live data, both locally and on Toolforge (replicas,
-Toolsdb). Not built yet: a web interface, a topic layer via Wikidata, stance
-extraction for ruwiki, and bulk loading from dumps.
+`Procfile` declares `migrate`, `daily` and `smoke`; `toolforge.yaml` schedules
+`daily`. The post-deploy check runs as a one-off job on Toolforge, not in
+GitHub Actions: replicas and Toolsdb are unreachable outside Cloud VPS, so CI
+runs only the offline tests (`python -m pytest`) and `ruff`.
 
 Licensed under Apache-2.0.

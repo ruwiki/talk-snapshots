@@ -2,6 +2,9 @@
 
 Различие спрятано в одном месте — плейсхолдеры и типы. Схема одна, чтобы
 локальный прогон и продовый работали с одинаковыми запросами.
+
+У каждой таблицы есть колонка wiki: разделы живут в одной базе, и любой
+запрос витрины — это GROUP BY wiki, а не отдельная база на раздел.
 """
 
 from __future__ import annotations
@@ -34,7 +37,19 @@ SCHEMA = [
         opened_at   VARCHAR(32),
         closed_at   VARCHAR(32),
         n_comments  INT          NOT NULL,
+        kind        VARCHAR(16),
+        source_page VARCHAR(255),
         UNIQUE {uniq_noms} (wiki, page_id, title)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS nomination_pages (
+        nomination_id BIGINT       NOT NULL,
+        wiki          VARCHAR(32)  NOT NULL,
+        ns            INT          NOT NULL,
+        title         VARCHAR(255) NOT NULL,
+        resolved_by   VARCHAR(32),
+        PRIMARY KEY (nomination_id, ns, title)
     )
     """,
     """
@@ -51,7 +66,50 @@ SCHEMA = [
         is_outcome    {bool_t}     NOT NULL,
         is_bot        {bool_t}     NOT NULL,
         text          {text_t},
+        page          VARCHAR(255),
+        section       VARCHAR(255),
         UNIQUE {uniq_comments} (nomination_id, idx)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS discussion_outcome (
+        nomination_id BIGINT       NOT NULL,
+        wiki          VARCHAR(32)  NOT NULL,
+        page          VARCHAR(255) NOT NULL,
+        kind          VARCHAR(16)  NOT NULL,
+        closer        VARCHAR(255),
+        closed_at     VARCHAR(32),
+        source        VARCHAR(16),
+        raw           VARCHAR(255),
+        PRIMARY KEY (nomination_id, page)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS page_state (
+        wiki          VARCHAR(32)  NOT NULL,
+        ns            INT          NOT NULL,
+        title         VARCHAR(255) NOT NULL,
+        state         VARCHAR(16)  NOT NULL,
+        deleted_at    VARCHAR(32),
+        deleted_by    VARCHAR(255),
+        reason_class  VARCHAR(16),
+        reason_code   VARCHAR(16),
+        reason_raw    VARCHAR(500),
+        moved_to      VARCHAR(255),
+        checked_at    VARCHAR(32)  NOT NULL,
+        PRIMARY KEY (wiki, ns, title)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS topics (
+        nomination_id BIGINT       NOT NULL,
+        wiki          VARCHAR(32)  NOT NULL,
+        ns            INT          NOT NULL,
+        title         VARCHAR(255) NOT NULL,
+        source        VARCHAR(24)  NOT NULL,
+        value         VARCHAR(255) NOT NULL,
+        taken_at      VARCHAR(32)  NOT NULL,
+        PRIMARY KEY (nomination_id, ns, title, source, value)
     )
     """,
     """
@@ -68,11 +126,31 @@ SCHEMA = [
         PRIMARY KEY (wiki, rev_id)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS quality_runs (
+        id        {pk},
+        run_at    VARCHAR(32)  NOT NULL,
+        wiki      VARCHAR(32)  NOT NULL,
+        metric    VARCHAR(40)  NOT NULL,
+        value     DOUBLE,
+        threshold DOUBLE,
+        ok        {bool_t}     NOT NULL
+    )
+    """,
     "CREATE INDEX {ine} idx_revisions_actor ON revisions (actor)",
     "CREATE INDEX {ine} idx_revisions_section ON revisions (wiki, page_title, section)",
     "CREATE INDEX {ine} idx_comments_author ON comments (author)",
     "CREATE INDEX {ine} idx_comments_ts ON comments (ts)",
     "CREATE INDEX {ine} idx_noms_day ON nominations (wiki, day)",
+    "CREATE INDEX {ine} idx_pages_state ON page_state (wiki, state)",
+]
+
+#: колонки, добавленные после первого деплоя: применяются к уже существующим таблицам
+MIGRATIONS = [
+    "ALTER TABLE nominations ADD COLUMN kind VARCHAR(16)",
+    "ALTER TABLE nominations ADD COLUMN source_page VARCHAR(255)",
+    "ALTER TABLE comments ADD COLUMN page VARCHAR(255)",
+    "ALTER TABLE comments ADD COLUMN section VARCHAR(255)",
 ]
 
 
@@ -93,6 +171,13 @@ class DB:
         if self.flavour == "sqlite":
             return query.replace("INSERT INTO", "INSERT OR IGNORE INTO", 1)
         return query.replace("INSERT INTO", "INSERT IGNORE INTO", 1)
+
+    def upsert(self, query: str, keys: tuple[str, ...], cols: tuple[str, ...]) -> str:
+        """INSERT … ON CONFLICT/DUPLICATE — обновить всё, кроме ключей."""
+        upd = ", ".join(f"{c} = {'excluded.' if self.flavour == 'sqlite' else 'VALUES('}{c}{'' if self.flavour == 'sqlite' else ')'}" for c in cols if c not in keys)
+        if self.flavour == "sqlite":
+            return f"{query} ON CONFLICT ({', '.join(keys)}) DO UPDATE SET {upd}"
+        return f"{query} ON DUPLICATE KEY UPDATE {upd}"
 
     def execute(self, query: str, args: tuple = ()):
         cur = self.conn.cursor()
@@ -127,6 +212,12 @@ class DB:
                 self.execute(stmt.format(**fmt))
             except Exception as exc:  # индекс уже есть — MariaDB до 10.6 не знает IF NOT EXISTS
                 if "duplicate" not in str(exc).lower() and "exists" not in str(exc).lower():
+                    raise
+        for stmt in MIGRATIONS:
+            try:
+                self.execute(stmt)
+            except Exception as exc:
+                if "duplicate" not in str(exc).lower():
                     raise
         self.commit()
 

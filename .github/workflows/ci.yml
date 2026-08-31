@@ -11,4 +11,4 @@ jobs:
       - run: pip install -r requirements.txt pytest ruff
       - run: ruff check app tests
       # реплик и Toolsdb снаружи Cloud VPS нет — здесь только то, что работает офлайн
-      - run: pytest -q
+      - run: python -m pytest -q

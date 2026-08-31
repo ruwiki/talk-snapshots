@@ -1,0 +1,461 @@
+
+__NOINDEX__-{H|zh-hans:文件; zh-hant:檔案;}- <!--googleoff: all--><noinclude>
+<div style="float: right; margin: .3em .3em .3em 1em;">{{Clickable button 2|url={{fullurl:{{#if:|{{FULLPAGENAME}}#{{{jumpto}}}|{{FULLPAGENAME}}}}|action=purge&_={{CURRENTTIMESTAMP}}}}|刷新本頁}}</div>
+{| border="0" style="background-color:none"
+|-
+| align="center" | '''頁面''' || ：[[Wikipedia:頁面存廢討論/積壓討論|積壓]]<small>{{edit|Wikipedia:頁面存廢討論/積壓討論|編}}</small> || ｜
+| align="right"  | [[Wikipedia:頁面存廢討論/記錄/2026/06/30|←6月30日]]－
+| align="center" | '''7月1日'''
+| align="left" | －{{AfdLinkNext|subst=}}
+| class="autoconfirmed-show" | ｜{{NewAfdLink}}
+|-
+| <small>'''檔案'''</small> || ：<small>[[Wikipedia:檔案存廢討論/積壓討論|積壓]]{{edit|Wikipedia:檔案存廢討論/積壓討論|編}}</small> || ｜
+| align="right"  | <small>[[Wikipedia:檔案存廢討論/記錄/2026/06/10|←6月10日]]－<span style="color:#C0C0C0;">…</span>－</small>
+| align="center" | <small><span style="display:none">{{safesubst:IfdLinkToday/auto|text=</span>{{IfdLinkToday|subst=}}<span style="display:none">}}</span></small>
+| align="left" | <small>－{{IfdLinkNext|subst=}}</small>
+| class="autoconfirmed-show" | ｜<small>{{NewIfdLink}}</small>
+|}
+<p class="notice metadata" id="spoiler" style="font-size: small">请阅读[[Wikipedia:如何降低條目被提交刪除的可能性]]和[[Wikipedia:收錄標準簡明介紹]]，并尽可能协助改善和保留有益的条目。</p>
+<!-- 討論結束後刪除本行 --> 
+</noinclude><includeonly>
+<section begin=backlog />
+= [[Wikipedia:頁面存廢討論/記錄/2026/07/01|7月1日]] =
+<section end=backlog />
+</includeonly>
+== [[:恒定直流电机]] ==
+{{delh|relist}}
+{{Relisted}}到[[Wikipedia:頁面存廢討論/記錄/2026/07/09#恒定直流电机]]。--[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月9日 (四) 01:57 (UTC)
+{{delf}}
+== [[:霹靂布袋戲組織列表]] ==
+{{delh|nc}}
+{{移動到學院}}，列表內容過多侵權文字、無第二手來源且掛上維護模板超過30天。。
+: 提交的維基人及時間：[[User:Olaf8940|英國皇家歐拉夫王子]]（[[User talk:Olaf8940|留言]]） 2026年6月15日 (一) 03:10 (UTC)
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年6月23日 (二) 00:21 (UTC)</small></div></div>
+:{{拆分到}}各個組織的條目：建議將[[列表]]簡化，僅保留組織名稱或極少簡述內容，其他繁雜資訊另建該組織的新[[條目]]，並將繁雜資訊{{移動}}至每個組織的單獨條目內。[[User:3.14圓周率|3.14圓周率]]（[[User talk:3.14圓周率|留言]]） 2026年6月23日 (二) 02:33 (UTC)
+::大部分角色和組織的關注度均是不足以建立條目，也不適合{{併入}}主條目，大概僅剩{{刪除}}一途或是{{移動到學院}}。--[[User:Olaf8940|英國皇家歐拉夫王子]]（[[User talk:Olaf8940|留言]]） 2026年6月23日 (二) 04:16 (UTC)
+:{{意見}}：該條目的內容具有保留的價值，只是敘述過於繁雜，應將條目的資訊整理以符合列表的形式。或者建議掛上'''{{Tl|Cleanup rewrite}}'''模板，並將條目中對於個組織的敘述以較清楚的方式表達。包刮：
+#刪除以[[注音符號]]或[[通用拼音]]進行分類的'''二級標題'''及其[[檢索表]]；
+#組織名稱直接使用'''二級標題'''表示；
+#細節的[[列表]]小標題改為'''三級標題'''。
+:（參見[[MOS:BODY]]）
+:這些做法可以同時保留條目的內容，以及避免條目遭到刪除。[[User:3.14圓周率|3.14圓周率]]（[[User talk:3.14圓周率|留言]]） 2026年6月23日 (二) 13:12 (UTC)
+::這樣應該可行，只差來源的部分。--[[User:Olaf8940|英國皇家歐拉夫王子]]（[[User talk:Olaf8940|留言]]） 2026年6月23日 (二) 13:22 (UTC)
+{{Rescue editing|[[User:3.14圓周率|3.14圓周率]]（[[User talk:3.14圓周率|留言]]） 2026年6月24日 (三) 01:54 (UTC)}}
+:{{已改善}}：條目的內容排版已經修改好了，不知目前還有哪些缺失？[[User:3.14圓周率|3.14圓周率]]（[[User talk:3.14圓周率|留言]]） 2026年6月27日 (六) 11:57 (UTC)
+::過於依賴第一手來源，缺少第二手或是第三手的來源，但應可{{保留}}並掛上{{Tl|Primarysources}}。--[[User:Olaf8940|英國皇家歐拉夫王子]]（[[User talk:Olaf8940|留言]]） 2026年6月27日 (六) 12:04 (UTC)
+:::好的，{{Tl|Primarysources}}模板在[https://zh.wikipedia.org/w/index.php?title=%E9%9C%B9%E9%9D%82%E5%B8%83%E8%A2%8B%E6%88%B2%E7%B5%84%E7%B9%94%E5%88%97%E8%A1%A8&oldid=90018620 2025年11月16日 (日) 02:42]就已經由您掛上了，目前被合併在{{Tl|多個問題}}裡面。[[User:3.14圓周率|3.14圓周率]]（[[User talk:3.14圓周率|留言]]） 2026年6月27日 (六) 12:18 (UTC)
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月1日 (三) 02:13 (UTC)</small></div></div>
+<hr>
+: 无共识。--[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月8日 (三) 01:43 (UTC)
+{{delf}}
+
+== [[:中華民國棒球代表隊]] ==
+{{Delh|改為[[WP:D|消歧義]]}}{{刪除}}理據：该页面被剪贴移动后由改为疑似消歧义的页面。现在剪贴移动已通过合并历史修复，但考虑到“-{中華民國棒球代表隊}-”这个概念是否存在或是否是历史名称，其实存在疑问，因此请各位讨论本页面是改为消歧义，或是重定向，或是删除。
+: 提交的維基人及時間：[[U:Tigerzeng|<span style="color:#E91;font-family:Times;">'''Tiger'''</span>]]（[[UT:Tigerzeng#top|留言]]） 2026年6月15日 (一) 10:06 (UTC)
+
+:{{Vdab}}：如果有支持重定向或是删除的意見，請回答我，以下頁面的「中華民國棒球代表隊」分別是什麼意思：[https://www.amway.com.tw/iShare/Monthly/Inner/42250/42325 紐崔萊是中華民國棒球代表隊唯一指定營養補給品牌]、[https://catalog.digitalarchives.tw/item/00/30/e9/d3.html 中華成棒代表隊梅花臂章 : 中華民國棒球代表隊]、[https://tcmb.culture.tw/zh-tw/detail?indexCode=drnh&id=150-032100-0005-008 中華民國棒球代表隊，由領隊林鳳麟率領，搭機前往韓國，參加第二十七屆世界棒球錦標賽，並在搭機前全體隊員合影]、[https://twbsball.dils.tku.edu.tw/wiki/index.php?title=%E6%9D%8E%E8%A9%A9%E8%A8%88 1954年，第一屆亞洲盃（當時稱為亞洲盃，1994年起稱為亞錦賽）正式開打，台灣聯隊才「正名」為中華民國棒球代表隊]、[https://twbsball.dils.tku.edu.tw/index.php?title=1971%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%86%E4%BA%9E%E6%B4%B2%E6%A3%92%E7%90%83%E9%8C%A6%E6%A8%99%E8%B3%BD 8月12日起在台北市展開為期二十天的集中訓練，至中華民國棒球代表隊一行二十五人]、[https://www.facebook.com/Wulosy/posts/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%A3%92%E7%90%83%E4%BB%A3%E8%A1%A8%E9%9A%8A%E7%B0%A1%E7%A8%B1-%E4%B8%AD%E8%8F%AF%E6%88%90%E6%A3%92%E9%9A%8A%E4%B8%AD%E8%8F%AF%E9%9A%8A%E6%98%AF%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%A3%92%E7%90%83%E9%81%8B%E5%8B%95%E7%9A%84%E5%9C%8B%E5%AE%B6%E4%BB%A3%E8%A1%A8%E9%9A%8A%E8%A8%BB%E6%98%AF-%E4%B8%AD%E8%8F%AF%E9%9A%8A%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%90%8D%E7%A8%B1%E8%87%AA1981%E5%B9%B4%E8%B5%B7%E6%A0%B9%E6%93%9A%E6%B4%9B%E6%A1%91%E5%8D%94%E8%AD%B0%E5%9C%A8%E5%9C%8B%E9%9A%9B%E9%AB%94%E8%82%B2%E8%B3%BD%E4%BA%8B%E4%B8%AD%E4%B9%9F%E7%A8%B1%E4%B8%AD%E8%8F%AF%E5%8F%B0%E5%8C%97%E6%A3%92%E7%90%83%E4%BB%A3%E8%A1%A8%E9%9A%8Ach/8720980814624084/ 中華民國棒球代表隊（簡稱 #中華成棒隊、#中華隊）是中華民國棒球運動的國家代表隊（註：是 #中華隊真正的名稱）]--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年6月16日 (二) 16:08 (UTC)
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年6月23日 (二) 00:21 (UTC)</small></div></div>
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月1日 (三) 02:14 (UTC)</small></div></div>
+----
+改為[[WP:D|消歧義]]頁面。<span class="NAC"><small>（[[Wikipedia:非管理員關閉討論|非管理員關閉]]）</small></span>--[[User:3.14圓周率|3.14圓周率]]（[[User talk:3.14圓周率|留言]]） 2026年7月8日 (三) 11:03 (UTC)
+{{Delf}}
+
+== [[:朱寵 (嘉慶進士)]] ==
+{{delh|nc}}
+{{刪除}}理據：不符合收录标准。
+: 提交的維基人及時間：'''<span style="background:#EEE;padding:3px; color:#000;border-radius:10px;box-shadow:0 0 1em #333;">[[U:Kurgenera|<math> \mathfrak{Kurwa}</math>]]__<sup>[[UT:Kurgenera|<span style="color:#B8F">( •̀ ω •́ )＜✧</span>]]</sup></span>''' 2026年6月8日 (一) 02:01 (UTC)
+
+:同意刪除。--[[User:Tony85poon|Tony85poon]]（[[User talk:Tony85poon|留言]]） 2026年6月11日 (四) 10:08 (UTC)
+<!-- from Template:Relist -->:<div class="mw-archivedtalk" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>'''[[U:MonoFinet|<span style="color:#DFC5F0;">モノ</span>]][[UT:MonoFinet|<small><span style="color:#EFC3D9;">フィンット</span></small>]]'''<sub>[[落枕|<span style="font:12px Meiryo;color:#F5C1E3;">-{「}-ねちがえた。-{」}-</span>]]</sub> 2026年6月15日 (一) 11:33 (UTC)</small></div></div>
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年6月23日 (二) 00:22 (UTC)</small></div></div>
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月1日 (三) 02:14 (UTC)</small></div></div>
+:HuangQQ在條目提刪後在條目內加入了地方志的內文，算是勉強構成有效介紹，似乎可以不用刪？--[[User:日期20220626|日期20220626]]（[[User talk:日期20220626|留言]]） 2026年7月4日 (六) 09:06 (UTC)
+<hr>
+: 无共识。--[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月8日 (三) 01:43 (UTC)
+{{delf}}
+
+== [[:住得其樂]] ==
+{{delh|d}}
+{{刪除}}理據：沒有足夠的可靠資料來源能夠讓這個條目符合[[WP:收錄標準/電視劇]].
+: 提交的維基人及時間：[[User:Tony85poon|Tony85poon]]（[[User talk:Tony85poon|留言]]） 2026年6月23日 (二) 05:32 (UTC)
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月1日 (三) 02:14 (UTC)</small></div></div>
+:{{删除}}：从当前条目内和外间强搜结果看，缺乏可以佐证其符合GNG（应当指出的是，提删人援用[[NT:DRAMA]]是不匹配该条目的）的来源。事实上这种节目也许会在北美来源找到佐证，但至少当前线上毫无痕迹。--[[User:银色雪莉|银色雪莉]]（[[User talk:银色雪莉|留言]]） 2026年7月7日 (二) 06:17 (UTC)
+<hr>
+: 删除。--[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月8日 (三) 01:43 (UTC)
+{{delf}}
+== [[:火烈鸟革命（阿尔巴尼亚）]] ==
+{{delh|relist}}
+{{Relisted}}到[[Wikipedia:頁面存廢討論/記錄/2026/07/09#火烈鸟革命（阿尔巴尼亚）]]。--[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年7月9日 (四) 00:47 (UTC)
+{{delf}}
+
+== [[:約翰·費恩（第十代韋斯特摩蘭伯爵）]] ==
+{{delh|relist}}
+{{Relisted}}到[[Wikipedia:頁面存廢討論/記錄/2026/07/09#約翰·費恩（第十代韋斯特摩蘭伯爵）]]。--[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年7月9日 (四) 00:47 (UTC)
+{{delf}}
+
+== [[:資料經濟]] ==
+{{delh|relist}}
+{{Relisted}}到[[Wikipedia:頁面存廢討論/記錄/2026/07/09#資料經濟]]。--[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年7月9日 (四) 00:47 (UTC)
+{{delf}}
+==[[:Every Day Happy Day]]==
+{{delh|r}}
+{{Findsources|Every Day Happy Day}}
+
+{{删除}}理據：沒有足夠的可靠資料來源能夠讓這個條目符合[[Wikipedia:收錄標準]]中的標準
+: 提报以上<u>不符合收錄標準</u>条目的維基人及時間：<br id="no-new-title" />[[User:TimWu007|Tim]]（[[User talk:TimWu007|留言]]） 2026年6月23日 (二) 13:06 (UTC)
+
+<!-- from Template:Relist -->:<div class="mw-archivedtalk xfd_relist cd-moveMark" style="margin-left: -1.6em;"><div style="padding: 2px 12px; font-size: 91%; position: relative;"><div style="position:absolute;z-index:-1; top:0; left:0; bottom:0; right:0; background: rgba(177, 177, 177, 0.1);"></div><span style="opacity: 0.7;"><b>為获得更明确的共識，原討論已[[WP:删除程序#重新提交討論|重新提交]]至此。新讨论请置于下方。</b></span><small>[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月1日 (三) 02:15 (UTC)</small></div></div>
+:同上，现有来源均未对此曲作有效介绍，仅作顺带提及，不宜保留为独立条目。留意到该主题曲所属短剧[[财到福到·爱情驾到]]已设置相关章节，私以为可{{重定向}}到[[财到福到·爱情驾到#主题曲]]。--[[User:银色雪莉|银色雪莉]]（[[User talk:银色雪莉|留言]]） 2026年7月1日 (三) 15:29 (UTC)
+::同意重定向。--[[User:Tony85poon|Tony85poon]]（[[User talk:Tony85poon|留言]]） 2026年7月2日 (四) 01:39 (UTC)
+<hr>
+: 重定向。--[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月8日 (三) 01:44 (UTC)
+{{delf}}
+
+== [[:Save Lily事件]] ==
+{{delh|rr}}
+{{formerly|Save Lily 事件}}
+{{合併}}到[[:Draft:Save Lily]]。本討論延續[https://zh.wikipedia.org/wiki/Wikipedia:互助客栈/条目探讨#c-Cyberviewer-20260630161600-關於「Save_Lily_事件」條目 互助客栈的討論]，但由於互助客栈不適合討論單一條目存廢，因此轉到這邊來——最早的條目被以著作權為由刪除，之後原主編試圖透過草稿程序重寫，但無法理解審核程序，因此將為重寫後的版本直接放到條目空間。隨後有臨時帳號以[[WP:G19]]為由請求快速刪除，但經查，其經過不符合G19要件，因此改提交至正規頁面存廢討論，以重新取得意見。 cc {{ping2|Kurgenera|Cyberviewer}}
+: 提交的維基人及時間：[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 03:39 (UTC)
+
+::{{ping|Saimmx}} 感謝您提出「'''合併'''到[[Draft:Save Lily]]」的建議。不過，不知閣下有否留意，'''目前「Save Lily事件」與「[[Draft:Save Lily]]」的內容實際上已經一致'''。換言之，'''在現時情況下，將條目合併或移動至草稿頁面，對內容本身已不會產生實質影響，有關處理方式的實際意義似乎已經不大'''。
+::因此，本人認為討論的重點或許不再是條目應存放於主名字空間還是草稿空間，而是條目內容究竟存在哪些具體問題，以及應如何根據相關方針作出改善。
+::若條目確實仍有版權、來源、格式、顯著性或其他方面的疑慮，懇請'''具體指出相關段落及原因，讓編者能夠針對問題進行修正'''。相信這樣會比單純討論頁面位置更有助於解決爭議，亦更符合維基百科透過協作編輯改善內容的精神。謝謝！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 14:41 (UTC)
+
+:::我沒有意見。只要確定條目最終去向，怎麼辦都可以。如果最終條目要保留，我也同意。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 15:06 (UTC)
+
+::::我之所以發起這個討論，是因為單一條目存廢比較適合在頁面存廢頁面討論。在互助客栈不適合。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 15:19 (UTC)
+
+:就條目本身而言，我認為符合[[WP:GNG|收錄標準]]，但主條目與草稿的歷史關聯可能是我在意的地方——很久以前，我聽人說過，如果有同樣的主題，那較晚出現的條目，應併至較早出現的草稿。主要原因是著作權。但我不太理解這種宣稱，因此不對此發表意見。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 03:49 (UTC)
+
+:{{保留}}，cc{{ping2|Cyberviewer|Saimmx}}。--'''<span style="background:#EEE;padding:3px; color:#000;border-radius:10px;box-shadow:0 0 1em #333;">[[U:Kurgenera|<math> \mathfrak{Kurwa}</math>]]__<sup>[[UT:Kurgenera|<span style="color:#B8F">( •̀ ω •́ )＜✧</span>]]</sup></span>''' 2026年7月1日 (三) 04:08 (UTC)
+
+::已修订格式和部分语句，不过是不是应该{{移动}}到[[Save Lily事件]]？--'''<span style="background:#EEE;padding:3px; color:#000;border-radius:10px;box-shadow:0 0 1em #333;">[[U:Kurgenera|<math> \mathfrak{Kurwa}</math>]]__<sup>[[UT:Kurgenera|<span style="color:#B8F">( •̀ ω •́ )＜✧</span>]]</sup></span>''' 2026年7月1日 (三) 04:14 (UTC)
+
+:::我也非常困惑。整個過程從歷史、重建、速刪、到合併目標，沒一個能清楚理解。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 04:19 (UTC)
+:我整理一下情况吧，历史上就是Cyberviewer建立了Draft:Save Lily，但是在6月13日被我拒绝草稿了。然后Cyberviewer在6月26日重写内容之后又直接在主空间重新建立，临时账号6月29日提删，而Cyberviewer在6月30日又把主空间的{{固定版本|93262693}}提交到草稿。
+:我自己的建议是，把[[Draft:Save Lily]]合并历史到[[Save Lily 事件]]，然后再移动到[[Save Lily事件]]（不应有空格）。{{ping2|Saimmx}}--'''<span style="background:#EEE;padding:3px; color:#000;border-radius:10px;box-shadow:0 0 1em #333;">[[U:Kurgenera|<math> \mathfrak{Kurwa}</math>]]__<sup>[[UT:Kurgenera|<span style="color:#B8F">( •̀ ω •́ )＜✧</span>]]</sup></span>''' 2026年7月1日 (三) 05:30 (UTC)
+
+::我不知道你有沒有聽過，那種[https://zh.wikipedia.org/wiki/Wikipedia:頁面存廢討論/記錄/2026/07/01#c-Saimmx-20260701034900-Saimmx-20260701033900 把Save Lily 事件合并历史到Draft:Save Lily的說法]。我對历史紀錄和著作權很不明白，所以我沒辦法說什麼。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 05:33 (UTC)
+::感謝 Kurgenera 君整理事件經過及提出處理建議。
+::不過，我想澄清一點：目前的「Save Lily事件」與「Draft:Save Lily」內容實際上已經相同。因此，若將「Draft:Save Lily」的歷史合併至「Save Lily事件」，其主要作用應是保留及整合編輯歷史，而非解決任何內容上的爭議。
+::換言之，目前的爭議似乎已不在於主空間版本與草稿版本存在內容差異，因為兩者內容早已一致；即使完成歷史合併，仍然未能回答目前討論中最核心的問題：
+::'''條目具體有哪些內容被認為有問題？'''
+::'''哪些段落需要修改？'''
+::'''哪些部分涉及版權、格式、來源或其他方針上的疑慮？'''
+::'''草稿曾先後被否決，相關判斷依據具體為何？'''
+::'''特別是關於「Draft:Save Lily」的部分，本人至今仍未能理解其被否決的具體原因。'''以本人理解，無論是當時的草稿內容，還是後來建立的「Save Lily事件」條目，其核心內容均大致相同。因此，我一直希望能夠了解：'''究竟是哪些內容或哪些問題導致草稿未能獲得閣下接受，以及應如何修改才能符合相關要求。'''
+::若歷史合併是基於版面整理及保留編輯紀錄的考量，本人並無異議。但由於主空間條目與草稿內容本身已經相同，因此我認為現階段更值得討論的，仍是條目內容究竟存在哪些具體問題，以及應如何改善。畢竟，若相關問題始終未被具體指出，即使完成歷史合併或頁面移動，實際上也無法解決目前爭議的核心所在。本人仍然希望能夠獲得較具體的意見，以便針對問題作出修正。謝謝。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 23:53 (UTC)
+
+:{{保留}}　原「Save Lily」條目已於2026年6月13日遭刪除，刪除理由為涉及版權問題。然而，在相關討論過程中，似乎一直未有'''具體指出條目中哪些內容涉嫌侵犯版權，以及相關內容的權利來源為何'''，以致編者根本無法針對問題進行檢視、討論及修正。
+:　　在條目被刪除前，本人曾依照建議將內容重新改寫為草稿。然而，其後收到意見指出草稿「不適合以列表形式表達，建議改以散文形式撰寫」。對此，本人有以下疑問：
+::(1) 相關討論至今仍未具體說明原條目或重寫後草稿中，'''究竟哪些內容涉及版權問題，亦未指出相關版權持有人或權利來源'''，因此難以判斷應如何修正。
+::(2) 草稿內容實際上並非以列表形式撰寫，而是採用一般條目慣用的段落敘述方式，因此不明白被指為「列表形式」的原因，亦不清楚草稿未獲接受的具體理由。
+::(3) 即使草稿在表達方式或格式上存在改進空間，相關問題似乎亦與版權爭議無直接關聯，'''未必足以支持刪除處理'''。因此，對於相關意見及後續決定，本人感到相當困惑。
+:　　在'''尚未釐清上述問題'''的情況下，原「Save Lily」條目已於2026年6月13日被刪除，而本人重新撰寫、且自認不存在版權問題的草稿，亦未能轉移回原條目空間。
+:　　其後，本人唯有再次重新整理資料全文重寫，並以「[[Save Lily 事件]]」為題建立新條目；然而，新條目隨即又被提出'''快速刪除'''申請（~2026-37565-05）。對於這樣的處理方式，本人深感遺憾!
+:　　若條目確實存在內容品質、來源引用、版權疑慮或格式編排等方面的問題，期望相關意見能夠'''具體指出有問題的段落及原因'''，讓編者有機會根據建議進行修正與改善，而非在缺乏明確說明的情況下直接刪除條目。
+:　　此外，快速刪除模板中明文指出：「其他編者若認為本頁明顯不符合快速刪除標準，或已修正存在問題，可去除此模板。」然而，實際上本人並無法移除該模板，對此亦感到不解。
+:　　維基百科的編輯工作建基於討論與共識。若對條目內容、收錄標準或編寫方式存在不同看法，建議先透過討論充分交換意見，釐清爭議所在，再決定後續處理方式。如此不但有助提升條目品質，亦能讓編者了解問題所在，並根據社群共識作出適當修訂。'''本人期望相關問題能夠獲得具體說明，使編者有機會按照意見作出修正，而非在理由未獲充分解釋的情況下再次面臨刪除處理'''。最後，感謝所有願意參與理性討論、提供建設性意見的朋友，衷心感謝各位的參與！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月1日 (三) 08:32 (UTC)
+
+::{{ping|Manchiu}}Cyberviewer認為你沒有詳細解釋原條目何處侵犯著作權的況下，就直接刪除條目了，並對這個作法非常不滿。你這邊可以解釋一下為什麼你認為原條目侵犯著作權嗎？--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 15:51 (UTC)
+
+:::根据[https://zh.wikipedia.org/wiki/Special:AbuseLog?wpSearchTitle=Save_Lily 过滤器日志]以及archive.org存档的[https://web.archive.org/web/20260604110504/https://zh.wikipedia.org/wiki/Save_Lily 条目]和[https://web.archive.org/web/20260604112456/https://zh.wikipedia.org/wiki/Talk:Save_Lily 讨论页]，提报侵权的是[[Special:Contributions/~2026-33134-42|~2026-33134-42]]。我觉得可以说标了脚注[6]的一两处复制了来源的句子，但都不算长。我来判断的话应该可接受。--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月1日 (三) 17:55 (UTC)
+
+::::檢查一下，雖然「{{tq|2016年，曾先生（Tsang Wai Bong）到芬蘭遠赴芬蘭進修，伴侶關佩仙亦隨行。2019年，關佩仙在芬蘭住所獨自進行家中分娩長女CS Tsang，長女出生約1個月後因心臟病及腦膜炎而夭折}}」（對比「{{tq|現年43歲的曾先生（Tsang Wai Bong）於2016年遠赴芬蘭進修，伴侶關佩仙亦隨行。3年後，兩人以在家分娩形式誕下長女CS Tsang，但僅一個月便因心臟病及腦膜炎而早夭}}」）、以及「{{tq|瑞典當局在一架停泊在邊境地區的貨車上找到他們以及大量現金，遂將他們拘捕}}」——雖然可以說幾乎是複製貼上，刪除確實有理由；但我也認為這剪貼內容的原創性太低，說「侵犯著作權」實在是相當勉強。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 18:18 (UTC)
+
+:::::{{ping|Manchiu}} {{ping|Srapoj}} {{ping|Saimmx}} 衷心感謝 Srapoj 和 Saimmx 翻查相關紀錄及進行比對。
+:::::根據兩位的分析，所指出的問題似乎主要集中於條目中'''兩個句子'''與來源文字過於接近，而'''(1)相關文字在整篇條目中所佔比例亦相當有限，(2)條目已標示資料來源。'''若情況確實如此，我有一個疑問：
+:::::為何當時的處理方式不是'''「明確指出涉事句子或段落，標示其可能涉及版權問題，並要求編者重寫或移除相關文子」'''；而是'''「將整篇條目視為版權問題條目，並據此以『不指證、不解釋、不討論』的方式刪除整個條目」？'''
+:::::維基百科一向鼓勵透過編輯及改善內容來解決問題。倘若問題僅限於少數措辭與來源過於相近，理論上應屬可透過'''重寫修正'''的情況。尤其當其他大量內容本身並未被指出存在版權爭議時，'''以『不指證、不解釋、不討論』的方式直接刪除整篇條目是否符合比例原則'''，值得進一步討論。
+:::::更重要的是，在條目被提報及刪除的過程中，相關討論似乎一直未有具體指出哪些句子涉及侵權、涉及哪些來源，以及需要如何修正。這使編者難以根據意見作出針對性的改善，也無法有效避免類似問題再次出現。
+:::::因此，我希望了解：當時作出刪除決定時，是否已認定條目的大部分內容均涉及侵權；還是實際上只有個別句子存在疑慮？若屬後者，是否可以考慮以標示問題內容、要求重寫或暫時移除相關段落等方式處理，而非直接刪除整個條目？
+:::::我提出上述問題，並非質疑任何管理員或巡查員的工作，而是希望釐清當時的判斷依據。畢竟，如果條目最終是因兩句可重寫的文字而被整體刪除，而相關問題在刪除前後都沒有被具體指出，編者實際上很難知道應如何修正，也難以理解刪除整個條目的必要性。這也是本人至今最感困惑之處。謝謝理解。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 00:57 (UTC)
+
+:::::: {{ping|Manchiu}} {{ping|Srapoj}} {{ping|Saimmx}} P.S.：若當時能有人像 Srapoj 和 Saimmx 一樣，能具體指出哪些句子與哪些來源過於接近，相信編者在'''一小時內'''便可完成重寫或移除相關文字。如此一來，問題或許在'''一小時內'''已獲得解決，亦可避免後續連串討論、重建及刪除程序所耗費的'''人力、心力及時間'''。因此，我認為'''具體指出問題所在，往往比直接刪除條目更有助於改善內容，亦更符合維基百科協作編輯的精神'''，謝謝各位。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 01:17 (UTC)
+
+:::::::# 雖然這次刪除有很多溝通問題，但基於[[WP:舉證責任|舉證責任]]，我必須同意管理員刪除時沒有義務說明細節。
+:::::::# '''[[WP:CRFAQ|著作權是非常嚴肅的問題]]'''。速刪無可厚非。
+:::::::# 我也能說，如果你能從[[WP:DRV|存廢複核]]提出請求並要求釐清管理動作，問題或許能在幾天內解決。但說那些「如果當時」的問題對現在並沒有助益。
+:::::::--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 03:02 (UTC)
+
+::::::::感謝您的回覆。
+::::::::　　關於「管理員刪除時沒有義務說明細節」一點，我理解這是現行制度下的一種看法，尤其涉及版權問題時，管理員往往需要優先處理潛在侵權內容。因此，我'''並非'''主張管理員必須逐句進行教學式說明，亦理解著作權問題需要嚴肅對待。
+::::::::　　不過，我認為這裡仍然存在三個不同層面的問題：
+::::::::　　'''第一，當臨時帳號(~2026-33134-42)對條目作出「整個條目涉及侵權」的嚴重指控時，是否已提出足夠及合理的舉證，以支持有關主張？'''
+::::::::　　'''第二，在管理員根據該指控決定刪除整個條目前，是否已確認相關指控具有充分依據，並符合相應的處理程序？'''
+::::::::　　'''第三，即使最終認為條目確實存在問題，社群是否可以透過更具體的說明和溝通，協助編者理解問題所在並作出修正，而非讓編者在欠缺具體指引的情況下反覆嘗試修改？'''
+::::::::　　我認為這三者其實是彼此獨立的問題。
+::::::::　　第一個問題涉及舉證責任。即使管理員沒有義務詳細說明侵權原因，也不代表提出'''指控的一方完全沒有舉證責任'''。尤其當有人對一個條目作出「整個條目均屬侵權」或「應整體刪除」這類'''相當嚴重的指控'''時，我認為至少應提出相應理據，說明究竟哪些內容涉及侵權，以及作出有關判斷的依據為何。
+::::::::　　第二個問題涉及管理決定的依據。就本次個案而言，後來經 Srapoj 與 Saimmx 檢視後，目前被指出的似乎主要只是個別句子與來源文字過於接近，而'''並非'''整篇條目大部分內容均屬複製貼上。若情況確實如此，那麼我認為有必要了解：'''當初提出「全條目侵權」主張的一方，是否已提出足夠證據支持其主張；而在決定刪除整個條目前，是否已確認相關指控具備充分基礎。'''
+::::::::　　第三個問題則涉及維基百科作為協作計畫，應如何以最低成本解決問題並改善條目內容。事實上，本次討論正是在 Srapoj 與 Saimmx 具體比對相關文字後，大家才較清楚地理解爭議所在。若這些資訊能較早出現，編者便能更快作出針對性修正。
+::::::::　　我同意事後討論「如果當時怎樣」無法改變已發生的結果，但我提出相關看法的目的，並非追究個別決定，而是'''希望從這次個案中反思：未來遇到類似情況時，社群是否有機會減少不必要的重複編輯、重建及討論成本'''。
+::::::::　　畢竟，若當時能有人像 Srapoj 和 Saimmx 一樣，具體指出哪些句子與哪些來源過於接近，相信編者在短時間內便可完成重寫或移除相關內容。如此一來，問題或許早已獲得解決，亦可避免後續連串討論、重建及刪除程序所耗費的人力、心力及時間。
+::::::::　　因此，我的重點始終不是質疑任何管理動作是否出於善意，而是希望了解：'''當有人提出足以導致條目整體刪除的重大指控時，相關指控應達到什麼舉證標準；而當最終發現問題可能只集中於個別句子時，社群是否存在更有效率、也更符合維基百科協作精神的處理方式。'''
+::::::::　　再次感謝您的回覆，更要感謝您具體指出相關的問題。謝謝您！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 04:34 (UTC)
+
+:::::::::[[WP:BURDEN|添加或恢复内容的编辑者应承担举证的责任]]，因此是你有義務寫出不抄襲、不侵犯著作權的內容。對我而言，臨時用戶提出關鍵字，就已經足夠成立指控。我的問題是被複製的文字是否確實屬於侵權。如此而已。
+:::::::::但是，程序方面，我不太確定存廢複核（[[WP:DRV]]）與管理操作覆核（[[WP:XRV]]）是否有你認為的「足夠效率」——在我看來，管理員行動方面確實很有效率，但是申訴，看到你如此不熟悉程序的情況下，問題蔓延到現在這樣，我不確定要怎麼提供明確的申訴管道。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 05:00 (UTC)
+
+::::::::::感謝回覆。
+::::::::::我同意添加內容的編輯者有責任確保自己所撰寫的內容不侵犯著作權，這一點並無爭議。
+::::::::::不過，我所提出的問題其實是另一個層面的問題：
+::::::::::'''編者有責任避免侵權，與指控者(~2026-33134-42)是否有責任為其指控提供合理依據，這是兩件不同的事情。'''
+::::::::::若有人指出「這一句與來源過於接近」，我完全同意應由編者檢查及修正；但若有人進一步主張「整個條目均屬侵權」、「整個條目應被刪除」，那麼我認為仍然有必要提出相應程度的依據，以支持這項主張。
+::::::::::就本案而言，我一直困惑的地方正在於此。
+::::::::::後來經 Srapoj 與閣下實際比對後，目前被指出的似乎主要是個別句子與來源文字較為接近。若最後能夠具體確認的問題主要集中於這些句子，那麼我自然會配合重寫或刪除相關內容。
+::::::::::但回過頭來看，當初作出的主張卻是整個條目涉及侵權，最終結果亦是整個條目遭到刪除。
+::::::::::因此我想討論的問題是：
+::::::::::'''當有人(~2026-33134-42)提出的是「全條目侵權」而非「個別句子侵權」時，這項主張本身是否應有相應的舉證基礎？'''
+::::::::::如果只要提出幾個關鍵字，便足以成立「全條目侵權」的指控，那麼「個別句子可能侵權」與「整個條目應刪除」之間的界線又在哪裡？
+::::::::::這也是我一直希望釐清的地方。
+::::::::::我並非否認侵權問題的嚴重性，也不是否認編者應承擔內容責任；我只是認為，'''既然「全條目侵權」是一項足以導致條目被整體刪除的重大指控，那麼提出相關指控的臨時帳號是否也應當有與其嚴重程度相符的理由或證據作為基礎呢？'''。
+::::::::::否則，若事後檢視發現實際問題可能只涉及個別句子，而編者在整個過程中又始終未被告知具體問題所在，那麼我認為討論當初的舉證是否充分，以及程序上是否仍有改善空間，並非完全沒有意義。
+::::::::::至於 DRV 或 XRV，我感謝閣下提供相關資訊。我的重點其實並不在於追究個別操作，而是希望藉這次個案了解：當未來再有編者被指控「整個條目侵權」時，社群是否能有更清晰的舉證標準及溝通方式，讓問題能夠更快被識別及修正，而不是等到條目刪除後，才逐漸明確究竟哪些內容真正存在爭議。謝謝。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 05:07 (UTC)
+:{{outdent|::::::::::}}我原本以為，存廢複核與草稿審核，已經算是相當清晰的溝通方式。刪除的舉證標準大概列出關鍵字就夠了。但看你似乎對這樣的門檻與程序感到相當不耐，我才發現自己有盲點。但老實說，我目前也不知道怎麼做。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 05:31 (UTC)
+::{{ping|Saimmx}} Saimmx 君，多謝您的回覆。
+::我想我關注的問題，或許並不是存廢複核或草稿審核本身是否存在，而是相關審核意見是否足以讓編者理解問題所在。
+::以本人這次經歷為例：
+::第一次草稿被否決時，收到的理由是'''「條目體裁應為散文而非列表」'''。然而，本人至今仍未能理解相關意見所指為何，因為草稿本身已經採用一般條目常見的散文方式撰寫，'''當中並未有列表'''。因此，本人一直不知道究竟是哪一部分被認為存在問題。
+::其後本人根據自己的理解再次全文重寫，但第二次草稿被否決時，收到的意見竟然是'''「仍需改善」'''。然而，「仍需改善」究竟是指來源不足、格式問題、顯著性不足、版權疑慮、內容比例失衡，還是其他問題？'''若未能具體指出需要改善的地方，編者怎知道應往哪個方向修改呢？'''
+::因此，我並不是對存廢複核或草稿審核程序本身感到不耐，而是'''對於審核員一而再的否決、而審核意見始終未能具體指出問題所在感到困惑。'''
+::如果有人告訴編者：
+::* 第A段存在版權疑慮，文字和某URL的內容太相似；
+::* 第B段來源不足；
+::* 第C段的列表應改為散文；
+::那麼編者完全可以根據相關意見進行修改，問題可以在短時間內得到完滿解決。
+::請您明白，但如果編者收到的意見只有「條目體裁應為散文而非列表」、「仍需改善」等數個關鍵字，而沒有進一步說明具體問題及改善方向，編者其實很難知道自己究竟應該修改什麼的。結果：「全文重寫 > 因「仍需改善」而否決 > 全文再重寫 > 壐因「仍需改善」而被否決 」 的循環會不斷發生，令人無奈和困擾。謝謝。
+::--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月3日 (五) 01:51 (UTC)
+
+----
+::::::::Saimmx，閣下說'''「管理員行動方面確實很有效率」'''，如果閣下認為管理員『'''不核實臨時帳號提出重大指控時有否提供程度相符的證據作為基礎、不解釋、不討論、不回應』'''的方式刪除整個條目的行動視為'''「很有效率」'''，本人除了嘆息，實在無話可說！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 05:55 (UTC)
+:::::::::欸……我前面說過，我其實認為臨時帳號提出的證據，已經到指控成立、足夠懷疑的程度。我原本預期你會在存廢複核要求重新審核著作權事宜，如果不通過就透過草稿審核重寫；但你直接選擇以草稿審核重寫，不過了以後又直接編寫條目、被（錯誤掛上）快速刪除後上客棧發言。過程蠻……令我感到意外與驚訝。
+:::::::::然後看到你的嘆息後，雖然我認為條目可能可以保留，但如果未來碰上類似情境，我不確定要怎麼溝通會比較適合。因為我發現……自己其實不知道，要怎麼與完全不明白程序的人溝通。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 07:05 (UTC)
+
+::::::::::Saimmx，感謝回覆。
+::::::::::我想我們目前討論的其實是兩件不同的事情。
+::::::::::閣下認為我的問題在於對 DRV、XRV、AFC 等程序不夠熟悉；但我想討論的核心問題一直沒有改變：
+::::::::::'''當有人對條目提出「整個條目涉及侵權」這種足以導致條目被刪除的重大指控時，相關指控是否已提出與其嚴重程度相稱的證據及說明？'''
+::::::::::我尊重閣下認為「臨時帳號提出的證據已足夠成立合理懷疑」的個人看法，但從目前討論結果來看，後來經閣下及 Srapoj 實際比對後，被具體指出的主要似乎只是個別句子與來源文字較為接近，而非整篇條目大規模複製內容。因此，我才一直提出同一個問題：
+::::::::::'''「個別句子可能涉及侵權」與「整個條目涉及侵權並應刪除」，兩者之間是否存在不同的舉證標準？'''
+::::::::::如果存在，當初達到的是哪一個標準？如果不存在，那麼我也希望能了解社群對於「全條目侵權」的認定標準究竟為何。至於程序方面，我當然承認自己未必熟悉所有維基程序。畢竟我主要關心的是條目內容本身，而非刪除、覆核及申訴程序。但正因如此，我反而認為：
+::::::::::'''一個程序如果必須建立在編者充分理解 DRV、XRV、AFC、存廢討論、草稿審核等複雜機制之上，才能知道自己究竟被指控了什麼，那麼問題可能未必完全出在編者身上。'''
+::::::::::就本案而言，直到最近經閣下和 Srapoj 具體指出相關句子後，我才首次較清楚地知道究竟哪些內容被認為有問題。如果這些資訊在最初提報時便能被清楚指出，我相信後續無論是重寫、討論、覆核還是草稿改善，都會容易得多。因此，我想表達的並不是「程序錯了」，而是：
+::::::::::'''若一項指控足以導致條目被整體刪除，編者是否至少應有機會知道相關指控的具體內容及依據？'''
+::::::::::這個問題與我是否熟悉 DRV 或 XRV 無關；即使今天是資深編者，我認為這依然是一個值得討論的問題。事實上，截至目前為止，我最想了解的仍然不是「當初應該走哪個程序」，而是：
+::::::::::'''當初「全條目侵權」這項主張所依據的具體證據究竟是什麼，以及這些證據是否足以支持如此重大的結論。'''
+::::::::::這也是我一直希望釐清的核心問題。謝謝！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 09:59 (UTC)
+
+:{{outdent|:::::::::}}回[https://zh.wikipedia.org/wiki/Wikipedia:頁面存廢討論/記錄/2026/07/01#c-Cyberviewer-20260702095900-Saimmx-20260702070500 上方問題]：如果你只是要我的回答，那麼，我會如此回答：
+:#當有人對條目提出「整個條目涉及侵權」這種足以導致條目被刪除的重大指控時，相關指控是否已提出與其嚴重程度相稱的證據及說明？
+:##我覺得要看侵權比例：如果在一千多字中有一百多個字複製貼上，那就是十分之一。十分之一的程度，我認為懷疑「整個條目涉及侵權」是可以的。
+:#「個別句子可能涉及侵權」與「整個條目涉及侵權並應刪除」，兩者之間是否存在不同的舉證標準？
+:##同問題一，我想「不同的舉證標準」要看比例——如果一萬多字中有一百多個字複製貼上，那整個刪除的門檻舉證應該更高；但一千多字、甚至到小作品的話，門檻舉證其實就會低一點。
+:#一個程序如果必須建立在編者充分理解 DRV、XRV、AFC、存廢討論、草稿審核等複雜機制之上，才能知道自己究竟被指控了什麼，那麼問題可能未必完全出在編者身上。
+:##這點你倒說得沒錯。所以我在回答你的問題時，心理其實很為難。一方面，你沒有按照程序去走，所以對我而言，你的行為增加了很多溝通成本；但另一方面，我也確實理解到普通編者不可能熟悉各種程序複雜的情況。再加上[[WP:NOTBUREAU|維基百科不應該弄得像官僚機構]]、也不該[[WP:BITE|傷害新手]]，因此我很煩惱這方面還可以如何溝通。
+:#若一項指控足以導致條目被整體刪除，編者是否至少應有機會知道相關指控的具體內容及依據？
+:##「知道相關指控的具體內容及依據」的機制一直有，那就是'''存廢複核'''——也就是 '''[[WP:DRV|DRV]] 與/或 [[WP:XRV|XRV]]'''。一般而言，如果我的條目被刪除，我會透過條目存廢複核理解並尋求回復機會。但因為你沒有注意到，所以沒有走這個程序，所以就變成問題三了。
+:--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 15:52 (UTC)
+
+::對了，找管理員討論也是可以的。雖然我會疑惑為什麼沒有和管理員討論，但我不喜歡搬出「你為什麼沒有遵照某某程序」這種[[RTFM]]式的論調。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月2日 (四) 16:00 (UTC)
+
+:::Saimmx, 謝謝您的意見。找管理員討論當然也是一個可行的方法，我同意。
+:::不過，令本人感到困惑的是，在本次事件中，'''問題似乎並非編者完全沒有主動溝通，而是相關溝通未能獲得回應'''。例如，在本討論中，已有不同人士先後透過 {{ping|Manchiu}} 邀請刪除條目的 Manchiu 君說明相關判斷依據；同時，也有以{{ping|Kurgenera}}  向兩度否決草稿的 Kurgenera 君請教具體原因及改善方向。'''然而截至目前為止，相關問題似乎仍未獲得明確回覆。'''
+:::因此，我一直希望釐清的並不是「應該找誰討論」，而是：'''當編者已經主動提出問題、尋求意見及要求說明時，是否能夠獲得較具體的回應。'''畢竟，若連具體問題所在都未能了解，即使知道還有 DRV、XRV、管理員討論頁或其他程序，編者實際上仍然不清楚究竟應該為哪些內容辯護、哪些內容需要重寫，以及哪些部分被認為不符合要求。
+:::我認為，相較於討論當初是否選擇了最合適的程序，或許更值得關注的是：'''編者真誠地尋當求說明時，是否能獲得足以理解問題及作出修正的具體回覆。畢竟，這才是後續任何討論、覆核或改善工作的基礎。'''--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 16:50 (UTC)
+
+::对Saimmx：您要不要把提删撤回了？我不知道这位为什么这么有激情地在这里堆砌LLM生成的留言。我吐槽的生者传记问题则没人理，不过可以挂维护模板来凑合。--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月3日 (五) 00:21 (UTC)
+:::我隱約意識到意見有可能是AI產生，不過從整個文章的生產過程與討論方式，我認為主編有理由感到「激情」，或是說，不滿。總之，因為已經有共識，我可以撤回並用[[WP:SK#1]]快速保留。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月3日 (五) 02:38 (UTC)
+
+:{{合併}}到[[:Draft:Save Lily]]，[[:Draft:Save Lily]]在6/4建立, 在6/13提報提交草稿等待审阅, 之後審閱結果是"仍需改善"。不贊成在此情形下, 由原草稿作者直接建立條目, 應該仍在草稿空間整合會比較合適。--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月1日 (三) 09:35 (UTC)
+
+::本人對本條目的處理過程深感無奈。原有的Save Lily條目被一臨時帳號指出涉及版權問題後，本人自2026年6月4日起曾多次請求說明條目中究竟哪些內容涉嫌侵犯版權，以及相關權利來源為何，以便針對問題作出修正。然而，'''至今仍未收到任何具體回應'''。
+::為配合相關意見，本人於6月4日重新整理及改寫內容，建立[[Draft:Save Lily]]草稿，並'''多次提交審閱及尋求改善建議，但同樣在6月13日前未獲任何具體回覆或改善建議'''。直至6月13日，原「Save Lily」條目在'''「不指證、不解釋、不討論」情況下遭到刪除'''。'''在整個過程中，相關版權問題既未被具體指出，亦未見充分說明或討論。'''
+::此外，Draft:Save Lily的內容並非以列表形式撰寫，而是採用一般維基百科條目常見的段落敘述方式。然而，草稿卻'''莫名其妙的被似「不適合以列表形式表達」等理由而否決'''。本人至今仍未理解有關評價所指為何，'''以及其與原先提出的版權問題有何關聯'''。最終，原條目遭刪除，草稿亦應一個不清楚的格式問題而未能轉回條目空間，使相關內容自6月13日起完全自維基百科消失。
+::若條目確實涉及版權問題，依據相關方針處理，本人完全可以理解；然而，當版權問題始終未獲具體說明，而討論焦點又轉為格式問題時，難免令人感到困惑。本人亦不明白，'''為何在最初提出的版權疑慮尚未獲釐清的情況下，相關討論會轉向其他理由。'''這種情況難免令人產生準則或處理理由不斷改變的觀感。
+::為免相關內容完全自維基百科消失，本人唯有再次重新撰寫內容建立「[[Save Lily事件]]」條目。然而，新條目建立後不久，便再次被一臨時帳號提出「快速刪除」申請。
+::令人困惑的是，自始至終，最核心的問題——即原條目中究竟哪些內容涉嫌侵犯版權，以及相關權利來源為何——一直沒有獲得任何具體說明。在缺乏明確指證及解釋的情況下，編者實際上難以針對問題進行討論、修訂或改善。
+::本人尊重維基百科的各項方針與管理程序，亦願意按照社群意見修改條目內容。然而，若僅因臨時帳號人士提出「涉及版權問題」的疑慮，而'''未具體指出問題所在、未提供相關依據、亦未經充分討論，最終導致整個條目被刪除，實在令人感到遺憾與無奈'''。本人仍希望相關問題能獲得具體說明，讓編者有機會依據實際意見作出修正，並透過公開討論與社群共識解決爭議。'''--'''[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月1日 (三) 11:47 (UTC)
+
+:::我認為目前的存廢討論, 和6/4因為侵權而被刪除的"Save Lily"無關。是針對您在6/26創建的[[Save Lily 事件]]。
+:::另外, "Save Lily"在提報侵權之後, '''該頁面上會有說明和哪一個檔案太過類似''', 有侵權問題。您的討論頁也有對應通知, 並且在其中提到「請前往問題頁面了解情況。」被提報侵權的頁面會在一段時間之後刪除。--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月1日 (三) 11:59 (UTC)
+
+::::如果真的有說明和哪一個檔案太過類似，懇請您指出，謝謝。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月1日 (三) 12:05 (UTC)
+::::您說「目前的"Save Lily事件"的討論和6/4因為侵權而被刪除的"Save Lily"無關」？
+::::(1) 若"Save Lily"不是在'''「不指證、不解釋、不討論」情況下遭到刪除'''，才會出現這個"Save Lily事件"條目及討論嗎？
+::::(2) 您指"Save Lily"是因為侵權而被刪除，可否請您說明'''條目中究竟哪些內容涉嫌侵犯版權以及相關權利來源為何嗎？'''懇請您'''具體指出和哪一個檔案太過類似, 有怎樣的侵權問題'''？您的指正將有助編者依據意見作出修正，亦有利於透過討論提升條目品質。謝謝！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月1日 (三) 12:26 (UTC)
+
+:::::刪除的管理員是Manchiu，你該問他。我這邊幫忙Ping了。
+:::::我能看出你對整個條目的建立與刪除過程非常不滿。確實刪除過程缺乏很多溝通。雖然一般而言，被刪除後的申訴過程，也不是目前看到的這樣，但基於條目的刪存與回復過程十分複雜，我可以理解你的作法——這也是我在這邊提出正規頁面存廢討論的原因。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 15:56 (UTC)
+
+:<s>{{删除}}</s>{{移动|Draft:Save Lily}}：这是“事件”，还是生者传记？他们的Facebook专页叫Save Lily，媒体也这么叫。然而次女Lily人还在瑞典，最近的新闻则是香港本地关于三子Danny的事件，以及这对魔怔父母继续尝试从瑞典要Lily人的企图。目前条目写法恐怕实为[[曾偉邦與關佩仙]]的生者传记。我不觉得目前这些tabloid journalism能够写成一个正经条目。--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月1日 (三) 12:07 (UTC)
+
+::{{保留}}Srapoj君，謝謝您的留言。「Save Lily 事件」當然是「事件」而不是「生者傳記」。個人認為判斷條目性質時，應以可靠來源的實際報導方式及條目主題本身作為依據，而非以相關人物目前是否仍然在世作為決定因素。
+:: 　　「Save Lily 事件」自出現以來，一直以一項具名的社會事件、網上運動及家庭糾紛爭議被媒體廣泛報導。多家媒體(例如：《明報》、《香港01》、《香港經濟日報》、《法庭線》等)均以「Save Lily 事件」作為專有名稱報導相關發展，而非單純以曾偉邦、關佩仙或Lily個人的傳記角度進行報導。因此，條目主題可以視為圍繞「Save Lily 事件」所衍生的一系列公共事件及社會討論，而不是某一兩位在世人士的傳記。
+:: 　　維基百科亦有大量以事件為主題、但涉及仍然在世人士的條目，例如司法案件、社會運動、監護權爭議、網絡事件等。相關人士仍然在世，並不必然導致條目被定性為生者傳記。關鍵在於條目是否以事件本身為中心，以及是否有足夠獨立可靠來源對該事件作出持續報導。
+:: 　　至於近期新聞主要聚焦於Danny或其他後續發展，這恰恰反映事件仍然持續發展，並未脫離「Save Lily 事件」的整體脈絡。事件的參與者、影響人物及後續發展可能隨時間改變，但不代表條目主題因此轉變為個人傳記。
+:: 　　如果有編者認為目前條目內容過度集中於曾偉邦、關佩仙或其他個別人士，較合適的做法應是指出具體段落並協助改善內容結構，例如增加事件背景、社會反響、媒體報導及相關發展等部分，而非直接認定整個主題屬於生者傳記。
+:: 　　至於對來源質素的疑慮，則應就個別來源是否符合WP:RS（可靠來源）進行討論。即使部分來源被認為偏向小報化，也不等同整個條目主題不具百科全書價值；關鍵仍在於是否存在足夠數量的獨立來源對事件作出顯著報導。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月1日 (三) 15:49 (UTC)
+
+:::我在想，Srapoj君想說的是不是[[WP:NOTNEWS]]方針——很多新聞報導，不等於能變成一個條目。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 16:03 (UTC)
+
+::另外Srapoj君，我個人認為主題與條目命名，應依照來源提及的多寡走。我不明白你為什麼看到包括[https://www.bbc.com/zhongwen/articles/c8d8v0v81l1o/trad BBC分析在內的]諸多來源，還認為都是「tabloid journalism」。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 16:03 (UTC)
+
+:::条目现在的写法就是一对魔怔家长用自己的孩子与瑞典和香港的child protection机构无理取闹的八卦新闻，哪用到了来源里可能可以写的home birth观点，以及如 https://theinitium.com/20260603-whatsnew-hongkong-save-lily-couple-refuse-dna-test-arrested/ 提到的香港现行人口登记法律的“漏洞”。--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月1日 (三) 17:55 (UTC)
+
+::::Srapoj君，謝謝您的意見。我認為上述意見實際上涉及兩個不同問題：一是條目主題是否具有百科價值；二是目前條目內容是否寫得完善。即使認為現有版本存在偏重個別爭議或八卦新聞的問題，也不等同整個條目主題不具收錄價值。
+::::首先，「Save Lily事件」並不只涉及個別家庭糾紛。從現有報導可見，相關事件已延伸至跨境監護權爭議、兒童保護制度、非住院分娩（home birth）、人口登記制度、DNA檢測要求、香港與瑞典機構的處理方式，以及社會及法律層面的討論。因此，條目的潛在涵蓋範圍遠較個別人物的家庭糾紛為廣。
+::::其次，若有編者認為條目目前過度集中於涉事家庭的言論或媒體追訪內容，這反映的是條目內容比例（due weight）和寫作方式的問題，而不是條目主題本身的問題。維基百科一般傾向透過改善內容解決此類問題，而非因此否定整個條目。
+::::正如閣下所提及，部分來源確實討論了非住院分娩、香港人口登記制度及DNA檢測安排等議題。如果現有條目未能充分反映這些內容，更合理的做法似乎是補充和擴展相關章節，使條目能更全面反映事件引發的社會及法律討論，而不是因現有版本尚未完善便認定條目不適合存在。
+::::此外，「某些媒體報導較具小報色彩」與「事件不具百科價值」並非同一概念。評估條目時，應考慮整體來源情況，包括是否存在具編輯審核的新聞機構、深度報導及評論文章持續關注相關議題，而非僅根據部分報導風格作出判斷。
+::::最後，我認為討論應聚焦於「條目應如何改善」而非「涉事人士是否值得同情」或其他價值判斷。即使有人認為涉事父母的做法不合理，維基百科記錄的仍然是其所引發的事件及社會反響，而非對相關人士作出道德評價。使用「魔怔家長」等帶有明顯立場的描述，亦未必有助於依據內容方針討論條目應否保留及如何撰寫。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月1日 (三) 18:10 (UTC)
+
+::::聽起來有點類似「離題」——雖然[[Talk:守護民主台灣大遊行 123別印來#優良條目評選|因為某些原因]]，我不太喜歡離題或寫作等說法所以有主觀色彩；但如同Cyberviewer指出的，條目品質與[[WP:GNG|收錄標準]]是兩回事。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月1日 (三) 18:24 (UTC)
+:::::那就拿出事件收录标准[[:en:WP:NEVENT]]。
+::::*Lasting effects: 为时尚早，不知道。
+::::*Geographical scope: 目前是香港本地新闻。我有尝试切到瑞典和芬兰语搜索这对魔怔父母的姓名，没有留意到香港媒体以外的报道。可能是当地媒体对外地人的bias、出于孩子隐私考虑不报或者早年其实报道过但没有写名字。
+::::*Depth of coverage: 有些不八卦的分析报道。
+::::*Duration of coverage: 为时尚早。
+::::*Diversity of sources: 关于Lily的资料主要是事主公开的外国法庭文件，虽然有见到香港媒体向瑞典地方政府进行查询。其他部分则应该够了。
+::::*Routine coverage: 不适用。
+::::*Sensationalism: 我吐槽过了。
+::::*Criminal acts: 算，不过这节只说应根据之前的标准来判断是否符合事件收录标准。
+::::*People notable for only one event: 这对魔怔父母原本不知名，所以不应写成他们的传记。
+::::*Future events: 不适用。
+:::::总之我怀疑最后只会有抚养权官司的肥皂剧，但基于3和5，我目前认为它可能符合事件收录标准，故已更改意见。--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月1日 (三) 20:18 (UTC)
+
+::{{ping|Srapoj}} 感謝[[User:Srapoj|Srapoj]] 將此條目的意見由「'''刪除'''」改為「'''移動'''到[[Draft:Save Lily]]」，亦感謝您提出較具建設性的處理方案。不過，不知閣下有否留意，目前「Save Lily事件」與「[[Draft:Save Lily]]」的內容實際上已經相同。換言之，在現時情況下，將條目移動至草稿頁面，對內容本身已不會產生實質影響，有關處理方式的實際意義似乎已經不大。因此，本人認為討論的重點或許不再是條目應存放於主名字空間還是草稿空間，而是條目內容究竟存在哪些具體問題，以及應如何根據相關方針作出改善。若條目確實仍有版權、來源、格式、顯著性或其他方面的疑慮，懇請具體指出相關段落及原因，讓編者能夠針對問題進行修正。相信這樣會比單純討論頁面位置更有助於解決爭議，亦更符合維基百科透過協作編輯改善內容的精神。謝謝。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 14:38 (UTC)
+
+:{{ping|Manchiu}}{{ping|Kurgenera}}（事實上，自6月5日收到臨時帳號(~2026-33134-42)提出'''「全條目侵權」的嚴重指控'''後，本人立即將條目內容全面重寫，建立[[Draft:Save Lily]]草稿。由6月5日至6月13日期間，本人先後三次修改草稿內容，每次完成修訂後，均於相關討論頁主動通知並徵詢意見，希望了解仍有哪些部分需要改善。然而，在此期間'''一直未有人就草稿內容提出任何意見'''、指出'''全條目或哪部內容涉及侵權，或格式上有什麼嚴重錯誤'''。直至6月13日，原條目在「不指證、不解釋、不討論」情況下被刪除，而草稿亦因'''「條目體裁應為散文而非列表」'''為由而否決，結果使'''相關內容未能以任何形式保留於維基百科'''。令本人感到困惑的是，無論是原條目還是重新撰寫後的草稿，內容均以一般條目常見的散文形式撰寫，並未採用列表作為主要表達方式。因此，相關意見具體所指為何、'''有關格式問題為何嚴重至足以使相關內容消失於維基百科'''，以及應如何修改才符合要求，至今仍未見明確說明。若當時能夠具體指出相關問題所在，相信本人可根據意見作出針對性的修正；然而，在未能得知具體問題的情況下，多次重寫後仍未能理解'''條目究竟犯了什麼嚴重錯誤'''、需要如何改善，這也是本人一直希望釐清的地方。謝謝大家。）--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 01:55 (UTC)
+
+:{{ping|Kurgenera}} Kurgenera君，您好，閣下兩次否決了 [[Draft:Save Lily]]，本人希望進一步了解相關審核意見的判斷依據，懇請賜教。
+:'''(1) 關於「條目體裁應為散文而非列表」的嚴重錯誤'''
+::2026年6月13日，閣下以「條目體裁應為散文而非列表」理由否決草稿。然而，無論是原條目還是其後重寫的 [[Draft:Save Lily]]，內容均以一般條目常見的散文方式撰寫，並無以列表作為主要表達形式。因此，本人一直未能理解相關意見具體所指為何。
+::若草稿確有不符合格式要求之處，可否具體指出哪些段落屬於「列表」？以及應如何修改，才能符合閣下所理解的格式要求？
+::此外，若相關問題屬於體裁或格式層面的問題，可否說明其'''嚴重程度'''為何，以致草稿被否決？
+:'''(2) 關於「您所提交的草稿仍需改善」的意見''' 
+::2026年7月1日，本人再次修改草稿，並請求閣下接納，但未見具體回應，而是收到閣下指'''「您所提交的草稿仍需改善」'''的意見以。 請問「仍需改善」是指那方面的改善？哪些文字需要作出閣下要求的改善呢？條目已先後多次全面重寫，若閣下仍認為條目存在問題，懇請具體指出相關段落、句子或內容，並說明認為不符合方針或指引的原因，以及可行的改善方向。 由於目前提出的意見較為概括，未能明確指出問題所在，因此編者較難進行針對性的修正，也不易理解條目究竟需要作出哪些改動才能符合要求。 維基百科一向鼓勵透過具體討論及共識方式改善條目內容。若能明確指出相關問題及改進建議，相信不僅有助於解決爭議，亦能協助編者更有效率地完善條目內容，從而提升條目品質。謝謝！
+:'''(3) 關於「造成審核困擾」的嚴重指控'''
+::2026年7月2日，閣下除了未說清原因下再次否決草稿，更留下'''「造成審核困擾」的嚴重指控。'''本人希望了解，「造成審核困擾」具體是指什麼行為？自6月5日起，本人因應被臨時帳號指控'''全條目侵權'''而重寫草稿，並先後三次修訂內容。每次修訂後，均於相關討論頁通知及徵詢意見，希望了解仍有哪些部分需要改善。然而，'''在6月13日前並未收到任何回應'''。在未能得知具體問題所在的情況下，本人只能透過討論頁詢問及尋求意見。'''若這種嘗試理解問題並配合改善內容的做法被指控為「造成審核困擾」，本人希望能了解相關判斷的具體理由。'''
+:本人提出上述問題，並非質疑任何編者的善意或工作，而是希望釐清相關審核標準及判斷依據。若問題能夠被具體指出，相信編者將更容易針對問題進行修正，亦有助減少重複修改、反覆討論及不必要的誤解。
+:感謝閣下撥冗解答。謝謝您！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月2日 (四) 10:28 (UTC)
+::{{ping|Cyberviewer}}本次否决是为该页面共识后再整理（至少我认为是已经通过了）。
+::本人提出[[Save Lily 事件]]予以{{保留}}并{{移动}}至[[Save Lily事件]]（标题不留空格）。现在可以说的是条目已经改善完成。至于草稿拒绝一事则是提交草稿会占据[[:CAT:AFC]]造成其他审核员困扰。
+::目前来看条目已无重大质量问题，也请不要再抓着已经改善的问题再揪着不放然后大量输出好不好……--'''<span style="background:#EEE;padding:3px; color:#000;border-radius:10px;box-shadow:0 0 1em #333;">[[U:Kurgenera|<math> \mathfrak{Kurwa}</math>]]__<sup>[[UT:Kurgenera|<span style="color:#B8F">( •̀ ω •́ )＜✧</span>]]</sup></span>''' 2026年7月3日 (五) 00:35 (UTC)
+:::<small>{{吐槽}}：您真没觉得这写法是两个事主的八卦传记吗（--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月3日 (五) 00:37 (UTC)</small>
+:::{{ping|Kurgenera}} 感謝 Kurgenera 君的回覆。
+:::如果閣下現時認為「條目已經改善完成」、「目前來看條目已無重大質量問題」，本人對此表示歡迎。
+:::不過，這也正是本人一直感到疑惑的地方。
+:::目前的「Save Lily事件」與「Draft:Save Lily」內容實際上已相同或高度相近，而本人在建立草稿後亦曾多次修改內容並主動徵詢意見。然而，在草稿階段，本人收到的是「條目體裁應為散文而非列表」（'''但內容根本沒有列表啊！）'''、「仍需改善」'''（不具體說出問題怎能改善呢？）'''等摸不著頭腦意見，但一直未能了解具體需要改善的內容究竟是什麼。
+:::如今若社群認為條目已無重大質量問題，那麼本人自然樂見其成；但同時也會產生一個疑問：究竟是條目的哪些具體問題已獲改善？又是哪些修改令條目從當時未能通過草稿審核，變成現時可以保留？
+:::我之所以反覆提出相關問題，並非希望重新爭論已經解決的內容問題，而是希望理解當時的判斷依據。畢竟，'''若編者無法知道當初問題究竟在哪裡，未來遇到類似情況時，仍然不知道應如何修改、如何避免同類問題再次發生呢？'''
+
+:::至於'''「提交草稿會佔據 CAT:AFC，造成其他審核員困擾」'''的指控，本人希望補充幾點背景：
+:::(1) 提交草稿是因為被匿名的臨時帳號指控「全條目侵權」而'''被要求做的事'''。
+:::(2) 依要求全文重寫成草稿，但又被否決，原因是「條目體裁應為散文而非列表」，'''但內容根本沒有列表啊！'''
+:::(3) 因為不希望再'''「提交草稿佔據 CAT:AFC 造成其他審核員困擾」，'''本人唯有再次全文重寫成「Save Lily 事件」新條目，但新條目又被匿名的臨時帳號要求「快速刪除」。本人到「互助客棧」尋求討論以解決問題，結果討論又被審核員/管理員由「互助客棧」移到「頁面存廢討論」，並'''被要求將新條目 移到/合併 到草稿中！'''
+:::(4) 請大家明白，其實不斷全文重寫提交草稿，結果草稿又因「條目體裁應為散文而非列表」（但內容根本沒有列表啊！）、「仍需改善」（不具體說出問題怎能改善呢？）等摸不著頭腦意見而否決，'''除了對「佔據 CAT:AFC 造成其他審核員困擾」，亦會對編者會造成極大困擾。'''
+
+:::本人理解草稿審核系統需要維持效率。不過，若編者因未能理解否決原因而再次提交修訂版本，某程度上亦反映先前的審核意見可能未足以讓編者理解具體問題所在。
+:::因此，本人真正關心的是：'''當時究竟有哪些具體問題導致草稿被否決？而這些問題後來又是如何被解決的？'''
+:::若能釐清這一點，相信不但有助本人理解相關標準，亦有助其他編者日後處理類似情況。這也是本人持續提出相關問題的原因。
+:::謝謝閣下撥冗回覆。謝謝您！--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月3日 (五) 01:28 (UTC)
+<hr />
+: 快速保留：由於已取得保留共識，將撤回提刪討論（[[wp:SK#1]]）。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月3日 (五) 02:40 (UTC)
+----
+: 本條目原本被我撤回刪除，但臨時帳戶指責本人作法，稱本人尚未獲得{{ping2|Wolfch}}同意保留的意見。因此，本人這邊重開。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 09:24 (UTC)
+::Wolfch主張應合併，因為草稿先於條目建立，應以草稿為準。這似乎也是臨時帳戶的核心主張。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 09:28 (UTC)
+:::我還是覺得合併到草稿會比較合適，謝謝。--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月4日 (六) 09:36 (UTC)
+::::我建议直接覆盖草稿内容，因草稿目前的质量远不及[[Save Lily事件]]。--[[User:Chatsven|<span style="font-family: 'SimSun', 'Songti TC', 'STSong', serif; color: #111; font-size: 1.05em;"> 澪空</span>]] <span style="font-family: 'SimSun', 'Songti TC', serif; color: #999; font-style: italic;">[[User_talk:Chatsven|論]]</span> 2026年7月4日 (六) 10:14 (UTC)
+:::::對我來說，最後內容出現在草稿空間即可。合併到草稿或是覆蓋草稿內容都可以。--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月4日 (六) 10:18 (UTC)
+:::::Done: [[Special:Diff/93313119]]--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 10:31 (UTC)
+::::::Save Lily事件條目還在，應該不算done吧--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月4日 (六) 10:56 (UTC)
+:::::::欸，老實說，我其實不認為條目應該被草稿化。不過先這樣。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 10:59 (UTC)
+::{{vk}}：咀嚼完Wolfch的意見、並按照Chatsven指引做出數次改動後，我認為條目有大幅度改進，移動回草稿不必要。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 11:00 (UTC)
+:::具體而言：在大幅度修改下，[[Special:Diff/93313897|條目的內容]]已經與[[Special:Diff/93298463|草稿的內容]]有相當差異，應視為不同的內容。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 12:10 (UTC)
+::本人有一點疑問。
+::根據 Saimmx 君的說明：「本條目原本被我撤回刪除，但臨時帳戶指責本人作法，稱本人尚未獲得 Wolfch 同意保留的意見。因此，本人這邊重開。」
+::本人尊重任何編者提出異議的權利，不過，我認為這裡值得討論的問題是：「該項指責本身是否具有足夠理據，以致需要重新開啟一項已經結束的存廢討論？」
+::若確實存在新的證據、新的事實，或先前結案時存在重大程序問題，重新檢視當然可以理解；但若僅因有編者事後不同意既有結論，便重新展開討論，則相關討論何時才能獲得相對穩定的結論？
+::尤其本案中，條目內容已歷經多次重寫、草稿審核、存廢討論及公開討論，相關編者亦已投入大量時間改善內容。在此情況下，若要重新啟動已結束的討論，本人認為或許應說明：
+::* 相關指責具體是什麼?
+::* 重開討論所依據的新事實或新理由是什麼? 是否屬於「重大事實」或「重大理由」?
+::如此不但有助社群理解重開討論的必要性及合理性，亦可避免相同議題在缺乏新理據的情況下反覆討論，導致參與者投入大量人力、心力及時間，卻未能有效推進共識形成或解決實際問題。
+::維基百科固然鼓勵開放討論，但同時亦需要一定程度的穩定性與終局性。否則，若每當有編者對既有結論表示異議時，便可在缺乏新的事實基礎下重新開啟討論，長遠而言恐怕不利於條目改善，亦可能消耗社群寶貴的協作資源。--[[U:Cyberviewer|<span style="background-color:#7723E0; color:#FAF678;">'''　Cyber'''</span><span style="background-color:#FAF678; color:#7723E0;">'''viewer　'''</span>]]<small>（[[U:Cyberviewer/簽名|簽]]∥[[User_talk:Cyberviewer|論]]）</small> 2026年7月4日 (六) 11:52 (UTC)
+
+:::[[WP:SK#1]]要求「{{tq|原提刪者自行撤銷刪除提案……而且'''並無其他任何維基人建議將該頁面刪除'''}}」——在討論時有我、你、Srapoj、Wolfch、Kurgenera五人。當時明確同意保留的是你、我、Kurgenera，後來Srapoj暫時被說服撤銷刪除意見，表達要轉到草稿，Wolfch則堅持轉草稿。我當時在這樣的情形下關閉，確實不符合SK1的要件，因此重開。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 11:59 (UTC)
+::::而[https://zh.wikipedia.org/wiki/Wikipedia:頁面存廢討論/記錄/2026/07/01#c-Wolfch-20260704093600-Saimmx-20260704092800 Wolfch的意見]也代表我關閉其實是不夠周延的，因此是「{{tq|先前結案時存在重大程序問題}}」。--[[User:Saimmx|Saimmx]]（[[User talk:Saimmx|留言]]） 2026年7月4日 (六) 12:00 (UTC)
+:我当时的考虑是[[#c-Wolfch-20260701093500-Saimmx-20260701033900|Wolfch的意见]]只是提出了一个程序问题，而真要讲程序，[[WP:CP]]其实允许管理员删除原页时直接将草稿移到该位置<small>（只是当时Manchiu没有选择移动，而是提交审核[https://zh.wikipedia.org/w/index.php?title=Draft%3ASave_Lily&diff=93047981&oldid=92975141&diffonly=1]）</small>。AFC流程并非建立新条目必需的，而Wolfch当时只提及了Kurgenera的审核意见，但Kurgenera亦已认为现状可通过，故本人认为在撤回本人<small>（基于生者传记质量）</small>的草稿化意见后已不再有继续存废讨论的理由，于是建议Saimmx撤回提删。我不认为今日临时账号提出的质疑是正当合理的，而Wolfch也尚没有提出其他草稿化的理由，故本人认为这里的讨论应当关闭。--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月4日 (六) 12:29 (UTC)
+::有關此次存廢討論的重開，我已表達我的意見，不論最後結果是保留，或是回併到草稿，我都ok--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月4日 (六) 12:31 (UTC)
+:::您要是觉得写得烂或者有BLP问题就直接说啊，就说个认为应该草稿化的谜语让这里开着给那位输出LLM的长篇大论，何必呢--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月4日 (六) 12:38 (UTC)
+::::條目的草稿是因為原條目侵權，原作者所建立的草稿，管理員沒有將此草稿轉為條目，而維持草稿，審核沒有通過。此情形下，原作者另外在條目空間建立條目, 是不合適的。這是我認為，應該合併到草稿的原因。目前是因為存廢討論，多人參與條目修改，才將條目調整到比較理想的情形。（另外，其他人要如何在存廢討論表達意見，這個是個人自由，我不認為我需要為其他人的決定負責）--[[user:Wolfch|Wolfch]] ([[user talk:Wolfch|留言]]) 2026年7月4日 (六) 12:49 (UTC)
+----
+:此次重开前已有草稿审核员[[#c-Kurgenera-20260701040800-Saimmx-20260701033900|同意发布]]，若仍认为需草稿化请重新提删。<span class="NAC"><small>（[[Wikipedia:非管理員關閉討論|非管理員關閉]]）</small></span>--[[User:Srapoj|Srapoj]]（[[User talk:Srapoj|留言]]） 2026年7月4日 (六) 13:04 (UTC)
+{{delf}}
+
+== [[:慶祝中國共產黨成立105週年大會]] ==
+{{delh|sd}}
+{{合併}}到[[:中国共产党成立105周年庆祝活动]]。所述内容相同，但据该条目质量清理{{删除}}也可。
+: 提交的維基人及時間：'''<span style="background:#EEE;padding:3px; color:#000;border-radius:10px;box-shadow:0 0 1em #333;">[[U:Kurgenera|<math> \mathfrak{Kurwa}</math>]]__<sup>[[UT:Kurgenera|<span style="color:#B8F">( •̀ ω •́ )＜✧</span>]]</sup></span>''' 2026年7月1日 (三) 04:53 (UTC)
+
+:{{移動}}到[[Draft:慶祝中國共產黨成立105週年大會]]继续改善质量。 
+:{{意見}}'''：'''参见「[[庆祝中国共产党成立100周年大会|慶祝中國共產黨成立100週年大會]]」与「[[中国共产党成立100周年庆祝活动]]」，两者不是相同关系。 --[[User:Chatsven|<span style="font-family: 'SimSun', 'Songti TC', 'STSong', serif; color: #111; font-size: 1.05em;"> 澪空</span>]] <span style="font-family: 'SimSun', 'Songti TC', serif; color: #999; font-style: italic;">[[User_talk:Chatsven|論]]</span> 2026年7月1日 (三) 06:02 (UTC)
+:{{合并}}至目标条目即可，本身介绍的不多，且没有建党100周年庆祝大会隆重。--[[User:Shwangtianyuan|<span style="color: black;">'''Shwangtianyuan'''</span>]] [[User talk:Shwangtianyuan|<span style="color: #FF0000;">'''让中国再次伟大'''</span>]] 2026年7月1日 (三) 06:21 (UTC)
+::目標條目已有相關內容--[[User:Chatsven|<span style="font-family: 'SimSun', 'Songti TC', 'STSong', serif; color: #111; font-size: 1.05em;"> 澪空</span>]] <span style="font-family: 'SimSun', 'Songti TC', serif; color: #999; font-style: italic;">[[User_talk:Chatsven|論]]</span> 2026年7月1日 (三) 08:07 (UTC)
+<hr>
+: 快速删除。--<span style="font-family:思源宋体,Cursive;font-style:normal;">[[User:人间百态|人间百态,独尊变态]][[User_talk:人间百态|(讨论)]][[User:人间百态/签名板|(签名)]]</span> 2026年7月1日 (三) 09:06 (UTC)
+{{delf}}
+==30天后仍掛有{{tl|notability}}模板的條目==
+{{delh|relist}}
+{{Relisted}}在[[Wikipedia:頁面存廢討論/記錄/2026/07/09#30天后仍掛有{{notability}}模板的條目]]
+{{delf}}
+
+==批量提刪==
+{{delh|relist}}
+{{Relisted}}在[[Wikipedia:頁面存廢討論/記錄/2026/07/09#批量提刪]]
+{{delf}}
+
+==到期篩選的小小作品==
+===[[:瓦窰下]]===
+{{delh|rr}}
+
+<hr>
+: 请求理由消失：小小作品擴充後可以直接關閉討論。<span class="NAC"><small>（[[Wikipedia:非管理員關閉討論|非管理員關閉]]）</small></span>--[[User:日期20220626|日期20220626]]（[[User talk:日期20220626|留言]]） 2026年7月5日 (日) 01:02 (UTC)
+{{delf}}
+
+===[[:列蒂开局]]===
+{{delh|sd}}
+
+<hr>
+: 快速刪除：{{Afd-closure|Kuailong|G10}}。<span class="NAC"><small>（[[Wikipedia:非管理員關閉討論|非管理員關閉]]）</small></span>--[[U:Sakurase|<span style="color:#c3829e">Sakurase</span>]]<span><sub>[[UT:Sakurase|<span style="color:#87ceeb">留言</span>]]</sub></span> 2026年7月2日 (四) 10:30 (UTC)
+{{delf}}
+
+===[[:汪芫]]===
+{{delh|rr}}
+:{{保留}}，已擴充並補充來源，不再屬於小小作品。--[[User:银色雪莉|银色雪莉]]（[[User talk:银色雪莉|留言]]） 2026年7月2日 (四) 08:14 (UTC)
+<hr>
+: 请求理由消失：小小作品擴充後可以直接關閉討論。<span class="NAC"><small>（[[Wikipedia:非管理員關閉討論|非管理員關閉]]）</small></span>--[[User:日期20220626|日期20220626]]（[[User talk:日期20220626|留言]]） 2026年7月5日 (日) 01:01 (UTC)
+{{delf}}
+
+===[[:山東省語言文字工作委員會]]===
+{{delh|d}}
+
+<!-- Twinkle: User:Jason2016426 的 substub 提刪插入點，請勿變更或移除此行，除非不再於此頁提刪 -->
+<hr>
+: 删除。--[[User:Shizhao|-{百無一用是書生}-]] ([[User talk:Shizhao|☎]]) 2026年7月8日 (三) 01:45 (UTC)
+{{delf}}
+----
+:{{删除}}理據：過期小小作品
+提报以上<u>小小作品</u>的維基人及時間：<br id="no-new-title" />[[User:Jason2016426|Jason2016426]]（[[User talk:Jason2016426|留言]]） 2026年7月1日 (三) 10:37 (UTC)
+
+:[[瓦窰下]]已完成內容擴充，字數上已不再符合小小作品標準。—<font face="仿宋">飄流書生</font>（[[u:小文人|見山]]<span style="white-space:nowrap; font-weight:bold;">&nbsp;·</span> [[ut:小文人|客棧]]） 2026年7月1日 (三) 17:36 (UTC)
+:{{刪除}} 山東省語言文字工作委員會，難以擴充。--[[User:Tony85poon|Tony85poon]]（[[User talk:Tony85poon|留言]]） 2026年7月3日 (五) 08:20 (UTC)
+
+== [[:Template:Hey R Rangers]] ==
+{{delh|sd}}
+{{刪除}}理據：無相關報導此組合成員
+: 提交的維基人及時間：[[User:Manchiu|千村狐兔]]（[[User talk:Manchiu|留言]]） 2026年7月1日 (三) 14:47 (UTC)
+
+:{{删除}}：相关组合名称无来源，检视所称涉及人员的社媒亦未见提及，并见IP用户批量调整内容痕迹，有一定程度的扰乱疑虑。--[[User:银色雪莉|银色雪莉]]（[[User talk:银色雪莉|留言]]） 2026年7月2日 (四) 11:25 (UTC)
+<hr>
+: 快速刪除。--[[U:Hamish|<span style="background:White;color:Blue;border-radius:999px">Hamish </span>]][[UT:Hamish|<span style="font:10px Arial; color:#8A2BE2;font-weight:bold">one great show can change the world</span>]] 2026年7月6日 (一) 12:39 (UTC)
+{{delf}}
