@@ -74,6 +74,28 @@ def cmd_quality(args) -> int:
     return 0 if ok_all else 1
 
 
+def cmd_reclassify(args) -> int:
+    """Переклассифицировать сохранённые итоги по текущим правилам спека — без перезаливки."""
+    from .core.outcome import _classify
+
+    with open_db(args.db) as db:
+        for name in _wikis(args.wiki):
+            spec = wikis.get(name)
+            kinds = getattr(spec.outcome, "kinds", None) or {}
+            rows = db.execute("SELECT nomination_id, page, raw, kind FROM discussion_outcome WHERE wiki = ?",
+                              (name,)).fetchall()
+            changed = 0
+            for nom_id, page, raw, kind in rows:
+                new = _classify(raw or "", kinds)
+                if new != kind:
+                    db.execute("UPDATE discussion_outcome SET kind = ? WHERE nomination_id = ? AND page = ?",
+                               (new, nom_id, page))
+                    changed += 1
+            db.commit()
+            print(f"{name:7s} итогов {len(rows)}, переклассифицировано {changed}")
+    return 0
+
+
 def cmd_daily(args) -> int:
     args.start = args.end = None
     args.refresh = False
@@ -108,6 +130,9 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("quality", help="метрики качества и пороги")
     p.add_argument("--window", type=int, default=60, help="дней назад для метрик")
     p.set_defaults(func=cmd_quality)
+
+    p = sub.add_parser("reclassify", help="переклассифицировать сохранённые итоги по текущим правилам")
+    p.set_defaults(func=cmd_reclassify)
 
     p = sub.add_parser("daily", help="ingest --recent N --refresh-changed + state + quality")
     p.add_argument("--recent", type=int, default=int(os.environ.get("TS_RECENT_DAYS", "21")))

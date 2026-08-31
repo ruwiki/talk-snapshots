@@ -40,12 +40,12 @@ WIKI = WikiSpec(
     outcome=ClosingTemplate(
         pattern=r"\{\{\s*delh\s*\|\s*([^}|]+)",
         kinds={
-            # коды {{delh|…}}: d/sd — удалено, k/sk/nc — оставлено (nc = нет консенсуса),
-            # r — перенаправление, m — объединено, relist — продлено; плюс свободный текст
+            # коды {{delh|…}}: d/sd — удалено, k/sk/nc/tk/ir — оставлено, rr/r — перенаправление,
+            # merge* — объединено, relist — продлено (берётся ПОСЛЕДНИЙ delh секции)
             r"^s?d\s*$|快速?刪除|快速?删除|刪除|删除": "delete",
-            r"^s?k\s*$|^nc\s*$|保留|無共識|无共识": "keep",
-            r"^r\s*$|重定向|重新導向": "redirect",
-            r"^m\s*$|合併|合并": "merge",
+            r"^s?k\s*$|^nc\s*$|^tk\s*$|^ir\s*$|保留|無共識|无共识": "keep",
+            r"^rr?\s*$|重定向|重新導向": "redirect",
+            r"^merge\w*\s*$|^m\s*$|合併|合并": "merge",
             r"移動|移动|移至|草稿化": "moved",
             r"^w\s*$|撤回|撤销|撤銷": "withdrawn",
             r"^relist\s*$|重新提交|改為|改为|消歧義|消歧义": "other",

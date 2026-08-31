@@ -50,13 +50,13 @@ WIKI = WikiSpec(
     outcome=ClosingTemplate(
         pattern=r"The result was\s*'*\s*(?:\[\[[^]|]*\|)?([^'\].\n]{2,60})",
         kinds={
-            r"^speedy delet|^delet": "delete",
-            r"^speedy keep|^keep|^no consensus|^snow keep": "keep",
-            r"^merge": "merge",
-            r"^redirect": "redirect",
-            r"^draftif|^userf|^incubat|^move": "moved",
-            r"^withdraw|^nomination withdrawn|^procedural close": "withdrawn",
-            r"^rename": "rename",
+            r"delet": "delete",
+            r"keep|no consensus|not merged": "keep",
+            r"merge": "merge",
+            r"redirect|BLAR": "redirect",
+            r"draftif|userf|incubat|move": "moved",
+            r"withdraw|procedural close": "withdrawn",
+            r"rename": "rename",
         },
     ),
     # «Comment» сюда не входит: это пометка «просто замечание», а не позиция.

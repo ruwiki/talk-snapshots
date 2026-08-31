@@ -102,9 +102,10 @@ class ClosingTemplate:
     def apply(self, nom: Nomination, spec, wikitext: str | None) -> None:
         if not wikitext:
             return
-        m = re.search(self.pattern, wikitext, re.IGNORECASE | re.DOTALL)
-        if not m:
+        matches = list(re.finditer(self.pattern, wikitext, re.IGNORECASE | re.DOTALL))
+        if not matches:
             return
+        m = matches[-1]  # последний: первые бывают обёртками продления ({{delh|relist}})
         raw = (m.group(1) if m.groups() else m.group(0)).strip()
         nom.outcomes.append(
             DiscussionOutcome(kind=_classify(raw, self.kinds), source="template", raw=raw[:200])
