@@ -50,4 +50,5 @@ WIKI = WikiSpec(
     outcome=NoOutcome(),
     stance=SectionStance({"Mantenere": "Keep", "Cancellare": "Delete"}),
     reason=ReasonClass(discussion=r"Pagine da cancellare/", speedy=r"\bC(\d{1,2})\b|immediata"),
+    label="Wikipedia italiana — Pagine da cancellare",
 )

@@ -150,6 +150,10 @@ class WikiSpec:
     common_headings: tuple[str, ...] = ()
     #: заголовок номинации может быть зачёркнут — это «закрыто» без итога в тексте
     struck_means_closed: bool = True
+    #: подпись раздела на витрине
+    label: str = ""
+    #: регулярка по названию категории с одной группой = тема (en: «AfD debates (X)»)
+    topic_pattern: str | None = None
 
     def __post_init__(self) -> None:
         assert isinstance(self.listing, Listing)

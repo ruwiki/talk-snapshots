@@ -67,4 +67,6 @@ WIKI = WikiSpec(
         "Strong keep", "Strong delete",
     )),
     reason=ReasonClass(discussion=r"Articles for deletion/", speedy=r"CSD#([A-Z]\d+)"),
+    label="English Wikipedia — AfD",
+    topic_pattern=r"^AfD debates \((.+)\)$",
 )

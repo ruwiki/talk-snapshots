@@ -51,4 +51,5 @@ WIKI = WikiSpec(
     stance=VoteWords(("即時削除", "版指定削除", "特定版削除", "削除", "存続", "保留", "却下", "取り下げ"),
                      boundary=False),
     reason=ReasonClass(discussion=r"削除依頼/", speedy=r"即時削除|WP:CSD#?\s*([A-Z]?\d+(?:-\d+)?|全般\d+|記事\d+)"),
+    label="ウィキペディア日本語版 — 削除依頼",
 )
