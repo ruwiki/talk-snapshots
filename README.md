@@ -1,6 +1,9 @@
 # talk-snapshots
 
-**Live:** https://talk-snapshots.toolforge.org/ (HTML) · https://talk-snapshots.toolforge.org/api/report.json (JSON)
+**Live:** https://talk-snapshots.toolforge.org/ — overview in English, wikis ordered by volume;
+`/wiki/<dbname>` — per-wiki page **in that wiki's language** (`app/i18n.py`);
+`/api/report.json` — the same aggregates as JSON (CORS `*` is deliberate: the API is meant
+for on-wiki gadgets and user scripts); `/healthz` (liveness), `/readyz` (DB check).
 
 Who argues with whom, about which pages, in deletion discussions — and what
 happens to those pages afterwards — across Wikipedias with one codebase.

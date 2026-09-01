@@ -18,8 +18,10 @@ def test_report_on_empty_db_renders():
     db = _db()
     rep = report.build(db, [wikis.get("ruwiki"), wikis.get("enwiki")])
     assert rep["wikis"]["ruwiki"]["empty"]
-    html = page.render(rep)
-    assert "talk-snapshots" in html and "данных ещё нет" in html
+    html = page.render_overview(rep)
+    assert "talk-snapshots" in html
+    html = page.render_wiki("ruwiki", rep["wikis"]["ruwiki"], rep, "ru")
+    assert "данных ещё нет" in html
 
 
 def test_lifecycle_separates_outcome_from_state():
@@ -55,6 +57,11 @@ def test_lifecycle_separates_outcome_from_state():
     assert W["outcome_kinds"] == {"delete": 1, "keep": 2}
     assert W["deletion_delay"] == {"<1d": 2}
     assert W["top_participants"][0]["user"] == "Someone"
-    html = page.render({"generated": "now", "wikis": {"ruwiki": W}})
+    rep = {"generated": "now", "wikis": {"ruwiki": W}}
+    html = page.render_wiki("ruwiki", W, rep, "ru")
     assert "Оставленная" not in html  # витрина — агрегаты, не список статей
     assert "оставлена" in html and "висит без итога" in html
+    de = page.render_wiki("ruwiki", W, rep, "de")
+    assert "behalten" in de and "ohne Ergebnis" in de
+    ov = page.render_overview(rep)
+    assert "/wiki/ruwiki" in ov
