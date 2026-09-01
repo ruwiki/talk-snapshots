@@ -1,5 +1,7 @@
 # talk-snapshots
 
+**Live:** https://talk-snapshots.toolforge.org/ (HTML) · https://talk-snapshots.toolforge.org/api/report.json (JSON)
+
 Who argues with whom, about which pages, in deletion discussions — and what
 happens to those pages afterwards — across Wikipedias with one codebase.
 
@@ -82,8 +84,10 @@ every run — it has no window.
 
 ## Deployment
 
-`Procfile` declares `migrate`, `daily` and `smoke`; `toolforge.yaml` schedules
-`daily`. The post-deploy check runs as a one-off job on Toolforge, not in
+`Procfile` declares `web` (gunicorn serving the dashboard straight from Toolsdb with an
+hourly in-memory cache — no files shared between the cron and the web pod), `migrate`,
+`daily` and `smoke`; `toolforge.yaml` schedules `daily`. Web: `toolforge webservice
+buildservice start --mount none`. The post-deploy check runs as a one-off job on Toolforge, not in
 GitHub Actions: replicas and Toolsdb are unreachable outside Cloud VPS, so CI
 runs only the offline tests (`python -m pytest`) and `ruff`.
 
