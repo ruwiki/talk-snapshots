@@ -57,6 +57,6 @@ WIKI = WikiSpec(
         boundary=False,
         prefix=r"(?:[（(][^）)]{0,4}[）)]\s*)?",
     ),
-    reason=ReasonClass(discussion=r"頁面存廢討論|页面存废讨论", speedy=r"\b(?:CSD|快速删除|快速刪除)\s*#?\s*([A-Z]\d+|[A-Z]+\d*)"),
+    reason=ReasonClass(discussion=r"頁面存廢討論|页面存废讨论|存废讨论|存廢討論", speedy=r"\b(?:CSD|快速删除|快速刪除)\s*#?\s*([A-Z]\d+|[A-Z]+\d*)"),
     label="中文维基百科 — 頁面存廢討論",
 )

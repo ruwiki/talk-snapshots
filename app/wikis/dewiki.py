@@ -59,6 +59,9 @@ WIKI = WikiSpec(
         },
     ),
     stance=VoteWords(("Löschen", "Behalten", "LAE", "LAZ", "Schnelllöschen", "SLA", "Neutral")),
-    reason=ReasonClass(discussion=r"Löschkandidaten/", speedy=r"\b(SLA|Schnelllösch\w*)\b"),
+    reason=ReasonClass(
+        discussion=r"Löschkandidaten/|Löschdiskussion",
+        speedy=r"\b(SLA|Schnelllösch\w*)\b|fehlende .*Relevanz|Kein ausreichender Artikel|Werbeeintrag|Leere\]\] oder|Verschieberest|Wiederanlage|KI\]\]-generiert",
+    ),
     label="Deutsche Wikipedia — Löschkandidaten",
 )
