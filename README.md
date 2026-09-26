@@ -65,7 +65,8 @@ python -m app.cli ingest --from 2026-07-01 --to 2026-07-03   # all TS_WIKIS
 python -m app.cli --wiki dewiki ingest --recent 3 --refresh-changed
 python -m app.cli state                                      # page fate from logs, whole volume
 python -m app.cli quality                                    # metrics vs thresholds, non-zero exit on breach
-python -m app.cli daily                                      # what the cron runs: the three above
+python -m app.cli logs --from 2026-07-01                     # log counters: deletions by channel, restores, moves, protections
+python -m app.cli daily                                      # what the cron runs: the four above
 python -m app.stats --report top                             # participation reports
 ```
 
