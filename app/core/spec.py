@@ -120,6 +120,41 @@ class StanceStrategy(Protocol):
 
 
 @dataclass(frozen=True)
+class LogChannels:
+    """Каналы удаления по строке причины в журнале: упорядоченные пары (канал, регулярка).
+
+    Первая совпавшая побеждает; не совпало — «other». Канал, которого в вики нет
+    (PROD вне enwiki), витрина показывает серым: «такого процесса здесь нет» — тоже факт.
+    Ключи каналов: discussion, prod, speedy, mass, xfd.
+    """
+
+    patterns: tuple[tuple[str, str], ...]
+    #: пространства имён, которые витрина показывает отдельно: {ns: ключ}
+    ns_groups: tuple[tuple[int, str], ...] = ((0, "article"), (2, "user"))
+
+    ALL = ("discussion", "prod", "speedy", "mass", "xfd", "other")
+
+    def classify(self, comment: str) -> str:
+        for chan, pat in self.patterns:
+            if re.search(pat, comment or "", re.IGNORECASE):
+                return chan
+        return "other"
+
+    def present(self) -> tuple[str, ...]:
+        return tuple(c for c, _ in self.patterns)
+
+    def group(self, ns: int) -> str:
+        for n, key in self.ns_groups:
+            if n == ns:
+                return key
+        return "other"
+
+    @classmethod
+    def from_reason(cls, reason: ReasonClass) -> LogChannels:
+        return cls(patterns=(("speedy", reason.speedy), ("discussion", reason.discussion)))
+
+
+@dataclass(frozen=True)
 class ReasonClass:
     """Класс основания удаления по комментарию в журнале: по итогу / быстро / иное."""
 
@@ -154,12 +189,16 @@ class WikiSpec:
     label: str = ""
     #: регулярка по названию категории с одной группой = тема (en: «AfD debates (X)»)
     topic_pattern: str | None = None
+    #: каналы удаления для панели «из журналов»; по умолчанию — из reason
+    log_channels: LogChannels | None = None
 
     def __post_init__(self) -> None:
         assert isinstance(self.listing, Listing)
         assert all(isinstance(p, PagesStrategy) for p in self.pages)
         assert isinstance(self.outcome, OutcomeStrategy)
         assert isinstance(self.stance, StanceStrategy)
+        if self.log_channels is None:
+            object.__setattr__(self, "log_channels", LogChannels.from_reason(self.reason))
 
     @property
     def nomination_level(self) -> int:

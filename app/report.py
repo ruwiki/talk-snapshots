@@ -172,8 +172,43 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
     }
 
 
-def build(db: DB, specs: list) -> dict:
+def build_logs(db: DB, spec) -> dict | None:
+    """Панель «из журналов»: удаления статей по каналам, по пространствам, restore/move/protect.
+
+    Каналы, которых в вики нет (нет регулярки в spec.log_channels), отдаются в `absent`:
+    витрина рисует их серым, а не пропускает — отсутствие процесса тоже сравнимо.
+    """
+    w = spec.dbname
+    rows = db.execute("SELECT day, kind, ns_group, channel, n FROM log_counts WHERE wiki = ?", (w,)).fetchall()
+    if not rows:
+        return None
+    ch = spec.log_channels
+    chans: Counter = Counter()
+    ns: Counter = Counter()
+    kinds: Counter = Counter()
+    days = [min(r[0] for r in rows), max(r[0] for r in rows)]
+    for _day, kind, ns_group, channel, n in rows:
+        if kind == "delete":
+            ns[ns_group] += n
+            if ns_group == "article":
+                chans[channel] += n
+        kinds[kind] += n
+    present = set(ch.present()) | {"other"}
     return {
+        "days": days,
+        "delete_channels": {c: chans.get(c, 0) for c in ch.ALL},
+        "absent": [c for c in ch.ALL if c not in present],
+        "delete_ns": {g: ns.get(g, 0) for g in ("article", "draft", "user", "other")},
+        "has_draft": any(key == "draft" for _, key in ch.ns_groups),
+        "kinds": {k: kinds.get(k, 0) for k in ("delete", "restore", "move", "protect")},
+    }
+
+
+def build(db: DB, specs: list) -> dict:
+    out = {
         "generated": dt.datetime.now(dt.UTC).isoformat(timespec="minutes"),
         "wikis": {spec.dbname: build_wiki(db, spec) for spec in specs},
     }
+    for spec in specs:
+        out["wikis"][spec.dbname]["logs"] = build_logs(db, spec)
+    return out

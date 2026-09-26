@@ -88,6 +88,49 @@ def hbar(items, lang: str, color=C["blue"], width=560, row=22, total=None, label
     return "".join(out)
 
 
+def channel_bar(items, lang: str, width=560, row=22) -> str:
+    """Как hbar, но канал, которого в вики нет, рисуется серой полосой с подписью —
+    отсутствие процесса показывается, а не пропускается."""
+    if not items:
+        return f"<p class='muted'>{t(lang, 'no_data')}</p>"
+    total = sum(n for _, n, absent in items if not absent) or 1
+    m = max((n for _, n, absent in items if not absent), default=0) or 1
+    lab_w, height = 200, row * len(items) + 4
+    out = [f"<svg viewBox='0 0 {width} {height}' class='chart' role='img'>"]
+    for i, (label, n, absent) in enumerate(items):
+        y = i * row + 2
+        out.append(f"<text x='{lab_w-8}' y='{y+row/2+4}' class='lab' text-anchor='end'>{esc(label)}</text>")
+        if absent:
+            out.append(f"<rect x='{lab_w}' y='{y+3}' width='{width - lab_w - 90}' height='{row-8}' rx='3' fill='#e6e4dc'>"
+                       f"<title>{esc(t(lang, 'chan_absent'))}</title></rect>"
+                       f"<text x='{lab_w + 6}' y='{y+row/2+4}' class='val' fill='#8a887f'>{esc(t(lang, 'chan_absent'))}</text>")
+            continue
+        w = (width - lab_w - 90) * n / m
+        share = f" ({100*n/total:.0f}%)"
+        out.append(f"<rect x='{lab_w}' y='{y+3}' width='{w:.1f}' height='{row-8}' rx='3' fill='{C['orange']}'>"
+                   f"<title>{esc(label)}: {n}{share}</title></rect>"
+                   f"<text x='{lab_w + w + 6:.1f}' y='{y+row/2+4}' class='val'>{n}{esc(share)}</text>")
+    out.append("</svg>")
+    return "".join(out)
+
+
+def logs_section(L: dict, lang: str) -> str:
+    chans = [(t(lang, f"chan_{c}"), L["delete_channels"][c], c in L["absent"]) for c in
+             ("discussion", "prod", "speedy", "mass", "xfd", "other")]
+    ns = [(t(lang, f"ns_{g}"), L["delete_ns"][g], g == "draft" and not L["has_draft"]) for g in
+          ("article", "draft", "user", "other")]
+    kinds = [(t(lang, f"log_{k}"), L["kinds"][k]) for k in ("delete", "restore", "move", "protect")]
+    return (
+        f"<h2>{esc(t(lang, 'ch_logs'))}</h2>"
+        f"<p class='muted'>{esc(t(lang, 'logs_lead', a=L['days'][0], b=L['days'][1]))}</p>"
+        "<div class='kpis'>" + "".join(f"<div class='kpi'><b>{v}</b><span>{esc(name)}</span></div>" for name, v in kinds) + "</div>"
+        "<div class='grid2'>"
+        f"<figure><figcaption>{esc(t(lang, 'ch_delete_channels'))}</figcaption>{channel_bar(chans, lang)}</figure>"
+        f"<figure><figcaption>{esc(t(lang, 'ch_delete_ns'))}</figcaption>{channel_bar(ns, lang)}</figure>"
+        "</div>"
+    )
+
+
 def stacked_hbar(rows, keys, lang: str, width=560, row=24, links=None) -> str:
     if not rows:
         return f"<p class='muted'>{t(lang, 'no_data')}</p>"
@@ -153,6 +196,7 @@ body{margin:0;background:#fcfcfb;color:#0b0b0b;font:14px/1.45 system-ui,Segoe UI
 main{max-width:1240px;margin:0 auto;padding:20px 24px 60px}
 h1{font-size:22px;margin:0 0 4px}h2{font-size:18px;margin:32px 0 2px}
 .muted{color:#52514e;font-size:12.5px;margin:2px 0 12px}
+.absent{color:#9a9892}
 nav{margin:6px 0 14px}nav a{margin-right:14px;font-size:13px}
 .kpis{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 14px}
 .kpi{background:#f3f2ec;border-radius:8px;padding:8px 14px;min-width:96px}
@@ -217,6 +261,28 @@ def render_overview(report: dict) -> str:
         "<tr><td><a href='" + esc(r["_href"]) + "'>" + esc(r["wiki"]) + "</a></td>" +
         "".join(f"<td>{esc(r[k])}</td>" for k, _ in cols[1:]) + "</tr>"
         for r in kpi_rows)
+    log_rows, span = [], None
+    for w in order:
+        L = wikis[w].get("logs")
+        if not L:
+            continue
+        span = span or L["days"]
+        dc, tot = L["delete_channels"], sum(L["delete_channels"].values()) or 1
+
+        def cell(c, L=L, dc=dc):
+            return "<td class='absent'>—</td>" if c in L["absent"] else f"<td>{dc[c]}</td>"
+        log_rows.append(
+            f"<tr><td><a href='/wiki/{esc(w)}'>{esc(wikis[w]['label'])}</a></td><td>{tot}</td>"
+            f"<td>{100*dc['discussion']/tot:.0f}%</td>{cell('prod')}{cell('speedy')}{cell('mass')}"
+            f"<td>{L['kinds']['restore']}</td><td>{L['kinds']['move']}</td><td>{L['kinds']['protect']}</td></tr>")
+    logs_html = ""
+    if log_rows:
+        lh = "".join(f"<th>{esc(c)}</th>" for c in (
+            "", t(lang, "ov_th_deleted"), t(lang, "ov_th_share_disc"), t(lang, "chan_prod"), t(lang, "chan_speedy"),
+            t(lang, "chan_mass"), t(lang, "log_restore"), t(lang, "log_move"), t(lang, "log_protect")))
+        logs_html = (
+            f"<h2>{esc(t(lang, 'ch_logs'))}</h2><p class='muted'>{esc(t(lang, 'ov_logs', a=span[0], b=span[1]))}</p>"
+            f"<figure class='wide'><table class='ov-table'><thead><tr>{lh}</tr></thead><tbody>{''.join(log_rows)}</tbody></table></figure>")
     body = (
         f"<h1>{esc(t(lang, 'site_title'))}</h1>"
         f"<p class='muted'>{esc(t(lang, 'updated', date=report['generated']))} · {esc(t(lang, 'sources'))} · "
@@ -225,6 +291,7 @@ def render_overview(report: dict) -> str:
         f"<figure class='wide'><figcaption>{esc(t(lang, 'ov_fate'))} — {esc(t(lang, 'ov_hint'))}</figcaption>"
         f"{stacked_hbar(rows, life, lang, width=1160, row=26, links=links)}{legend(life)}</figure>"
         f"<figure class='wide'><table class='ov-table'><thead><tr>{head}</tr></thead><tbody>{trs}</tbody></table></figure>"
+        f"{logs_html}"
         f"<div class='note'>{t(lang, 'note')}</div>"
     )
     return _shell(lang, t(lang, "site_title"), body)
@@ -233,7 +300,8 @@ def render_overview(report: dict) -> str:
 def render_wiki(dbname: str, W: dict, report: dict, lang: str) -> str:
     nav = f"<nav><a href='/'>← {esc(t(lang, 'overview'))}</a></nav>"
     if W.get("empty"):
-        return _shell(lang, W["label"], nav + f"<h1>{esc(W['label'])}</h1><p class='muted'>{t(lang, 'no_data')}</p>")
+        extra = logs_section(W["logs"], lang) if W.get("logs") else ""
+        return _shell(lang, W["label"], nav + f"<h1>{esc(W['label'])}</h1><p class='muted'>{t(lang, 'no_data')}</p>" + extra)
     k = W["kpi"]
     life = _life(lang)
     kpis = [(t(lang, "kpi_nominations"), k["nominations"]), (t(lang, "kpi_articles"), k["articles"]),
@@ -288,6 +356,8 @@ def render_wiki(dbname: str, W: dict, report: dict, lang: str) -> str:
         parts.append(f"<figure class='wide'><figcaption>{esc(t(lang, 'ch_topic'))}</figcaption>"
                      f"{stacked_hbar(list(W['topic_state'].items()), topic, lang)}{legend(topic)}</figure>")
     parts.append("</div>")
+    if W.get("logs"):
+        parts.append(logs_section(W["logs"], lang))
     parts.append(f"<figure class='wide'><figcaption>{esc(t(lang, 'ch_top'))}</figcaption>" +
                  table(W["top_participants"], [("user", t(lang, "th_user")), ("comments", t(lang, "th_comments")),
                                                ("nominations", t(lang, "th_nominations")), ("closes", t(lang, "th_closes"))]) +

@@ -65,3 +65,42 @@ def test_lifecycle_separates_outcome_from_state():
     assert "behalten" in de and "ohne Ergebnis" in de
     ov = page.render_overview(rep)
     assert "/wiki/ruwiki" in ov
+
+
+def test_logs_panel_marks_absent_channels():
+    """Канал, которого в вики нет (PROD в рувики), витрина рисует серым, а не пропускает."""
+    db = _db()
+    rows = [
+        ("ruwiki", "2026-07-01", "delete", "article", "discussion", 30),
+        ("ruwiki", "2026-07-01", "delete", "article", "speedy", 50),
+        ("ruwiki", "2026-07-02", "delete", "user", "speedy", 7),
+        ("ruwiki", "2026-07-02", "restore", "article", "-", 2),
+        ("ruwiki", "2026-07-02", "move", "article", "-", 9),
+        ("enwiki", "2026-07-01", "delete", "article", "prod", 40),
+        ("enwiki", "2026-07-01", "delete", "draft", "speedy", 300),
+    ]
+    db.executemany("INSERT INTO log_counts (wiki, day, kind, ns_group, channel, n) VALUES (?, ?, ?, ?, ?, ?)", rows)
+    db.commit()
+    rep = report.build(db, [wikis.get("ruwiki"), wikis.get("enwiki")])
+    ru, en = rep["wikis"]["ruwiki"]["logs"], rep["wikis"]["enwiki"]["logs"]
+    assert ru["delete_channels"]["discussion"] == 30 and ru["delete_ns"]["user"] == 7
+    assert "prod" in ru["absent"] and "prod" not in en["absent"]
+    assert ru["kinds"] == {"delete": 87, "restore": 2, "move": 9, "protect": 0}
+    assert en["delete_ns"]["draft"] == 300 and en["has_draft"]
+    html = page.render_wiki("ruwiki", rep["wikis"]["ruwiki"], rep, "ru")
+    assert "в этом разделе нет" in html and "по итогу обсуждения" in html
+    ov = page.render_overview(rep)
+    assert "class='absent'" in ov and "proposed deletion (PROD)" in ov
+
+
+def test_log_channels_classify():
+    en = wikis.get("enwiki").log_channels
+    assert en.classify("[[Wikipedia:Articles for deletion/Foo]]") == "discussion"
+    assert en.classify("Expired [[WP:PROD|PROD]], concern was: x") == "prod"
+    assert en.classify("[[WP:CSD#G13|G13]]: Abandoned draft") == "speedy"
+    assert en.classify("[[WP:G5]]: Mass deletion of pages added by X") == "speedy"
+    assert en.group(118) == "draft" and en.group(5) == "other"
+    ru = wikis.get("ruwiki").log_channels
+    assert ru.classify("/*<noinclude>{{к удалению|1=2026-07-16}}") == "discussion"
+    assert ru.classify("[[ВП:КБУ#О9]]") == "speedy"
+    assert "prod" not in ru.present() and "prod" in wikis.get("dewiki").log_channels.ALL

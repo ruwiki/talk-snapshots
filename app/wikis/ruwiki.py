@@ -8,7 +8,7 @@
 from ..core.listing import DayPage
 from ..core.outcome import OutcomeSection
 from ..core.pages import HeadingLinks, Subsections, TitleFromHeading
-from ..core.spec import Locale, ReasonClass, WikiSpec
+from ..core.spec import Locale, LogChannels, ReasonClass, WikiSpec
 from ..core.stance import VoteWords
 
 MONTHS = {
@@ -64,5 +64,14 @@ WIKI = WikiSpec(
     # «{{к удалению|…}}» в комментарии = MediaWiki подставила начало страницы: удаление пачкой по итогу без причины
     reason=ReasonClass(discussion=r"К удалению/|\{\{к удалению\||по итогу|согласно итогу", speedy=r"КБУ#([А-Я]\d+)"),
     common_headings=("По всем", "По всем статьям", "Общее", "По обеим"),
+    log_channels=LogChannels(
+        patterns=(
+            ("discussion", r"К удалению"),
+            ("speedy", r"КБУ|быстр"),
+            ("mass", r"Множественное удаление|Mass deletion"),
+            ("xfd", r"К объединению|К переименованию|К разделению|Обсуждение категорий|К улучшению"),
+        ),
+        ns_groups=((0, "article"), (102, "draft"), (2, "user")),
+    ),
     label="Русская Википедия — КУ",
 )

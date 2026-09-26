@@ -62,6 +62,23 @@ def cmd_state(args) -> int:
     return 0
 
 
+def cmd_logs(args) -> int:
+    """Счётчики журналов: по умолчанию последние 3 дня (записи задним числом не появляются, но
+    день на границе мог быть неполным при прошлом прогоне)."""
+    from .core import logs
+
+    today = dt.datetime.now(dt.UTC).date()
+    start = dt.date.fromisoformat(args.start) if args.start else today - dt.timedelta(days=2)
+    end = dt.date.fromisoformat(args.end) if args.end else today
+    with open_db(args.db) as db:
+        db.init_schema()
+        for name in _wikis(args.wiki):
+            spec = wikis.get(name)
+            n = logs.store(db, spec, start, end)
+            print(f"{spec.dbname:7s} журналы {start}..{end}: {n} строк")
+    return 0
+
+
 def cmd_quality(args) -> int:
     ok_all = True
     since = dt.datetime.now(dt.UTC).date() - dt.timedelta(days=args.window)
@@ -104,6 +121,7 @@ def cmd_daily(args) -> int:
     args.no_topics = False
     cmd_ingest(args)
     cmd_state(args)
+    cmd_logs(args)
     return cmd_quality(args)
 
 
@@ -112,6 +130,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--db", default=None, help="файл SQLite или toolsdb:<база>")
     ap.add_argument("--wiki", default=None, help="раздел(ы) через запятую; по умолчанию TS_WIKIS")
     sub = ap.add_subparsers(dest="cmd", required=True)
+
+    p = sub.add_parser("logs", help="счётчики журналов (удаления по каналам, восстановления, переименования, защита)")
+    p.add_argument("--from", dest="start")
+    p.add_argument("--to", dest="end")
+    p.set_defaults(func=cmd_logs)
 
     p = sub.add_parser("ingest", help="загрузить обсуждения за дни")
     p.add_argument("--from", dest="start")

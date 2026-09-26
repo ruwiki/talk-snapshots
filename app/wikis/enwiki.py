@@ -7,7 +7,7 @@
 from ..core.listing import DailyLog
 from ..core.outcome import ClosingTemplate
 from ..core.pages import HeadingLinks, TitleAfterPrefix, TitleFromHeading
-from ..core.spec import Locale, ReasonClass, WikiSpec
+from ..core.spec import Locale, LogChannels, ReasonClass, WikiSpec
 from ..core.stance import VoteWords
 
 MONTHS = {
@@ -67,6 +67,16 @@ WIKI = WikiSpec(
         "Strong keep", "Strong delete",
     )),
     reason=ReasonClass(discussion=r"Articles for deletion/", speedy=r"CSD#([A-Z]\d+)"),
+    log_channels=LogChannels(
+        patterns=(
+            ("discussion", r"Articles for deletion/"),
+            ("xfd", r"Miscellany for deletion|Templates for discussion|Categories for discussion|Files for discussion|Redirects for discussion"),
+            ("prod", r"PROD|[Pp]roposed deletion"),
+            ("speedy", r"CSD|\[\[WP:[AGRUFCTP]\d+|\[\[WP:G13"),
+            ("mass", r"Mass deletion of pages"),
+        ),
+        ns_groups=((0, "article"), (118, "draft"), (2, "user")),
+    ),
     label="English Wikipedia — AfD",
     topic_pattern=r"^AfD debates \((.+)\)$",
 )

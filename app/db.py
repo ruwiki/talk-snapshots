@@ -137,6 +137,17 @@ SCHEMA = [
         ok        {bool_t}     NOT NULL
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS log_counts (
+        wiki     VARCHAR(32) NOT NULL,
+        day      VARCHAR(10) NOT NULL,
+        kind     VARCHAR(16) NOT NULL,
+        ns_group VARCHAR(16) NOT NULL,
+        channel  VARCHAR(16) NOT NULL,
+        n        INT         NOT NULL,
+        PRIMARY KEY (wiki, day, kind, ns_group, channel)
+    )
+    """,
     "CREATE INDEX {ine} idx_revisions_actor ON revisions (actor)",
     "CREATE INDEX {ine} idx_revisions_section ON revisions (wiki, page_title, section)",
     "CREATE INDEX {ine} idx_comments_author ON comments (author)",
