@@ -75,3 +75,10 @@ def test_page_renders_with_links_and_report_carries_counts():
     html = page.render_mismatches("ruwiki", rep["wikis"]["ruwiki"], rep, "ru", cases, counts)
     assert quote("Удалена_без_итога") in html and "type=delete" in html and ">Удалена без итога<" in html
     assert "Всё сходится" not in html
+
+
+def test_overview_links_mismatch_counts():
+    db = _db()
+    rep = report.build(db, [wikis.get("ruwiki")])
+    html = page.render_overview(rep)
+    assert "<a href='/wiki/ruwiki/mismatches'>6</a>" in html

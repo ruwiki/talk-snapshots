@@ -1,6 +1,6 @@
 # talk-snapshots
 
-**Live:** https://talk-snapshots.toolforge.org/ — overview in English, wikis ordered by volume;
+**Live:** https://talk-snapshots.toolforge.org/ — overview in English, wikis ordered by volume, plus a coverage table of other Wikipedias (deletion venue, listing pattern, nominations per month, plan — `app/coverage.py`, surveyed 2026-09-27);
 `/wiki/<dbname>` — per-wiki page **in that wiki's language** (`app/i18n.py`);
 `/wiki/<dbname>/mismatches` — case-by-case list where the discussion and the deletion log disagree (page deleted but discussion open, kept but deleted, delete but exists, redirect but article, no page recognised, page found nowhere), each row linking to the discussion, the page and its log (`app/core/mismatch.py`);
 `/api/report.json` — the same aggregates as JSON (CORS `*` is deliberate: the API is meant

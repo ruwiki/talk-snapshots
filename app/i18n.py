@@ -293,6 +293,22 @@ S: dict[str, dict[str, str]] = {
     "th_state": {"en": "state", "ru": "состояние", "de": "Status", "uk": "стан", "zh": "状态", "it": "stato", "ja": "状態"},
     "th_outcome": {"en": "outcome", "ru": "итог", "de": "Ergebnis", "uk": "підсумок", "zh": "结论", "it": "esito", "ja": "結果"},
     "th_log": {"en": "log", "ru": "журнал", "de": "Logbuch", "uk": "журнал", "zh": "日志", "it": "registro", "ja": "記録"},
+    "ov_th_mismatches": {"en": "mismatches"},
+    "ov_coverage": {"en": "Other Wikipedias: what we know about their deletion venues"},
+    "ov_coverage_note": {"en": "Surveyed {date} via the MediaWiki API: active editors in the last 30 days, the venue for deletion "
+                               "discussions, how nominations are listed, and nominations opened in August 2026. "
+                               "«next» = queued for this tool; «later» = venue exists but a handful of nominations a month; "
+                               "«log only» = no working discussion venue, deletions can only be read from the log. "
+                               "The seven wikis above are live; ru, uk and the CEE wikis below make one regional set."},
+    "ov_no_venue": {"en": "none"},
+    "ov_th_active": {"en": "active editors"},
+    "ov_th_venue": {"en": "deletion venue"},
+    "ov_th_listing": {"en": "how nominations are listed"},
+    "ov_th_per_month": {"en": "nominations / month"},
+    "ov_th_plan": {"en": "plan"},
+    "ov_plan_next": {"en": "next"},
+    "ov_plan_later": {"en": "later"},
+    "ov_plan_log": {"en": "log only"},
     "ov_fate": {"en": "Fate of nominated articles (July 1 onwards)", "ru": "Судьба номинированных статей (с 1 июля)",
                 "de": "", "uk": "", "zh": "", "it": "", "ja": ""},
     "ov_hint": {"en": "click a wiki for the full picture in its own language",

@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import html
 
+from . import coverage
 from .i18n import t, weekdays
 
 C = {"blue": "#2a78d6", "orange": "#eb6834", "aqua": "#1baf7a", "yellow": "#eda100",
@@ -213,6 +214,7 @@ svg a .lab{fill:#2a78d6}
 table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:4px 8px;border-bottom:1px solid #e1e0d9}
 td:not(:first-child),th:not(:first-child){text-align:right}
 table.mm td,table.mm th{text-align:left}
+table.cov td,table.cov th{text-align:left}table.cov td:nth-child(2),table.cov th:nth-child(2){text-align:right}
 .note{background:#fff8e6;border:1px solid #f0d78a;border-radius:8px;padding:10px 14px;font-size:13px;margin:12px 0}
 .ov-table td:first-child a{text-decoration:none}
 footer{margin-top:40px;color:#52514e;font-size:12px}
@@ -252,15 +254,17 @@ def render_overview(report: dict) -> str:
             "participants": k["participants"],
             "deleted": f"{100*k['share_deleted']:.0f}%", "kept": f"{100*k['share_kept']:.0f}%",
             "open": f"{100*k['share_open']:.0f}%",
+            "mismatches": f"<a href='/wiki/{esc(w)}/mismatches'>{sum(d.get('mismatches', {}).values())}</a>",
         })
     life = _life(lang)
     cols = [("wiki", ""), ("nominations", t(lang, "kpi_nominations")), ("articles", t(lang, "kpi_articles")),
             ("comments", t(lang, "kpi_comments")), ("participants", t(lang, "kpi_participants")),
-            ("deleted", t(lang, "kpi_deleted")), ("kept", t(lang, "kpi_kept")), ("open", t(lang, "kpi_open"))]
+            ("deleted", t(lang, "kpi_deleted")), ("kept", t(lang, "kpi_kept")), ("open", t(lang, "kpi_open")),
+            ("mismatches", t(lang, "ov_th_mismatches"))]
     head = "".join(f"<th>{esc(c)}</th>" for _, c in cols)
     trs = "".join(
         "<tr><td><a href='" + esc(r["_href"]) + "'>" + esc(r["wiki"]) + "</a></td>" +
-        "".join(f"<td>{esc(r[k])}</td>" for k, _ in cols[1:]) + "</tr>"
+        "".join(f"<td>{r[k] if k == 'mismatches' else esc(r[k])}</td>" for k, _ in cols[1:]) + "</tr>"
         for r in kpi_rows)
     log_rows, span = [], None
     for w in order:
@@ -293,9 +297,29 @@ def render_overview(report: dict) -> str:
         f"{stacked_hbar(rows, life, lang, width=1160, row=26, links=links)}{legend(life)}</figure>"
         f"<figure class='wide'><table class='ov-table'><thead><tr>{head}</tr></thead><tbody>{trs}</tbody></table></figure>"
         f"{logs_html}"
+        f"{coverage_section(lang, set(order))}"
         f"<div class='note'>{t(lang, 'note')}</div>"
     )
     return _shell(lang, t(lang, "site_title"), body)
+
+
+def coverage_section(lang: str, live: set[str]) -> str:
+    """Другие Википедии: что известно о площадке удаления и когда подключим."""
+    plan_label = {"next": t(lang, "ov_plan_next"), "later": t(lang, "ov_plan_later"), "log-only": t(lang, "ov_plan_log")}
+    trs = []
+    for r in coverage.rows():
+        if r["wiki"] in live:
+            continue
+        venue = (f"<a href='{esc(r['venue_url'])}'>{esc(r['venue'])}</a>" if r["venue"]
+                 else f"<span class='absent'>{esc(t(lang, 'ov_no_venue'))}</span>")
+        trs.append(f"<tr><td>{esc(r['wiki'])}</td><td>{r['active']:,}</td><td>{venue}</td>"
+                   f"<td>{esc(r['listing'])}</td><td>{esc(r['per_month'])}</td><td>{esc(plan_label[r['plan']])}</td></tr>")
+    head = "".join(f"<th>{esc(c)}</th>" for c in (
+        "", t(lang, "ov_th_active"), t(lang, "ov_th_venue"), t(lang, "ov_th_listing"),
+        t(lang, "ov_th_per_month"), t(lang, "ov_th_plan")))
+    return (f"<h2>{esc(t(lang, 'ov_coverage'))}</h2>"
+            f"<p class='muted'>{esc(t(lang, 'ov_coverage_note', date=coverage.SURVEYED_ON))}</p>"
+            f"<figure class='wide'><table class='ov-table cov'><thead><tr>{head}</tr></thead><tbody>{''.join(trs)}</tbody></table></figure>")
 
 
 def render_wiki(dbname: str, W: dict, report: dict, lang: str) -> str:
