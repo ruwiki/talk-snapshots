@@ -10,6 +10,8 @@ plan: live — раздел в проде; next — в очереди этапа
 
 from __future__ import annotations
 
+from urllib.parse import quote
+
 SURVEYED_ON = "2026-09-27/28"
 
 #: (dbname, active editors, venue title or None, how nominations are listed, nominations in Aug 2026, plan)
@@ -61,7 +63,12 @@ SURVEY: list[tuple[str, int, str | None, str, str, str]] = [
 ]
 
 
+SPECIAL_HOSTS = {"be_x_oldwiki": "be-tarask.wikipedia.org"}
+
+
 def host(dbname: str) -> str:
+    if dbname in SPECIAL_HOSTS:
+        return SPECIAL_HOSTS[dbname]
     lang = dbname.removesuffix("wiki").replace("_", "-")
     return f"{lang}.wikipedia.org"
 
@@ -71,7 +78,7 @@ def rows() -> list[dict]:
     for db, active, venue, listing, per_month, plan in SURVEY:
         out.append({
             "wiki": db, "active": active, "venue": venue,
-            "venue_url": f"https://{host(db)}/wiki/{venue.replace(' ', '_')}" if venue else None,
+            "venue_url": f"https://{host(db)}/wiki/{quote(venue.replace(' ', '_'), safe=':/()!,\'')}" if venue else None,
             "listing": listing, "per_month": per_month, "plan": plan,
         })
     return out

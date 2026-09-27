@@ -20,7 +20,7 @@ def test_report_on_empty_db_renders():
     assert rep["wikis"]["ruwiki"]["empty"]
     html = page.render_overview(rep)
     assert "talk-snapshots" in html
-    assert "Other Wikipedias" in html and "Pagini_de_șters" in html and "log only" in html
+    assert "Other Wikipedias" in html and "Pagini de șters" in html and "log only" in html
     html = page.render_wiki("ruwiki", rep["wikis"]["ruwiki"], rep, "ru")
     assert "данных ещё нет" in html
 
