@@ -212,6 +212,7 @@ svg a .lab{fill:#2a78d6}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:4px 8px;border-bottom:1px solid #e1e0d9}
 td:not(:first-child),th:not(:first-child){text-align:right}
+table.mm td,table.mm th{text-align:left}
 .note{background:#fff8e6;border:1px solid #f0d78a;border-radius:8px;padding:10px 14px;font-size:13px;margin:12px 0}
 .ov-table td:first-child a{text-decoration:none}
 footer{margin-top:40px;color:#52514e;font-size:12px}
@@ -333,6 +334,8 @@ def render_wiki(dbname: str, W: dict, report: dict, lang: str) -> str:
         f"<div class='note'>{t(lang, 'note')}</div>",
         "<div class='kpis'>" + "".join(f"<div class='kpi'><b>{esc(v)}</b><span>{esc(name)}</span></div>"
                                        for name, v in kpis) + "</div>",
+        f"<p class='muted'><a href='/wiki/{esc(dbname)}/mismatches'>"
+        f"{esc(t(lang, 'mm_link', n=sum(W.get('mismatches', {}).values())))}</a></p>",
         "<div class='grid2'>",
         f"<figure><figcaption>{esc(t(lang, 'ch_week'))}</figcaption>"
         f"{stacked_columns(W['lifecycle_by_week'], life, lang)}{legend(life)}</figure>",
@@ -363,3 +366,41 @@ def render_wiki(dbname: str, W: dict, report: dict, lang: str) -> str:
                                                ("nominations", t(lang, "th_nominations")), ("closes", t(lang, "th_closes"))]) +
                  "</figure>")
     return _shell(lang, W["label"], "".join(parts))
+
+
+def render_mismatches(dbname: str, W: dict, report: dict, lang: str, cases: dict, counts: dict) -> str:
+    """Третий уровень: конкретные случаи несовпадения обсуждения и журнала, со ссылками."""
+    nav = (f"<nav><a href='/'>← {esc(t(lang, 'overview'))}</a>"
+           f"<a href='/wiki/{esc(dbname)}'>← {esc(W['label'])}</a></nav>")
+    parts = [nav, f"<h1>{esc(W['label'])}: {esc(t(lang, 'mm_title'))}</h1>",
+             f"<p class='muted'>{esc(t(lang, 'updated', date=report['generated']))}</p>",
+             f"<div class='note'>{esc(t(lang, 'mm_intro'))}</div>"]
+    cols = [("day", t(lang, "th_day")), ("nomination", t(lang, "th_nomination")), ("page", t(lang, "th_page")),
+            ("state", t(lang, "th_state")), ("outcome", t(lang, "th_outcome")), ("log", t(lang, "th_log"))]
+    for kind in cases:
+        n = counts.get(kind, 0)
+        parts.append(f"<h2>{esc(t(lang, f'mm_{kind}'))} <span class='muted'>({n})</span></h2>")
+        if not n:
+            parts.append(f"<p class='muted'>{esc(t(lang, 'mm_none'))}</p>")
+            continue
+        rows = []
+        for c in cases[kind]:
+            state = c.state or ""
+            if c.deleted_at:
+                state += f" {c.deleted_at[:10]}"
+            if c.reason:
+                state += f" · {c.reason}"
+            outcome = (c.outcome or "") + (f" · {c.closer}" if c.closer else "")
+            page_link = f"<a href='{esc(c.page_url)}'>{esc(c.title)}</a>" if c.page_url else ""
+            log_link = f"<a href='{esc(c.log_url)}'>log</a>" if c.log_url else ""
+            rows.append("<tr>"
+                        f"<td>{esc(c.day)}</td>"
+                        f"<td><a href='{esc(c.discussion_url)}'>{esc(c.nomination)}</a></td>"
+                        f"<td>{page_link}</td>"
+                        f"<td>{esc(state)}</td><td>{esc(outcome)}</td>"
+                        f"<td>{log_link}</td></tr>")
+        head = "".join(f"<th>{esc(title)}</th>" for _, title in cols)
+        parts.append(f"<table class='mm'><thead><tr>{head}</tr></thead><tbody>{''.join(rows)}</tbody></table>")
+        if n > len(cases[kind]):
+            parts.append(f"<p class='muted'>{esc(t(lang, 'mm_more', n=n - len(cases[kind])))}</p>")
+    return _shell(lang, f"{W['label']}: {t(lang, 'mm_title')}", "".join(parts))

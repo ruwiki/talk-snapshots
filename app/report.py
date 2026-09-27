@@ -15,6 +15,7 @@ import datetime as dt
 import re
 from collections import Counter, defaultdict
 
+from .core import mismatch
 from .db import DB
 
 OPEN_DAYS = 14          # моложе — «обсуждается»; старше без итога и судьбы — «висит»
@@ -211,4 +212,6 @@ def build(db: DB, specs: list) -> dict:
     }
     for spec in specs:
         out["wikis"][spec.dbname]["logs"] = build_logs(db, spec)
+        if not out["wikis"][spec.dbname].get("empty"):
+            out["wikis"][spec.dbname]["mismatches"] = mismatch.find(db, spec, limit=0)[1]
     return out

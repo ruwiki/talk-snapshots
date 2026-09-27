@@ -19,6 +19,7 @@ import time
 from flask import Flask, Response
 
 from . import page, report, wikis
+from .core import mismatch
 from .db import open_db
 
 app = Flask(__name__)
@@ -54,8 +55,12 @@ class _Cache:
         with open_db() as db:
             rep = report.build(db, [wikis.get(w) for w in _order()])
         pages = {"": page.render_overview(rep)}
-        for w in page.order_by_scale(rep):
-            pages[w] = page.render_wiki(w, rep["wikis"][w], rep, wikis.get(w).lang)
+        with open_db() as db:
+            for w in page.order_by_scale(rep):
+                spec = wikis.get(w)
+                pages[w] = page.render_wiki(w, rep["wikis"][w], rep, spec.lang)
+                cases, counts = mismatch.find(db, spec)
+                pages[f"{w}/mismatches"] = page.render_mismatches(w, rep["wikis"][w], rep, spec.lang, cases, counts)
         with self._lock:
             self.report_json = json.dumps(rep, ensure_ascii=False).encode()
             self.pages = pages
@@ -116,6 +121,16 @@ def index() -> Response:
 @app.get("/wiki/<dbname>")
 def wiki_page(dbname: str) -> Response:
     html = CACHE.get(dbname)
+    if html is None:
+        if dbname not in wikis.REGISTRY:
+            return Response("no such wiki\n", status=404, mimetype="text/plain")
+        return Response("service warming up\n", status=503, mimetype="text/plain")
+    return Response(html, mimetype="text/html; charset=utf-8")
+
+
+@app.get("/wiki/<dbname>/mismatches")
+def wiki_mismatches(dbname: str) -> Response:
+    html = CACHE.get(f"{dbname}/mismatches")
     if html is None:
         if dbname not in wikis.REGISTRY:
             return Response("no such wiki\n", status=404, mimetype="text/plain")

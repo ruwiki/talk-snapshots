@@ -224,6 +224,75 @@ S: dict[str, dict[str, str]] = {
                 "ru": "Обсуждения удаления в разных Википедиях одним конвейером: кто номинирует, кто спорит и что реально "
                       "происходит со страницами — по самим обсуждениям и журналам удалений. Разделы упорядочены по объёму.",
                 "de": "", "uk": "", "zh": "", "it": "", "ja": ""},
+    "mm_link": {
+        "en": "Mismatches between discussions and logs: {n} — case by case",
+        "ru": "Несовпадения обсуждений и журналов: {n} — по случаям",
+        "de": "Abweichungen zwischen Diskussionen und Logbüchern: {n} — Fall für Fall",
+        "uk": "Розбіжності між обговореннями та журналами: {n} — за випадками",
+        "zh": "讨论与日志不一致：{n} 例 — 逐条查看",
+        "it": "Discrepanze tra discussioni e registri: {n} — caso per caso",
+        "ja": "議論と記録の不一致: {n} 件 — 個別に表示",
+    },
+    "mm_title": {
+        "en": "mismatches between discussions and logs", "ru": "несовпадения обсуждений и журналов",
+        "de": "Abweichungen zwischen Diskussionen und Logbüchern", "uk": "розбіжності між обговореннями та журналами",
+        "zh": "讨论与日志的不一致", "it": "discrepanze tra discussioni e registri", "ja": "議論と記録の不一致",
+    },
+    "mm_intro": {
+        "en": "Only what can be checked mechanically: the discussion says one thing, the page and the deletion log say another. "
+              "Each row links to the discussion, the page and its log so a human can tell a data error from a real oddity.",
+        "ru": "Только то, что проверяется механически: обсуждение говорит одно, страница и журнал удалений — другое. "
+              "В каждой строке ссылки на обсуждение, страницу и её журнал, чтобы человек отличил ошибку данных от настоящей странности.",
+        "de": "Nur maschinell Prüfbares: die Diskussion sagt das eine, Seite und Lösch-Logbuch das andere. "
+              "Jede Zeile verlinkt Diskussion, Seite und Logbuch, damit ein Mensch Datenfehler von echten Kuriosa unterscheiden kann.",
+        "uk": "Лише те, що перевіряється механічно: обговорення каже одне, сторінка та журнал вилучень — інше. "
+              "У кожному рядку посилання на обговорення, сторінку та її журнал, щоб людина відрізнила помилку даних від справжньої дивини.",
+        "zh": "仅列出可机械核对的情况：讨论说一回事，页面与删除日志说另一回事。每行都链接到讨论、页面及其日志，便于人工区分数据错误与真实异常。",
+        "it": "Solo ciò che si può verificare meccanicamente: la discussione dice una cosa, la pagina e il registro delle cancellazioni un'altra. "
+              "Ogni riga rimanda alla discussione, alla pagina e al suo registro, perché una persona distingua un errore nei dati da una vera anomalia.",
+        "ja": "機械的に検証できるものだけを列挙: 議論の内容とページ・削除記録が食い違う場合。各行から議論・ページ・記録へ飛べるので、データの誤りか実際の異常かを人が判断できる。",
+    },
+    "mm_deleted_open": {
+        "en": "page deleted, discussion still open", "ru": "страница удалена, обсуждение не закрыто",
+        "de": "Seite gelöscht, Diskussion noch offen", "uk": "сторінку вилучено, обговорення не закрите",
+        "zh": "页面已删除，讨论仍未关闭", "it": "pagina cancellata, discussione ancora aperta", "ja": "ページは削除済み、議論は未終了",
+    },
+    "mm_kept_deleted": {
+        "en": "closed as keep, page deleted", "ru": "итог «оставить», страница удалена",
+        "de": "Ergebnis „behalten“, Seite gelöscht", "uk": "підсумок «залишити», сторінку вилучено",
+        "zh": "结论为保留，页面却已删除", "it": "chiusa come «mantenere», pagina cancellata", "ja": "存続で終了、ページは削除済み",
+    },
+    "mm_delete_exists": {
+        "en": "closed as delete, page still exists", "ru": "итог «удалить», страница существует",
+        "de": "Ergebnis „löschen“, Seite existiert noch", "uk": "підсумок «вилучити», сторінка існує",
+        "zh": "结论为删除，页面仍存在", "it": "chiusa come «cancellare», pagina ancora esistente", "ja": "削除で終了、ページは存在",
+    },
+    "mm_redirect_exists": {
+        "en": "closed as redirect, page is still an article", "ru": "итог «перенаправить», страница осталась статьёй",
+        "de": "Ergebnis „Weiterleitung“, Seite ist noch ein Artikel", "uk": "підсумок «перенаправити», сторінка лишилася статтею",
+        "zh": "结论为重定向，页面仍是条目", "it": "chiusa come «reindirizzare», la pagina è ancora una voce", "ja": "リダイレクト化で終了、ページは記事のまま",
+    },
+    "mm_no_pages": {
+        "en": "no page recognised in the nomination", "ru": "в номинации не распознано ни одной страницы",
+        "de": "keine Seite in der Nominierung erkannt", "uk": "у номінації не розпізнано жодної сторінки",
+        "zh": "提删中未识别出任何页面", "it": "nessuna pagina riconosciuta nella proposta", "ja": "依頼からページを特定できず",
+    },
+    "mm_missing": {
+        "en": "page found neither live nor in the log", "ru": "страница не найдена ни живой, ни в журнале",
+        "de": "Seite weder vorhanden noch im Logbuch", "uk": "сторінку не знайдено ні живою, ні в журналі",
+        "zh": "页面既不存在也不在日志中", "it": "pagina né esistente né nel registro", "ja": "ページは存在せず記録にもない",
+    },
+    "mm_none": {"en": "none", "ru": "нет", "de": "keine", "uk": "немає", "zh": "无", "it": "nessuna", "ja": "なし"},
+    "mm_more": {
+        "en": "… and {n} more, older", "ru": "… и ещё {n}, старее", "de": "… und {n} weitere, ältere",
+        "uk": "… і ще {n}, старіші", "zh": "……另有 {n} 例更早的", "it": "… e altre {n}, più vecchie", "ja": "…ほか {n} 件（古い順）",
+    },
+    "th_day": {"en": "day", "ru": "день", "de": "Tag", "uk": "день", "zh": "日期", "it": "giorno", "ja": "日"},
+    "th_nomination": {"en": "discussion", "ru": "обсуждение", "de": "Diskussion", "uk": "обговорення", "zh": "讨论", "it": "discussione", "ja": "議論"},
+    "th_page": {"en": "page", "ru": "страница", "de": "Seite", "uk": "сторінка", "zh": "页面", "it": "pagina", "ja": "ページ"},
+    "th_state": {"en": "state", "ru": "состояние", "de": "Status", "uk": "стан", "zh": "状态", "it": "stato", "ja": "状態"},
+    "th_outcome": {"en": "outcome", "ru": "итог", "de": "Ergebnis", "uk": "підсумок", "zh": "结论", "it": "esito", "ja": "結果"},
+    "th_log": {"en": "log", "ru": "журнал", "de": "Logbuch", "uk": "журнал", "zh": "日志", "it": "registro", "ja": "記録"},
     "ov_fate": {"en": "Fate of nominated articles (July 1 onwards)", "ru": "Судьба номинированных статей (с 1 июля)",
                 "de": "", "uk": "", "zh": "", "it": "", "ja": ""},
     "ov_hint": {"en": "click a wiki for the full picture in its own language",
