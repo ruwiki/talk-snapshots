@@ -226,7 +226,10 @@ def _shell(lang: str, title: str, body: str) -> str:
             "<meta name='viewport' content='width=device-width,initial-scale=1'>"
             f"<title>{esc(title)}</title><style>{CSS}</style></head><body><main>{body}"
             "<footer>talk-snapshots · Toolforge · Apache-2.0 · "
-            "<a href='https://github.com/ruwiki/talk-snapshots'>GitHub</a></footer></main></body></html>")
+            "<a href='https://github.com/ruwiki/talk-snapshots'>GitHub</a> · "
+            "suggestions and requests: <a href='https://github.com/ruwiki/talk-snapshots/issues'>issues</a> or "
+            "<a href='mailto:talk-snapshots.suggestions@toolforge.org'>talk-snapshots.suggestions@toolforge.org</a>"
+            "</footer></main></body></html>")
 
 
 def order_by_scale(report: dict) -> list[str]:

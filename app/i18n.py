@@ -299,7 +299,7 @@ S: dict[str, dict[str, str]] = {
                                "discussions, how nominations are listed, and nominations opened in August 2026. "
                                "«next» = queued for this tool; «later» = venue exists but a handful of nominations a month; "
                                "«log only» = no working discussion venue, deletions can only be read from the log. "
-                               "The seven wikis above are live; ru, uk and the CEE wikis below make one regional set."},
+                               "The seven wikis above are live. Every Wikipedia with roughly 1 000 or more active editors is listed; the CEE wikis together with ru and uk make one regional set."},
     "ov_no_venue": {"en": "none"},
     "ov_th_active": {"en": "active editors"},
     "ov_th_venue": {"en": "deletion venue"},
