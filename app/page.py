@@ -309,6 +309,7 @@ def render_overview(report: dict) -> str:
 def coverage_section(lang: str, live: set[str]) -> str:
     """Другие Википедии: что известно о площадке удаления и когда подключим."""
     plan_label = {"next": t(lang, "ov_plan_next"), "later": t(lang, "ov_plan_later"), "log-only": t(lang, "ov_plan_log")}
+    volume_label = {v: t(lang, f"ov_volume_{v}") for v in ("none", "low", "medium", "high")}
     trs = []
     for r in coverage.rows():
         if r["wiki"] in live:
@@ -316,10 +317,11 @@ def coverage_section(lang: str, live: set[str]) -> str:
         venue = (f"<a href='{esc(r['venue_url'])}'>{esc(r['venue'])}</a>" if r["venue"]
                  else f"<span class='absent'>{esc(t(lang, 'ov_no_venue'))}</span>")
         trs.append(f"<tr><td>{esc(r['wiki'])}</td><td>{r['active']:,}</td><td>{venue}</td>"
-                   f"<td>{esc(r['listing'])}</td><td>{esc(r['per_month'])}</td><td>{esc(plan_label[r['plan']])}</td></tr>")
+                   f"<td>{esc(r['listing'])}</td><td>{esc(r['tag_route'] or '—')}</td>"
+                   f"<td>{esc(volume_label[r['volume']])}</td><td>{esc(plan_label[r['plan']])}</td></tr>")
     head = "".join(f"<th>{esc(c)}</th>" for c in (
         "", t(lang, "ov_th_active"), t(lang, "ov_th_venue"), t(lang, "ov_th_listing"),
-        t(lang, "ov_th_per_month"), t(lang, "ov_th_plan")))
+        t(lang, "ov_th_tag_route"), t(lang, "ov_th_volume"), t(lang, "ov_th_plan")))
     return (f"<h2>{esc(t(lang, 'ov_coverage'))}</h2>"
             f"<p class='muted'>{esc(t(lang, 'ov_coverage_note', date=coverage.SURVEYED_ON))}</p>"
             f"<figure class='wide'><table class='ov-table cov'><thead><tr>{head}</tr></thead><tbody>{''.join(trs)}</tbody></table></figure>")

@@ -296,7 +296,8 @@ S: dict[str, dict[str, str]] = {
     "ov_th_mismatches": {"en": "mismatches"},
     "ov_coverage": {"en": "Other Wikipedias: what we know about their deletion venues"},
     "ov_coverage_note": {"en": "Surveyed {date} via the MediaWiki API: active editors in the last 30 days, the venue for deletion "
-                               "discussions, how nominations are listed, and nominations opened in August 2026. "
+                               "discussions, how nominations are listed, deletion by tag without a discussion (PROD, notability tags), "
+                               "and discussion volume: low = under 10 a month, medium = 10–99, high = 100 or more. "
                                "«next» = queued for this tool; «later» = venue exists but a handful of nominations a month; "
                                "«log only» = no working discussion venue, deletions can only be read from the log. "
                                "The seven wikis above are live. Every Wikipedia with roughly 1 000 or more active editors is listed; the CEE wikis together with ru and uk make one regional set."},
@@ -304,7 +305,12 @@ S: dict[str, dict[str, str]] = {
     "ov_th_active": {"en": "active editors"},
     "ov_th_venue": {"en": "deletion venue"},
     "ov_th_listing": {"en": "how nominations are listed"},
-    "ov_th_per_month": {"en": "nominations / month"},
+    "ov_th_tag_route": {"en": "deletion by tag, no discussion"},
+    "ov_th_volume": {"en": "discussions"},
+    "ov_volume_none": {"en": "none"},
+    "ov_volume_low": {"en": "low"},
+    "ov_volume_medium": {"en": "medium"},
+    "ov_volume_high": {"en": "high"},
     "ov_th_plan": {"en": "plan"},
     "ov_plan_next": {"en": "next"},
     "ov_plan_later": {"en": "later"},
