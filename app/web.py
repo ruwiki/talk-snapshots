@@ -18,7 +18,7 @@ import time
 
 from flask import Flask, Response
 
-from . import page, report, wikis
+from . import page, report, speedy, wikis
 from .core import mismatch
 from .db import open_db
 
@@ -136,6 +136,27 @@ def wiki_mismatches(dbname: str) -> Response:
             return Response("no such wiki\n", status=404, mimetype="text/plain")
         return Response("service warming up\n", status=503, mimetype="text/plain")
     return Response(html, mimetype="text/html; charset=utf-8")
+
+
+def _html(html: str | None) -> Response:
+    if html is None:
+        return Response("not found\n", status=404, mimetype="text/plain")
+    return Response(html, mimetype="text/html; charset=utf-8")
+
+
+@app.get("/speedy")
+def speedy_index() -> Response:
+    return _html(speedy.render_index())
+
+
+@app.get("/speedy/wiki/<dbname>")
+def speedy_wiki(dbname: str) -> Response:
+    return _html(speedy.render_wiki(dbname))
+
+
+@app.get("/speedy/<int:family>/<sid>")
+def speedy_defect(family: int, sid: str) -> Response:
+    return _html(speedy.render_defect(f"{family}:{sid}"))
 
 
 @app.get("/api/report.json")

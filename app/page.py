@@ -300,6 +300,8 @@ def render_overview(report: dict) -> str:
         f"{stacked_hbar(rows, life, lang, width=1160, row=26, links=links)}{legend(life)}</figure>"
         f"<figure class='wide'><table class='ov-table'><thead><tr>{head}</tr></thead><tbody>{trs}</tbody></table></figure>"
         f"{logs_html}"
+        "<p><a href='/speedy'>Speedy deletion across 51 Wikipedias</a> — what is wrong with a page and how each "
+        "Wikipedia deletes it: local criterion, tag, reason people write (prototype).</p>"
         f"{coverage_section(lang, set(order))}"
         f"<div class='note'>{t(lang, 'note')}</div>"
     )
