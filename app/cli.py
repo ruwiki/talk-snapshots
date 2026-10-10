@@ -48,7 +48,7 @@ def cmd_ingest(args) -> int:
                     with_topics=not args.no_topics,
                 )
                 print(f"{spec.dbname:7s} {r['day']}  номинаций {r['nominations']:>3}  реплик {r['comments']:>4}  "
-                      f"правок {r['revisions']:>4}  тем {r['topics']:>4}  пропущено {r['skipped']}")
+                      f"правок {r['revisions']:>4}  тем {r['topics']:>4}  P31/P106 {r['claims']:>4}  авторов {r['authors']:>4}  пропущено {r['skipped']}")
     return 0
 
 

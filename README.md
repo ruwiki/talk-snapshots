@@ -49,11 +49,18 @@ and a fifth of nominations there are such groups or non-article pages.
 |---|---|---|
 | **DiscussionTools API** | thread structure as MediaWiki itself sees it: author, timestamp, nesting, sub-headings, `transcludedfrom` | `core/threads.py` |
 | **Database replicas** (Toolforge; API elsewhere) | revision history of the discussion page, page state and deletion log, categories and Wikidata item snapshot | `core/revisions.py`, `core/state.py`, `core/topics.py` |
+| **Wikidata API** (`wbgetentities`, no `maxlag`) | `P31`/`P106` of the nominated page's item, taken at nomination time | `core/topics.py` |
 | **Wikitext parsing** | fallback for dump processing, where an API call per page is not affordable; also the closing templates | `core/parse.py` |
 
 Topics are snapshotted **at nomination time**: after deletion the categories
 are gone from every source (replicas, Wikidata sitelinks, even the enwiki
 DELSORT categories vanish when the AfD is closed).
+The Wikidata item itself is deleted soon after the last sitelink goes, so
+`P31` (instance of) and `P106` (occupation) are stored at the same moment as
+class QIDs — those survive (`Q5`, `Q4830453` «business»…).
+The same pass stores the page's **authors** (`page_authors`: edits, bytes added, first/last
+edit per user) — after deletion the history is admin-only, and these are the people to
+invite to the discussion (`core/authors.py`).
 
 ## Usage
 

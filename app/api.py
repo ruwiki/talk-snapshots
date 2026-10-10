@@ -18,17 +18,20 @@ UA = os.environ.get(
 
 
 class Api:
-    def __init__(self, host: str, timeout: int = 60):
+    def __init__(self, host: str, timeout: int = 60, maxlag: int | None = 5):
+        """maxlag=None — не просить сервер отказывать при лаге (чтение с Викиданных: лаг там почти всегда > 5 с)."""
         self.host = host
         self.url = f"https://{host}/w/api.php"
         self.timeout = timeout
+        self.maxlag = maxlag
         self.session = requests.Session()
         self.session.headers["User-Agent"] = UA
 
     def get(self, **params: Any) -> dict:
         params.setdefault("format", "json")
         params.setdefault("formatversion", 2)
-        params.setdefault("maxlag", 5)
+        if self.maxlag is not None:
+            params.setdefault("maxlag", self.maxlag)
         delay = 1.0
         for _attempt in range(5):
             resp = self.session.get(self.url, params=params, timeout=self.timeout)

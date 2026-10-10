@@ -14,6 +14,7 @@ import datetime as dt
 from ..api import Api
 from ..db import DB
 from ..models import Nomination, Revision
+from . import authors as pauthors
 from . import revisions as revs
 from . import state as pstate
 from . import topics as ptopics
@@ -129,8 +130,14 @@ def store_revisions(db: DB, rows: list[Revision]) -> None:
     )
 
 
-def store_topics(db: DB, spec, noms: list[Nomination], ids: list[int], api: Api | None) -> int:
-    """Снимок тем по страницам номинаций дня + категории страниц-номинаций (DELSORT)."""
+def store_topics(db: DB, spec, noms: list[Nomination], ids: list[int], api: Api | None) -> tuple[int, int]:
+    """Снимок тем по страницам номинаций дня + категории страниц-номинаций (DELSORT).
+
+    → (строк category/wikibase_item, строк P31/P106). Снимки, снятые раньше по той же
+    (wiki, ns, title), переносятся на новые id номинаций: purge_page их не трогает, а
+    после --refresh-changed номинации получают новые id — иначе отчёт по nomination_id
+    не дотянулся бы ровно до удалённых статей, ради которых снимок и делается.
+    """
     refs: list[tuple[int, str]] = []
     owners: dict[tuple[int, str], list[int]] = {}
     for nom, nom_id in zip(noms, ids, strict=True):
@@ -145,12 +152,42 @@ def store_topics(db: DB, spec, noms: list[Nomination], ids: list[int], api: Api 
             if key not in owners:
                 refs.append(key)
             owners.setdefault(key, []).append(nom_id)
+    carry = db.ignore(
+        "INSERT INTO topics (nomination_id, wiki, ns, title, source, value, taken_at) "
+        "SELECT ?, wiki, ns, title, source, value, taken_at FROM topics "
+        "WHERE wiki = ? AND ns = ? AND title = ? AND nomination_id <> ?"
+    )
+    for (ns, title), nom_ids in owners.items():
+        for nom_id in nom_ids:
+            db.execute(carry, (nom_id, spec.dbname, ns, title[:250], nom_id))
     rows = []
+    n_claims = 0
     for ns, title, source, value in ptopics.snapshot(spec, refs, api):
         for nom_id in owners.get((ns, title), ()):
             rows.append((nom_id, spec.dbname, ns, title[:250], source, value[:250], _now()))
+            n_claims += source in ptopics.CLAIMS
     db.executemany(
         db.ignore("INSERT INTO topics (nomination_id, wiki, ns, title, source, value, taken_at) VALUES (?, ?, ?, ?, ?, ?, ?)"),
+        rows,
+    )
+    return len(rows) - n_claims, n_claims
+
+
+def store_authors(db: DB, spec, noms: list[Nomination], api: Api | None) -> int:
+    """Снимок авторов страниц номинаций (не страниц-номинаций AfD): кого звать в обсуждение."""
+    refs = list(dict.fromkeys((p.ns, p.title) for nom in noms for p in nom.pages))
+    rows = [
+        (spec.dbname, a.ns, a.title[:250], a.user[:250], a.edits, a.bytes_added,
+         a.first_ts.isoformat(), a.last_ts.isoformat(), int(a.is_bot), _now())
+        for a in pauthors.snapshot(spec, refs, api)
+    ]
+    db.executemany(
+        db.upsert(
+            "INSERT INTO page_authors (wiki, ns, title, user, edits, bytes_added, first_ts, last_ts, is_bot, taken_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            ("wiki", "ns", "title", "user"),
+            ("wiki", "ns", "title", "user", "edits", "bytes_added", "first_ts", "last_ts", "is_bot", "taken_at"),
+        ),
         rows,
     )
     return len(rows)
@@ -190,7 +227,7 @@ def ingest_day(
     with_revisions: bool = True, refresh: bool = False, refresh_changed: bool = False,
     with_topics: bool = True,
 ) -> dict:
-    result = dict(day=day.isoformat(), pages=0, nominations=0, comments=0, revisions=0, topics=0, skipped=0)
+    result = dict(day=day.isoformat(), pages=0, nominations=0, comments=0, revisions=0, topics=0, claims=0, authors=0, skipped=0)
     for title in spec.listing.page_titles(spec, day):
         latest = None
         if refresh_changed or not refresh:
@@ -224,7 +261,10 @@ def ingest_day(
             store_revisions(db, rows)
             result["revisions"] += len(rows)
         if with_topics:
-            result["topics"] += store_topics(db, spec, noms, ids, api)
+            n_topics, n_claims = store_topics(db, spec, noms, ids, api)
+            result["topics"] += n_topics
+            result["claims"] += n_claims
+            result["authors"] += store_authors(db, spec, noms, api)
         db.commit()
     return result
 

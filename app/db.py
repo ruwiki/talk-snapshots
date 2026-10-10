@@ -113,6 +113,21 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS page_authors (
+        wiki        VARCHAR(32)  NOT NULL,
+        ns          INT          NOT NULL,
+        title       VARCHAR(255) NOT NULL,
+        user        VARCHAR(255) NOT NULL,
+        edits       INT          NOT NULL,
+        bytes_added INT          NOT NULL,
+        first_ts    VARCHAR(32)  NOT NULL,
+        last_ts     VARCHAR(32)  NOT NULL,
+        is_bot      TINYINT      NOT NULL DEFAULT 0,
+        taken_at    VARCHAR(32)  NOT NULL,
+        PRIMARY KEY (wiki, ns, title, user)
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS revisions (
         rev_id      BIGINT       NOT NULL,
         wiki        VARCHAR(32)  NOT NULL,
