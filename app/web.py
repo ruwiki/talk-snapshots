@@ -5,7 +5,8 @@
 и запускает пересборку в фоне; одновременных пересборок внутри процесса не
 бывает. У gunicorn sync-воркеры — отдельные процессы, кэш у каждого свой.
 
-/healthz — только живость процесса, без базы. /readyz — SELECT 1.
+/healthz — только живость процесса, без базы. /readyz — витрина собрана, база отвечает
+и на Toolforge это Toolsdb, а не SQLite.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ from flask import Flask, Response
 
 from . import page, report, speedy, wikis
 from .core import mismatch
-from .db import open_db
+from .db import on_toolforge, open_db
 
 app = Flask(__name__)
 log = logging.getLogger("talk-snapshots.web")
@@ -174,12 +175,21 @@ def healthz() -> Response:
 
 @app.get("/readyz")
 def readyz() -> Response:
+    """22–25.10.2026 витрина 2,5 суток отдавала 503, а здесь был зелёный SELECT 1 к пустой SQLite."""
+    if not CACHE.pages:
+        return _not_ready("showcase cache is empty")
     try:
         with open_db() as db:
             db.execute("SELECT 1").fetchone()
+            if on_toolforge() and db.flavour != "mysql":
+                return _not_ready("database is not Toolsdb")
     except Exception:
-        return Response("not ready\n", status=503, mimetype="text/plain")
+        return _not_ready("database unavailable")
     return Response("ok\n", mimetype="text/plain")
+
+
+def _not_ready(why: str) -> Response:
+    return Response(f"not ready: {why}\n", status=503, mimetype="text/plain")
 
 
 if __name__ == "__main__":

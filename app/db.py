@@ -248,13 +248,28 @@ class DB:
         self.commit()
 
 
+def on_toolforge() -> bool:
+    """Процесс в поде Toolforge. TOOL_TOOLSDB_USER приходит из envvars — тем же путём, что и TS_*,
+    и может пропасть вместе с ними; KUBERNETES_SERVICE_HOST кладёт сам Kubernetes в любой под."""
+    return bool(os.environ.get("TOOL_TOOLSDB_USER") or os.environ.get("KUBERNETES_SERVICE_HOST"))
+
+
 def connect(dsn: str | None = None) -> DB:
     """dsn: путь к файлу SQLite либо `toolsdb:<имя базы>`.
 
     На Toolforge креды приезжают в окружении сами — TOOL_TOOLSDB_USER
     и TOOL_TOOLSDB_PASSWORD подставляет платформа, руками их класть не надо.
     """
-    dsn = dsn or os.environ.get("TS_DB", "talk-snapshots.sqlite")
+    dsn = dsn or os.environ.get("TS_DB")
+    if not dsn:
+        if on_toolforge():
+            # 22–25.10.2026 под пересоздали без envvars, и витрина 2,5 суток читала пустую
+            # локальную SQLite, отвечая 503 на страницах и 200 на /readyz
+            raise RuntimeError(
+                "TS_DB не задан, а процесс на Toolforge: переменные окружения не доехали до пода. "
+                "Локальную SQLite не открываю. Проверить `toolforge envvars list` и перезапустить под."
+            )
+        dsn = "talk-snapshots.sqlite"
     if dsn.startswith("toolsdb:"):
         import pymysql
 
