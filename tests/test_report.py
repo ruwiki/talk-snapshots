@@ -67,6 +67,20 @@ def test_lifecycle_separates_outcome_from_state():
     ov = page.render_overview(rep)
     assert "/wiki/ruwiki" in ov
 
+    # заглавная — последние 30 дней: в окне только «Свежая» (3 дня), четыре старые (40 дней) — вне
+    M = W["month"]
+    assert (M["since"], M["until"]) == ("2026-08-02", "2026-08-31")
+    assert M["lifecycle_total"] == {"discussing": 1}
+    assert {k: M["kpi"][k] for k in ("nominations", "articles", "comments", "participants")} == \
+        {"nominations": 1, "articles": 1, "comments": 1, "participants": 1}
+    assert M["kpi"]["share_open"] == 1.0
+    full = report.build(db, [wikis.get("ruwiki")], today=today)
+    assert full["wikis"]["ruwiki"]["month"]["mismatches"] == {k: 0 for k in full["wikis"]["ruwiki"]["mismatches"]}
+    assert sum(full["wikis"]["ruwiki"]["mismatches"].values()) == 1      # «Оставили и снесли» — 40 дней назад
+    ov = page.render_overview(full)
+    assert "last 30 days (2026-08-02 — 2026-08-31)" in ov
+    assert "<td>1</td>" in ov and "<td>5</td>" not in ov                   # в таблице 1 номинация, не 5
+
 
 def test_logs_panel_marks_absent_channels():
     """Канал, которого в вики нет (PROD в рувики), витрина рисует серым, а не пропускает."""
@@ -82,7 +96,7 @@ def test_logs_panel_marks_absent_channels():
     ]
     db.executemany("INSERT INTO log_counts (wiki, day, kind, ns_group, channel, n) VALUES (?, ?, ?, ?, ?, ?)", rows)
     db.commit()
-    rep = report.build(db, [wikis.get("ruwiki"), wikis.get("enwiki")])
+    rep = report.build(db, [wikis.get("ruwiki"), wikis.get("enwiki")], today=dt.date(2026, 7, 2))
     ru, en = rep["wikis"]["ruwiki"]["logs"], rep["wikis"]["enwiki"]["logs"]
     assert ru["delete_channels"]["discussion"] == 30 and ru["delete_ns"]["user"] == 7
     assert "prod" in ru["absent"] and "prod" not in en["absent"]

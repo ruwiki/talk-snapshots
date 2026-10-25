@@ -240,24 +240,32 @@ def order_by_scale(report: dict) -> list[str]:
 
 
 def render_overview(report: dict) -> str:
+    """Заглавная — последние 30 дней: номинации, открытые в окне, их статьи и реплики, журналы
+    за те же дни. Полная картина с 1 июля — на странице раздела."""
     lang = "en"
-    order = order_by_scale(report)
     wikis = report["wikis"]
-    rows, links, kpi_rows = [], {}, []
+
+    def month_noms(w):
+        return (wikis[w].get("month") or {}).get("kpi", {}).get("nominations", 0)
+
+    order = sorted(wikis, key=lambda w: -month_noms(w))
+    rows, links, kpi_rows, span = [], {}, [], None
     for w in order:
         d = wikis[w]
-        if d.get("empty"):
+        if d.get("empty") or not month_noms(w):
             continue
-        rows.append((d["label"], d["lifecycle_total"]))
+        M = d["month"]
+        span = span or (M["since"], M["until"])
+        rows.append((d["label"], M["lifecycle_total"]))
         links[d["label"]] = f"/wiki/{w}"
-        k = d["kpi"]
+        k = M["kpi"]
         kpi_rows.append({
             "wiki": d["label"], "_href": f"/wiki/{w}",
             "nominations": k["nominations"], "articles": k["articles"], "comments": k["comments"],
             "participants": k["participants"],
             "deleted": f"{100*k['share_deleted']:.0f}%", "kept": f"{100*k['share_kept']:.0f}%",
             "open": f"{100*k['share_open']:.0f}%",
-            "mismatches": f"<a href='/wiki/{esc(w)}/mismatches'>{sum(d.get('mismatches', {}).values())}</a>",
+            "mismatches": f"<a href='/wiki/{esc(w)}/mismatches'>{sum(M.get('mismatches', {}).values())}</a>",
         })
     life = _life(lang)
     cols = [("wiki", ""), ("nominations", t(lang, "kpi_nominations")), ("articles", t(lang, "kpi_articles")),
@@ -269,12 +277,12 @@ def render_overview(report: dict) -> str:
         "<tr><td><a href='" + esc(r["_href"]) + "'>" + esc(r["wiki"]) + "</a></td>" +
         "".join(f"<td>{r[k] if k == 'mismatches' else esc(r[k])}</td>" for k, _ in cols[1:]) + "</tr>"
         for r in kpi_rows)
-    log_rows, span = [], None
+    log_rows, log_span = [], None
     for w in order:
-        L = wikis[w].get("logs")
+        L = wikis[w].get("logs_month")
         if not L:
             continue
-        span = span or L["days"]
+        log_span = log_span or L["days"]
         dc, tot = L["delete_channels"], sum(L["delete_channels"].values()) or 1
 
         def cell(c, L=L, dc=dc):
@@ -289,16 +297,21 @@ def render_overview(report: dict) -> str:
             "", t(lang, "ov_th_deleted"), t(lang, "ov_th_share_disc"), t(lang, "chan_prod"), t(lang, "chan_speedy"),
             t(lang, "chan_mass"), t(lang, "log_restore"), t(lang, "log_move"), t(lang, "log_protect")))
         logs_html = (
-            f"<h2>{esc(t(lang, 'ch_logs'))}</h2><p class='muted'>{esc(t(lang, 'ov_logs', a=span[0], b=span[1]))}</p>"
+            f"<h2>{esc(t(lang, 'ch_logs'))}</h2><p class='muted'>{esc(t(lang, 'ov_logs', a=log_span[0], b=log_span[1]))}</p>"
             f"<figure class='wide'><table class='ov-table'><thead><tr>{lh}</tr></thead><tbody>{''.join(log_rows)}</tbody></table></figure>")
+    month_html = (
+        f"<figure class='wide'><figcaption>{esc(t(lang, 'ov_fate_month', a=span[0], b=span[1]))} — "
+        f"{esc(t(lang, 'ov_hint'))}</figcaption>"
+        f"{stacked_hbar(rows, life, lang, width=1160, row=26, links=links)}{legend(life)}</figure>"
+        f"<figure class='wide'><figcaption>{esc(t(lang, 'ov_kpi_month', a=span[0], b=span[1]))}</figcaption>"
+        f"<table class='ov-table'><thead><tr>{head}</tr></thead><tbody>{trs}</tbody></table></figure>"
+    ) if span else f"<p class='muted'>{esc(t(lang, 'ov_month_empty'))}</p>"
     body = (
         f"<h1>{esc(t(lang, 'site_title'))}</h1>"
         f"<p class='muted'>{esc(t(lang, 'updated', date=report['generated']))} · {esc(t(lang, 'sources'))} · "
         f"<a href='/api/report.json'>JSON</a></p>"
         f"<p>{esc(t(lang, 'ov_lead'))}</p>"
-        f"<figure class='wide'><figcaption>{esc(t(lang, 'ov_fate'))} — {esc(t(lang, 'ov_hint'))}</figcaption>"
-        f"{stacked_hbar(rows, life, lang, width=1160, row=26, links=links)}{legend(life)}</figure>"
-        f"<figure class='wide'><table class='ov-table'><thead><tr>{head}</tr></thead><tbody>{trs}</tbody></table></figure>"
+        f"{month_html}"
         f"{logs_html}"
         "<p><a href='/speedy'>Speedy deletion across 51 Wikipedias</a> — what is wrong with a page and how each "
         "Wikipedia deletes it: local criterion, tag, reason people write (prototype).</p>"

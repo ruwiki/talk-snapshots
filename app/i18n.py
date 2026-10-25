@@ -220,9 +220,11 @@ S: dict[str, dict[str, str]] = {
                  "ja": "月|火|水|木|金|土|日"},
     # обзор
     "ov_lead": {"en": "Deletion discussions across Wikipedias, one pipeline: who nominates, who argues, and what actually "
-                      "happens to the pages — from the discussions themselves and the deletion logs. Wikis ordered by volume.",
+                      "happens to the pages — from the discussions themselves and the deletion logs. Here: the last 30 days, wikis "
+                      "ordered by volume.",
                 "ru": "Обсуждения удаления в разных Википедиях одним конвейером: кто номинирует, кто спорит и что реально "
-                      "происходит со страницами — по самим обсуждениям и журналам удалений. Разделы упорядочены по объёму.",
+                      "происходит со страницами — по самим обсуждениям и журналам удалений. Здесь — последние 30 дней, разделы "
+                      "упорядочены по объёму.",
                 "de": "", "uk": "", "zh": "", "it": "", "ja": ""},
     "mm_link": {
         "en": "Mismatches between discussions and logs: {n} — case by case",
@@ -317,7 +319,11 @@ S: dict[str, dict[str, str]] = {
     "ov_plan_log": {"en": "log only"},
     "ov_fate": {"en": "Fate of nominated articles (July 1 onwards)", "ru": "Судьба номинированных статей (с 1 июля)",
                 "de": "", "uk": "", "zh": "", "it": "", "ja": ""},
-    "ov_hint": {"en": "click a wiki for the full picture in its own language",
+    "ov_fate_month": {"en": "Fate of articles nominated in the last 30 days ({a} — {b})"},
+    "ov_kpi_month": {"en": "Last 30 days ({a} — {b}): nominations opened in the window, their articles, comments and "
+                           "participants; shares are of those articles, so many are still open"},
+    "ov_month_empty": {"en": "No nominations in the last 30 days yet."},
+    "ov_hint": {"en": "click a wiki for the full picture since July 1 in its own language",
                 "ru": "клик по разделу — полная картина на языке раздела",
                 "de": "", "uk": "", "zh": "", "it": "", "ja": ""},
 }

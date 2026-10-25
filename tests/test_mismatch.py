@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import datetime as dt
 from urllib.parse import quote
 
 from app import page, report, wikis
@@ -79,6 +80,9 @@ def test_page_renders_with_links_and_report_carries_counts():
 
 def test_overview_links_mismatch_counts():
     db = _db()
-    rep = report.build(db, [wikis.get("ruwiki")])
+    rep = report.build(db, [wikis.get("ruwiki")], today=dt.date(2026, 10, 10))
     html = page.render_overview(rep)
     assert "<a href='/wiki/ruwiki/mismatches'>6</a>" in html
+    # заглавная — последние 30 дней: через два месяца номинаций 24.09 на ней нет
+    later = page.render_overview(report.build(db, [wikis.get("ruwiki")], today=dt.date(2026, 11, 30)))
+    assert "/wiki/ruwiki/mismatches" not in later and "No nominations in the last 30 days" in later

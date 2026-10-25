@@ -67,8 +67,9 @@ def log_url(spec, ns: int, title: str) -> str:
     return f"https://{spec.host}/w/index.php?title=Special:Log&type=delete&page={quote(full, safe=_SAFE)}"
 
 
-def find(db: DB, spec, limit: int = 300) -> tuple[dict[str, list[Case]], dict[str, int]]:
-    """Случаи по видам (не больше `limit` на вид, свежие первыми) и полные счётчики."""
+def find(db: DB, spec, limit: int = 300, since: str | None = None) -> tuple[dict[str, list[Case]], dict[str, int]]:
+    """Случаи по видам (не больше `limit` на вид, свежие первыми) и полные счётчики.
+    since — только номинации с этого дня (ISO), для заглавной за последний месяц."""
     w = spec.dbname
     listing = dict(db.execute("SELECT id, title FROM pages WHERE wiki = ?", (w,)).fetchall())
     noms = db.execute(
@@ -93,6 +94,8 @@ def find(db: DB, spec, limit: int = 300) -> tuple[dict[str, list[Case]], dict[st
 
     found: dict[str, list[Case]] = {k: [] for k in KINDS}
     for nid, page_id, day, heading, source_page, struck, closed_at in noms:
+        if since and (day or "") < since:
+            continue
         base = dict(nomination_id=nid, day=day or "", nomination=heading,
                     discussion_url=discussion_url(spec, listing.get(page_id, ""), source_page, heading))
         if not pages.get(nid):

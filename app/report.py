@@ -19,6 +19,7 @@ from .core import mismatch, revisions
 from .db import DB
 
 OPEN_DAYS = 14          # моложе — «обсуждается»; старше без итога и судьбы — «висит»
+MONTH_DAYS = 30         # окно заглавной: номинации, открытые за последние 30 дней, считая сегодняшний
 DELAY_BUCKETS = ((1, "<1d"), (7, "1-7d"), (14, "8-14d"), (30, "15-30d"), (10**6, ">30d"))
 CPN_BUCKETS = ((0, "0"), (2, "1-2"), (5, "3-5"), (10, "6-10"), (20, "11-20"), (10**6, ">20"))
 LIFECYCLE = ("discussing", "hanging", "kept", "deleted", "redirect", "moved", "recreated", "missing")
@@ -40,8 +41,22 @@ def _iso(ts: str | None) -> dt.datetime | None:
         return None
 
 
+def month_start(today: dt.date) -> dt.date:
+    return today - dt.timedelta(days=MONTH_DAYS - 1)
+
+
+def _kpi(noms: int, articles: int, comments: int, participants: int, life: Counter) -> dict:
+    return {
+        "nominations": noms, "articles": articles, "comments": comments, "participants": participants,
+        "share_deleted": life["deleted"] / articles if articles else 0,
+        "share_kept": life["kept"] / articles if articles else 0,
+        "share_open": (life["discussing"] + life["hanging"]) / articles if articles else 0,
+    }
+
+
 def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
     today = today or dt.datetime.now(dt.UTC).date()
+    since = month_start(today)
     w = spec.dbname
     noms = db.execute("SELECT id, day, kind, n_comments FROM nominations WHERE wiki = ?", (w,)).fetchall()
     if not noms:
@@ -72,6 +87,8 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
     # --- жизненный цикл по страницам-статьям -------------------------------------------
     life_week: dict[str, Counter] = defaultdict(Counter)
     life_total: Counter = Counter()
+    life_month: Counter = Counter()
+    articles_month = 0
     delay: Counter = Counter()
     reasons: Counter = Counter()
     articles = 0
@@ -99,14 +116,21 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
         week = (day - dt.timedelta(days=day.weekday())).isoformat()
         life_week[week][lc] += 1
         life_total[lc] += 1
+        if day >= since:
+            life_month[lc] += 1
+            articles_month += 1
 
     # --- обсуждение ---------------------------------------------------------------------
     people: dict[str, dict] = defaultdict(lambda: {"comments": 0, "noms": set()})
     votes: Counter = Counter()
     heat = [[0] * 24 for _ in range(7)]
     n_comments = 0
+    comments_month = 0
+    people_month: set[str] = set()
     for nid, author, ts, vote, is_bot, _is_outcome in comments:
         n_comments += 1
+        in_month = nid in nom_day and nom_day[nid] >= since
+        comments_month += in_month
         if vote:
             votes[vote] += 1
         t = _iso(ts)
@@ -115,6 +139,8 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
         if author and not is_bot and not author.startswith("~"):
             people[author]["comments"] += 1
             people[author]["noms"].add(nid)
+            if in_month:
+                people_month.add(author)
     top = sorted(people.items(), key=lambda kv: -kv[1]["comments"])[:15]
     cpn: Counter = Counter(_bucket(n, CPN_BUCKETS) for _, _, _, n in noms)
     kinds: Counter = Counter(nom_kind.values())
@@ -160,12 +186,13 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
     return {
         "label": spec.label or w,
         "days": [min(nom_day.values()).isoformat(), max(nom_day.values()).isoformat()],
-        "kpi": {
-            "nominations": len(noms), "articles": articles, "comments": n_comments,
-            "participants": len(people),
-            "share_deleted": life_total["deleted"] / articles if articles else 0,
-            "share_kept": life_total["kept"] / articles if articles else 0,
-            "share_open": (life_total["discussing"] + life_total["hanging"]) / articles if articles else 0,
+        "kpi": _kpi(len(noms), articles, n_comments, len(people), life_total),
+        # заглавная: номинации, открытые за последние MONTH_DAYS дней, и всё о них
+        "month": {
+            "since": since.isoformat(), "until": today.isoformat(),
+            "kpi": _kpi(sum(d >= since for d in nom_day.values()), articles_month, comments_month,
+                        len(people_month), life_month),
+            "lifecycle_total": dict(life_month),
         },
         "kinds": dict(kinds),
         "lifecycle_total": dict(life_total),
@@ -184,7 +211,7 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
     }
 
 
-def build_logs(db: DB, spec) -> dict | None:
+def build_logs(db: DB, spec, since: dt.date | None = None) -> dict | None:
     """Панель «из журналов»: удаления статей по каналам, по пространствам, restore/move/protect.
 
     Каналы, которых в вики нет (нет регулярки в spec.log_channels), отдаются в `absent`:
@@ -192,6 +219,8 @@ def build_logs(db: DB, spec) -> dict | None:
     """
     w = spec.dbname
     rows = db.execute("SELECT day, kind, ns_group, channel, n FROM log_counts WHERE wiki = ?", (w,)).fetchall()
+    if since is not None:
+        rows = [r for r in rows if r[0] >= since.isoformat()]
     if not rows:
         return None
     ch = spec.log_channels
@@ -216,13 +245,18 @@ def build_logs(db: DB, spec) -> dict | None:
     }
 
 
-def build(db: DB, specs: list) -> dict:
+def build(db: DB, specs: list, today: dt.date | None = None) -> dict:
+    today = today or dt.datetime.now(dt.UTC).date()
+    since = month_start(today)
     out = {
         "generated": dt.datetime.now(dt.UTC).isoformat(timespec="minutes"),
-        "wikis": {spec.dbname: build_wiki(db, spec) for spec in specs},
+        "wikis": {spec.dbname: build_wiki(db, spec, today) for spec in specs},
     }
     for spec in specs:
-        out["wikis"][spec.dbname]["logs"] = build_logs(db, spec)
-        if not out["wikis"][spec.dbname].get("empty"):
-            out["wikis"][spec.dbname]["mismatches"] = mismatch.find(db, spec, limit=0)[1]
+        W = out["wikis"][spec.dbname]
+        W["logs"] = build_logs(db, spec)
+        W["logs_month"] = build_logs(db, spec, since)
+        if not W.get("empty"):
+            W["mismatches"] = mismatch.find(db, spec, limit=0)[1]
+            W["month"]["mismatches"] = mismatch.find(db, spec, limit=0, since=since.isoformat())[1]
     return out

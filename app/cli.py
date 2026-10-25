@@ -15,6 +15,7 @@ import argparse
 import datetime as dt
 import os
 import sys
+import traceback
 
 from . import wikis
 from .api import Api
@@ -37,49 +38,81 @@ def _wikis(arg: str | None) -> list[str]:
     return [w.strip() for w in raw.split(",") if w.strip()]
 
 
+def _per_wiki(db, names: list[str], step: str, fn) -> int:
+    """fn(name) для каждого раздела; сбой одного раздела не останавливает остальные.
+
+    14.09–25.10.2026 одна строка dewiki роняла `state`, и суточная джоба не доходила ни до
+    остальных разделов, ни до журналов и метрик — пять недель тишины. Теперь сбой — в лог
+    с трассой, код возврата 1, остальные разделы идут дальше.
+    """
+    failed = 0
+    for name in names:
+        try:
+            fn(name)
+        except Exception:  # noqa: BLE001 — любой сбой раздела; трасса уходит в лог джобы
+            failed += 1
+            db.rollback()
+            print(f"{name:7s} {step}: СБОЙ", file=sys.stderr)
+            traceback.print_exc()
+    return 1 if failed else 0
+
+
 def cmd_ingest(args) -> int:
     start, end = _days(args)
+
+    def one(name):
+        spec = wikis.get(name)
+        api = Api(spec.host)
+        for day in pipeline.daterange(start, end):
+            r = pipeline.ingest_day(
+                db, spec, api, day, with_revisions=not args.no_revisions,
+                refresh=args.refresh, refresh_changed=args.refresh_changed,
+                with_topics=not args.no_topics,
+            )
+            print(f"{spec.dbname:7s} {r['day']}  номинаций {r['nominations']:>3}  реплик {r['comments']:>4}  "
+                  f"правок {r['revisions']:>4}  тем {r['topics']:>4}  P31/P106 {r['claims']:>4}  авторов {r['authors']:>4}  пропущено {r['skipped']}")
+
     with open_db(args.db) as db:
         db.init_schema()
-        for name in _wikis(args.wiki):
-            spec = wikis.get(name)
-            api = Api(spec.host)
-            for day in pipeline.daterange(start, end):
-                r = pipeline.ingest_day(
-                    db, spec, api, day, with_revisions=not args.no_revisions,
-                    refresh=args.refresh, refresh_changed=args.refresh_changed,
-                    with_topics=not args.no_topics,
-                )
-                print(f"{spec.dbname:7s} {r['day']}  номинаций {r['nominations']:>3}  реплик {r['comments']:>4}  "
-                      f"правок {r['revisions']:>4}  тем {r['topics']:>4}  P31/P106 {r['claims']:>4}  авторов {r['authors']:>4}  пропущено {r['skipped']}")
-    return 0
+        return _per_wiki(db, _wikis(args.wiki), "ingest", one)
 
 
 def cmd_state(args) -> int:
+    def one(name):
+        spec = wikis.get(name)
+        n = pipeline.refresh_states(db, spec, Api(spec.host))
+        print(f"{spec.dbname:7s} судьба пересчитана для {n} страниц")
+
     with open_db(args.db) as db:
         db.init_schema()
-        for name in _wikis(args.wiki):
-            spec = wikis.get(name)
-            n = pipeline.refresh_states(db, spec, Api(spec.host))
-            print(f"{spec.dbname:7s} судьба пересчитана для {n} страниц")
-    return 0
+        return _per_wiki(db, _wikis(args.wiki), "state", one)
 
 
 def cmd_logs(args) -> int:
-    """Счётчики журналов: по умолчанию последние 3 дня (записи задним числом не появляются, но
-    день на границе мог быть неполным при прошлом прогоне)."""
+    """Счётчики журналов. По умолчанию — со дня после последнего сохранённого (не раньше чем
+    60 дней назад) и не позже чем последние 3 дня: день на границе мог быть неполным, а после
+    простоя дыра закрывается сама, без ручного --from."""
     from .core import logs
 
     today = dt.datetime.now(dt.UTC).date()
-    start = dt.date.fromisoformat(args.start) if args.start else today - dt.timedelta(days=2)
     end = dt.date.fromisoformat(args.end) if args.end else today
+
+    def one(name):
+        spec = wikis.get(name)
+        if args.start:
+            start = dt.date.fromisoformat(args.start)
+        else:
+            last = db.execute("SELECT MAX(day) FROM log_counts WHERE wiki = ?", (name,)).fetchone()[0]
+            start = today - dt.timedelta(days=2)
+            if last:
+                start = max(min(start, dt.date.fromisoformat(last) + dt.timedelta(days=1)),
+                            today - dt.timedelta(days=60))
+        n = logs.store(db, spec, start, end)
+        print(f"{spec.dbname:7s} журналы {start}..{end}: {n} строк")
+
     with open_db(args.db) as db:
         db.init_schema()
-        for name in _wikis(args.wiki):
-            spec = wikis.get(name)
-            n = logs.store(db, spec, start, end)
-            print(f"{spec.dbname:7s} журналы {start}..{end}: {n} строк")
-    return 0
+        return _per_wiki(db, _wikis(args.wiki), "logs", one)
 
 
 def cmd_quality(args) -> int:
@@ -134,10 +167,11 @@ def cmd_daily(args) -> int:
     args.refresh_changed = True
     args.no_revisions = False
     args.no_topics = False
-    cmd_ingest(args)
-    cmd_state(args)
-    cmd_logs(args)
-    return cmd_quality(args)
+    failed = cmd_ingest(args)
+    failed |= cmd_state(args)
+    failed |= cmd_logs(args)
+    failed |= cmd_quality(args)
+    return 1 if failed else 0
 
 
 def main(argv: list[str] | None = None) -> int:

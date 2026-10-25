@@ -339,7 +339,9 @@ def refresh_states(db: DB, spec, api: Api | None = None, since: dt.date | None =
             (
                 spec.dbname, s.ns, s.title[:250], s.state,
                 s.deleted_at.isoformat() if s.deleted_at else None, s.deleted_by,
-                s.reason_class, s.reason_code, s.reason_raw, s.moved_to, _now(),
+                # reason_code — группа регулярки спека: у dewiki «Schnelllöschantrag» (18) в VARCHAR(16)
+                # ронял всю вставку, и с 14.09 по 25.10.2026 суточная джоба не доходила до журналов
+                s.reason_class, (s.reason_code or None) and s.reason_code[:16], s.reason_raw, s.moved_to, _now(),
             )
             for s in states
         ],
