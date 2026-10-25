@@ -3,7 +3,6 @@
 
 from app.core import pipeline, revisions, topics
 from app.db import connect
-from app.models import Nomination, PageRef
 
 
 def _snak(q, rank="normal"):
@@ -88,17 +87,51 @@ def test_snapshot_appends_claims_to_categories(monkeypatch):
                    (0, "Ромашка", "P31", "Q891723")]
 
 
-def test_store_topics_carries_snapshot_to_new_nomination_id(monkeypatch):
+def test_store_topics_keyed_by_page_survives_deletion(monkeypatch):
+    """Снимок по странице: повтор обновляет last_seen, first_seen остаётся; удалённая статья
+    даёт пустой снимок, и снятое раньше никуда не девается — id номинации тут ни при чём."""
     from app import wikis
 
     spec = wikis.get("ruwiki")
     db = connect(":memory:")
     db.init_schema()
-    # старый снимок (статья уже удалена — новый снимок пуст) висит на номинации 1
-    db.execute("INSERT INTO topics VALUES (1, 'ruwiki', 0, 'Ромашка', 'P31', 'Q4830453', '2026-10-01')")
-    monkeypatch.setattr(topics, "snapshot", lambda spec, refs, api=None, wikidata=None: [])
-    nom = Nomination(title="Ромашка", heading_raw="Ромашка", struck=False)
-    nom.pages = [PageRef(ns=0, title="Ромашка", resolved_by="test")]
-    assert pipeline.store_topics(db, spec, [nom], [7], api=None) == (0, 0)
-    rows = db.execute("SELECT nomination_id, source, value FROM topics ORDER BY nomination_id").fetchall()
-    assert [tuple(r) for r in rows] == [(1, "P31", "Q4830453"), (7, "P31", "Q4830453")]
+    snap = [(0, "Ромашка", "category", "Компании"), (0, "Ромашка", "P31", "Q4830453")]
+    monkeypatch.setattr(topics, "snapshot", lambda spec, refs, api=None, wikidata=None: snap)
+    monkeypatch.setattr(pipeline, "_now", lambda: "2026-10-01T00:00:00+00:00")
+    assert pipeline.store_topics(db, spec, [(0, "Ромашка")], api=None) == (1, 1)
+    monkeypatch.setattr(pipeline, "_now", lambda: "2026-10-02T00:00:00+00:00")
+    pipeline.store_topics(db, spec, [(0, "Ромашка")], api=None)
+    monkeypatch.setattr(topics, "snapshot", lambda spec, refs, api=None, wikidata=None: [])   # статью удалили
+    assert pipeline.store_topics(db, spec, [(0, "Ромашка")], api=None) == (0, 0)
+    rows = db.execute("SELECT source, value, first_seen, last_seen FROM page_topics ORDER BY source").fetchall()
+    assert [tuple(r) for r in rows] == [
+        ("P31", "Q4830453", "2026-10-01T00:00:00+00:00", "2026-10-02T00:00:00+00:00"),
+        ("category", "Компании", "2026-10-01T00:00:00+00:00", "2026-10-02T00:00:00+00:00"),
+    ]
+
+
+def test_migrate_topics_collapses_old_nomination_ids_once():
+    """Старые строки под разными id (в т. ч. осиротевшими после --refresh-changed) → одна строка
+    на страницу и значение, first_seen/last_seen — крайние taken_at. Второй запуск ничего не делает,
+    даже если суточная джоба уже успела записать в page_topics."""
+    db = connect(":memory:")
+    db.init_schema()
+    ins = "INSERT INTO topics VALUES (?, ?, 0, ?, 'category', ?, ?)"
+    db.execute(ins, (5, "ruwiki", "Ромашка", "Компании", "2026-09-10"))      # осиротевший id
+    db.execute(ins, (9, "ruwiki", "Ромашка", "Компании", "2026-09-12"))
+    db.execute(ins, (9, "ukwiki", "Ромашка", "Компанії", "2026-09-11"))      # одноимённая страница в другой вики
+    assert pipeline.migrate_topics(db) == 2
+    rows = db.execute("SELECT wiki, value, first_seen, last_seen FROM page_topics ORDER BY wiki").fetchall()
+    assert [tuple(r) for r in rows] == [("ruwiki", "Компании", "2026-09-10", "2026-09-12"),
+                                        ("ukwiki", "Компанії", "2026-09-11", "2026-09-11")]
+    db.execute(ins, (11, "ruwiki", "Лютик", "Старое", "2026-09-13"))
+    assert pipeline.migrate_topics(db) == 0
+
+
+def test_migrate_runs_even_if_daily_wrote_first():
+    """Порядок деплоя сбился: суточная джоба записала page_topics раньше migrate — перенос всё равно идёт."""
+    db = connect(":memory:")
+    db.init_schema()
+    db.execute("INSERT INTO topics VALUES (5, 'ruwiki', 0, 'Ромашка', 'category', 'Компании', '2026-09-10')")
+    db.execute("INSERT INTO page_topics VALUES ('ruwiki', 0, 'Лютик', 'category', 'Цветы', 'x', 'x')")
+    assert pipeline.migrate_topics(db) == 1

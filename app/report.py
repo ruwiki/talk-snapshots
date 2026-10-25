@@ -15,7 +15,7 @@ import datetime as dt
 import re
 from collections import Counter, defaultdict
 
-from .core import mismatch
+from .core import mismatch, revisions
 from .db import DB
 
 OPEN_DAYS = 14          # моложе — «обсуждается»; старше без итога и судьбы — «висит»
@@ -124,26 +124,37 @@ def build_wiki(db: DB, spec, today: dt.date | None = None) -> dict:
     topic_state: dict[str, Counter] = {}
     if spec.topic_pattern:
         rx = re.compile(spec.topic_pattern)
-        rows = db.execute(
-            "SELECT nomination_id, value FROM topics WHERE wiki = ? AND source = 'category'", (w,)
-        ).fetchall()
+        # снимок лежит по странице: тема номинации — с её страниц и со страницы-номинации AfD (DELSORT)
+        topics_of: dict[tuple[int, str], list[str]] = defaultdict(list)
+        for ns, title, value in db.execute(
+            "SELECT ns, title, value FROM page_topics WHERE wiki = ? AND source = 'category'", (w,)
+        ).fetchall():
+            m = rx.match(value)
+            if m:
+                topics_of[(ns, title)].append(m.group(1))
         page_of: dict[int, list[tuple[int, str]]] = defaultdict(list)
         for nid, ns, title in pages:
             page_of[nid].append((ns, title))
-        seen: set[tuple[int, str]] = set()
-        for nid, value in rows:
-            m = rx.match(value)
-            if not m or (nid, m.group(1)) in seen:
-                continue
-            seen.add((nid, m.group(1)))
-            for ns, title in page_of.get(nid, ()):
-                if ns != 0:
-                    continue
-                state = states.get((ns, title), ("missing",))[0]
-                outs = out_by_nom.get(nid, {})
-                lc = state if state in ("deleted", "redirect", "moved", "recreated") else (
-                    "kept" if (outs.get(title) or outs.get(None)) else "open")
-                topic_state.setdefault(m.group(1), Counter())[lc] += 1
+        source_of = {
+            nid: revisions.split_title(spec, src)
+            for nid, src in db.execute(
+                "SELECT id, source_page FROM nominations WHERE wiki = ? AND source_page IS NOT NULL", (w,)
+            ).fetchall()
+        }
+        for nid in page_of:
+            refs = list(page_of[nid])
+            if nid in source_of:
+                ns, title = source_of[nid]
+                refs.append((ns, title.replace("_", " ")))
+            for topic in dict.fromkeys(t for ref in refs for t in topics_of.get(ref, ())):
+                for ns, title in page_of[nid]:
+                    if ns != 0:
+                        continue
+                    state = states.get((ns, title), ("missing",))[0]
+                    outs = out_by_nom.get(nid, {})
+                    lc = state if state in ("deleted", "redirect", "moved", "recreated") else (
+                        "kept" if (outs.get(title) or outs.get(None)) else "open")
+                    topic_state.setdefault(topic, Counter())[lc] += 1
         topic_state = dict(sorted(topic_state.items(), key=lambda kv: -sum(kv[1].values()))[:12])
 
     return {

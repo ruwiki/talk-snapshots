@@ -100,6 +100,7 @@ SCHEMA = [
         PRIMARY KEY (wiki, ns, title)
     )
     """,
+    # до 25.10.2026 снимок лежал под id номинации; теперь читает только migrate_topics
     """
     CREATE TABLE IF NOT EXISTS topics (
         nomination_id BIGINT       NOT NULL,
@@ -163,6 +164,25 @@ SCHEMA = [
         PRIMARY KEY (wiki, day, kind, ns_group, channel)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS tool_state (
+        name       VARCHAR(32)   NOT NULL PRIMARY KEY,
+        value      VARCHAR(1000) NOT NULL,
+        updated_at VARCHAR(32) NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS page_topics (
+        wiki       VARCHAR(32)  NOT NULL,
+        ns         INT          NOT NULL,
+        title      VARCHAR(255) NOT NULL,
+        source     VARCHAR(24)  NOT NULL,
+        value      VARCHAR(255) NOT NULL,
+        first_seen VARCHAR(32)  NOT NULL,
+        last_seen  VARCHAR(32)  NOT NULL,
+        PRIMARY KEY (wiki, ns, title, source, value)
+    )
+    """,
     "CREATE INDEX {ine} idx_revisions_actor ON revisions (actor)",
     "CREATE INDEX {ine} idx_revisions_section ON revisions (wiki, page_title, section)",
     "CREATE INDEX {ine} idx_comments_author ON comments (author)",
@@ -219,6 +239,9 @@ class DB:
 
     def commit(self) -> None:
         self.conn.commit()
+
+    def rollback(self) -> None:
+        self.conn.rollback()
 
     def init_schema(self) -> None:
         if self.flavour == "sqlite":

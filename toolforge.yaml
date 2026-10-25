@@ -4,3 +4,6 @@ components:
     component_type: scheduled
     schedule: "17 4 * * *"
     command: daily
+  stream:
+    component_type: continuous
+    command: stream

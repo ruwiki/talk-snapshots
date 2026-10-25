@@ -105,3 +105,20 @@ def test_log_channels_classify():
     assert ru.classify("/*<noinclude>{{к удалению|1=2026-07-16}}") == "discussion"
     assert ru.classify("[[ВП:КБУ#О9]]") == "speedy"
     assert "prod" not in ru.present() and "prod" in wikis.get("dewiki").log_channels.ALL
+
+
+def test_topics_come_from_page_snapshots_including_afd_subpage():
+    """Тема номинации en — DELSORT-категория страницы-номинации AfD, снятая по странице;
+    статью удалили, номинацию пересоздали с новым id — тема на витрине есть."""
+    db = _db()
+    db.execute("INSERT INTO pages (id, wiki, title, day, fetched_at) VALUES (1, 'enwiki', 'log', '2026-10-20', 'x')")
+    db.execute("INSERT INTO nominations (id, page_id, wiki, day, title, struck, n_comments, kind, source_page) "
+               "VALUES (77, 1, 'enwiki', '2026-10-20', 'Foo', 0, 1, 'single', 'Wikipedia:Articles for deletion/Foo')")
+    db.execute("INSERT INTO nomination_pages VALUES (77, 'enwiki', 0, 'Foo', 't')")
+    db.execute("INSERT INTO page_state (wiki, ns, title, state, checked_at) VALUES ('enwiki', 0, 'Foo', 'deleted', 'x')")
+    db.execute("INSERT INTO page_topics VALUES ('enwiki', 4, 'Articles for deletion/Foo', 'category', "
+               "'AfD debates (Business)', 'a', 'b')")
+    db.execute("INSERT INTO page_topics VALUES ('enwiki', 0, 'Foo', 'category', 'Companies', 'a', 'b')")
+    db.commit()
+    W = report.build_wiki(db, wikis.get("enwiki"), today=dt.date(2026, 10, 25))
+    assert W["topic_state"] == {"Business": {"deleted": 1}}

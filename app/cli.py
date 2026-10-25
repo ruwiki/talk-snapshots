@@ -1,9 +1,12 @@
-"""Командная строка: ingest | state | quality | daily.
+"""Командная строка: ingest | state | logs | quality | reclassify | stream | daily.
 
 `daily` — то, что крутит крон на Toolforge: по каждому разделу из TS_WIKIS
 перечитать последние N дней (только изменившиеся страницы), пересчитать судьбу
 страниц по журналам и посчитать метрики качества. Код возврата ненулевой, если
 метрики вышли за пороги, — сбой виден в логе джобы.
+
+`stream` — постоянная джоба рядом с `daily`: слушает EventStreams и снимает темы
+новых номинаций сразу, а не к следующему утру (app/core/stream.py).
 """
 
 from __future__ import annotations
@@ -113,6 +116,18 @@ def cmd_reclassify(args) -> int:
     return 0
 
 
+def cmd_stream(args) -> int:
+    """Постоянная джоба: снимок тем по потоку правок в момент номинации."""
+    import logging
+    from functools import partial
+
+    from .core import stream
+
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(asctime)s %(levelname)s %(message)s")
+    specs = [wikis.get(name) for name in _wikis(args.wiki)]
+    return stream.run(specs, partial(open_db, args.db), window_days=args.window, delay=args.delay)
+
+
 def cmd_daily(args) -> int:
     args.start = args.end = None
     args.refresh = False
@@ -156,6 +171,11 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sub.add_parser("reclassify", help="переклассифицировать сохранённые итоги по текущим правилам")
     p.set_defaults(func=cmd_reclassify)
+
+    p = sub.add_parser("stream", help="постоянно: снимок тем по EventStreams в момент номинации")
+    p.add_argument("--window", type=int, default=2, help="сколько последних дневных страниц слушать")
+    p.add_argument("--delay", type=float, default=60.0, help="секунд от первой правки страницы до прохода")
+    p.set_defaults(func=cmd_stream)
 
     p = sub.add_parser("daily", help="ingest --recent N --refresh-changed + state + quality")
     p.add_argument("--recent", type=int, default=int(os.environ.get("TS_RECENT_DAYS", "21")))

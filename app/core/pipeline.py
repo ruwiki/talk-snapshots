@@ -130,52 +130,95 @@ def store_revisions(db: DB, rows: list[Revision]) -> None:
     )
 
 
-def store_topics(db: DB, spec, noms: list[Nomination], ids: list[int], api: Api | None) -> tuple[int, int]:
-    """Снимок тем по страницам номинаций дня + категории страниц-номинаций (DELSORT).
+def store_topics(db: DB, spec, refs: list[tuple[int, str]], api: Api | None) -> tuple[int, int]:
+    """Снимок тем страниц → page_topics. → (строк category/wikibase_item, строк P31/P106).
 
-    → (строк category/wikibase_item, строк P31/P106). Снимки, снятые раньше по той же
-    (wiki, ns, title), переносятся на новые id номинаций: purge_page их не трогает, а
-    после --refresh-changed номинации получают новые id — иначе отчёт по nomination_id
-    не дотянулся бы ровно до удалённых статей, ради которых снимок и делается.
+    Снимок привязан к странице, а не к номинации: id номинации меняется при каждом
+    --refresh-changed, а страница — нет. Значение, которое видели раньше, получает новый
+    last_seen, first_seen остаётся моментом первого снимка. Удалённая статья даёт пустой
+    снимок, и ничего не стирается: всё, что сняли, пока она была жива, остаётся при ней.
     """
-    refs: list[tuple[int, str]] = []
-    owners: dict[tuple[int, str], list[int]] = {}
-    for nom, nom_id in zip(noms, ids, strict=True):
-        for p in nom.pages:
-            key = (p.ns, p.title)
-            if key not in owners:
-                refs.append(key)
-            owners.setdefault(key, []).append(nom_id)
-        if nom.source_page:
-            ns, title = revs.split_title(spec, nom.source_page)
-            key = (ns, title.replace("_", " "))
-            if key not in owners:
-                refs.append(key)
-            owners.setdefault(key, []).append(nom_id)
-    carry = db.ignore(
-        "INSERT INTO topics (nomination_id, wiki, ns, title, source, value, taken_at) "
-        "SELECT ?, wiki, ns, title, source, value, taken_at FROM topics "
-        "WHERE wiki = ? AND ns = ? AND title = ? AND nomination_id <> ?"
-    )
-    for (ns, title), nom_ids in owners.items():
-        for nom_id in nom_ids:
-            db.execute(carry, (nom_id, spec.dbname, ns, title[:250], nom_id))
+    now = _now()
     rows = []
     n_claims = 0
     for ns, title, source, value in ptopics.snapshot(spec, refs, api):
-        for nom_id in owners.get((ns, title), ()):
-            rows.append((nom_id, spec.dbname, ns, title[:250], source, value[:250], _now()))
-            n_claims += source in ptopics.CLAIMS
+        rows.append((spec.dbname, ns, title[:250], source, value[:250], now, now))
+        n_claims += source in ptopics.CLAIMS
     db.executemany(
-        db.ignore("INSERT INTO topics (nomination_id, wiki, ns, title, source, value, taken_at) VALUES (?, ?, ?, ?, ?, ?, ?)"),
+        db.upsert(
+            "INSERT INTO page_topics (wiki, ns, title, source, value, first_seen, last_seen) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            ("wiki", "ns", "title", "source", "value"),
+            ("wiki", "ns", "title", "source", "value", "last_seen"),
+        ),
         rows,
     )
     return len(rows) - n_claims, n_claims
 
 
+def topic_refs(spec, noms: list[Nomination]) -> list[tuple[int, str]]:
+    """(ns, title) для снимка тем: страницы номинаций и страницы-номинации AfD (там DELSORT)."""
+    refs: dict[tuple[int, str], None] = {}
+    for nom in noms:
+        for p in nom.pages:
+            refs[(p.ns, p.title)] = None
+        if nom.source_page:
+            ns, title = revs.split_title(spec, nom.source_page)
+            refs[(ns, title.replace("_", " "))] = None
+    return list(refs)
+
+
+def without_recent_snapshot(db: DB, spec, refs: list[tuple[int, str]], days: int = 3) -> list[tuple[int, str]]:
+    """Отбросить страницы, у которых снимок тем уже есть за последние `days` дней."""
+    cutoff = (dt.datetime.now(dt.UTC) - dt.timedelta(days=days)).isoformat(timespec="seconds")
+    have: set[tuple[int, str]] = set()
+    by_ns: dict[int, list[str]] = {}
+    for ns, title in refs:
+        by_ns.setdefault(ns, []).append(title[:250])
+    for ns, titles in by_ns.items():
+        for i in range(0, len(titles), 200):
+            chunk = titles[i:i + 200]
+            ph = ",".join(["?"] * len(chunk))
+            rows = db.execute(  # префикс первичного ключа (wiki, ns, title)
+                f"SELECT DISTINCT title FROM page_topics WHERE wiki = ? AND ns = ? AND title IN ({ph}) AND last_seen >= ?",
+                (spec.dbname, ns, *chunk, cutoff),
+            ).fetchall()
+            have.update((ns, title) for (title,) in rows)
+    return [r for r in refs if (r[0], r[1][:250]) not in have]
+
+
+MIGRATED_KEY = "page_topics_migrated"
+
+
+def migrate_topics(db: DB) -> int:
+    """Разово перенести снимки из старой `topics` (ключ — id номинации) в `page_topics`.
+
+    До 25.10.2026 снимок лежал под nomination_id, а --refresh-changed пересоздаёт
+    номинацию с новым id: до 10.10 строки оставались на старом, и у удалённых статей тема
+    «пропадала», хотя лежала в базе (24.10: 280 547 строк на 14 923 несуществующих id).
+    Группировка по странице возвращает их все. Один раз: отметка в tool_state, а не
+    «page_topics пуста» — суточная джоба могла успеть записать туда раньше migrate.
+    """
+    if db.execute("SELECT 1 FROM tool_state WHERE name = ?", (MIGRATED_KEY,)).fetchone():
+        return 0
+    cur = db.execute(
+        db.ignore(
+            "INSERT INTO page_topics (wiki, ns, title, source, value, first_seen, last_seen) "
+            "SELECT wiki, ns, title, source, value, MIN(taken_at), MAX(taken_at) FROM topics "
+            "GROUP BY wiki, ns, title, source, value"
+        )
+    )
+    n = cur.rowcount or 0
+    db.execute("INSERT INTO tool_state (name, value, updated_at) VALUES (?, ?, ?)", (MIGRATED_KEY, str(n), _now()))
+    db.commit()
+    return n
+
+
 def store_authors(db: DB, spec, noms: list[Nomination], api: Api | None) -> int:
     """Снимок авторов страниц номинаций (не страниц-номинаций AfD): кого звать в обсуждение."""
-    refs = list(dict.fromkeys((p.ns, p.title) for nom in noms for p in nom.pages))
+    return store_authors_refs(db, spec, list(dict.fromkeys((p.ns, p.title) for nom in noms for p in nom.pages)), api)
+
+
+def store_authors_refs(db: DB, spec, refs: list[tuple[int, str]], api: Api | None) -> int:
     rows = [
         (spec.dbname, a.ns, a.title[:250], a.user[:250], a.edits, a.bytes_added,
          a.first_ts.isoformat(), a.last_ts.isoformat(), int(a.is_bot), _now())
@@ -252,7 +295,7 @@ def ingest_day(
                 nom.outcomes.clear()
                 spec.outcome.apply(nom, spec, texts.get(i))
         page_id = store_page(db, spec, title, day, latest)
-        n_comments, ids = store_nominations(db, spec, page_id, day, noms)
+        n_comments, _ = store_nominations(db, spec, page_id, day, noms)
         result["pages"] += 1
         result["nominations"] += len(noms)
         result["comments"] += n_comments
@@ -261,7 +304,7 @@ def ingest_day(
             store_revisions(db, rows)
             result["revisions"] += len(rows)
         if with_topics:
-            n_topics, n_claims = store_topics(db, spec, noms, ids, api)
+            n_topics, n_claims = store_topics(db, spec, topic_refs(spec, noms), api)
             result["topics"] += n_topics
             result["claims"] += n_claims
             result["authors"] += store_authors(db, spec, noms, api)

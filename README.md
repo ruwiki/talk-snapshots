@@ -4,7 +4,7 @@
 `/wiki/<dbname>` — per-wiki page **in that wiki's language** (`app/i18n.py`);
 `/wiki/<dbname>/mismatches` — case-by-case list where the discussion and the deletion log disagree (page deleted but discussion open, kept but deleted, delete but exists, redirect but article, no page recognised, page found nowhere), each row linking to the discussion, the page and its log (`app/core/mismatch.py`);
 `/api/report.json` — the same aggregates as JSON (CORS `*` is deliberate: the API is meant
-for on-wiki gadgets and user scripts); `/healthz` (liveness), `/readyz` (DB check).
+for on-wiki gadgets and user scripts); `/healthz` (liveness), `/readyz` (showcase cache built, database reachable and, on Toolforge, Toolsdb rather than SQLite).
 
 Who argues with whom, about which pages, in deletion discussions — and what
 happens to those pages afterwards — across Wikipedias with one codebase.
@@ -66,7 +66,7 @@ invite to the discussion (`core/authors.py`).
 
 ```bash
 pip install -r requirements.txt
-export TS_DB=ts.sqlite            # or toolsdb:<db> on Toolforge (set by envvars)
+export TS_DB=ts.sqlite            # or toolsdb:<db> on Toolforge (set by envvars; unset there = refuse to start, no SQLite fallback)
 export TS_WIKIS=ruwiki,enwiki,dewiki
 
 python -m app.cli ingest --from 2026-07-01 --to 2026-07-03   # all TS_WIKIS
@@ -98,9 +98,17 @@ every run — it has no window.
 
 `Procfile` declares `web` (gunicorn serving the dashboard straight from Toolsdb with an
 hourly in-memory cache — no files shared between the cron and the web pod), `migrate`,
-`daily` and `smoke`; `toolforge.yaml` schedules `daily`. Web: `toolforge webservice
-buildservice start --mount none`. The post-deploy check runs as a one-off job on Toolforge, not in
-GitHub Actions: replicas and Toolsdb are unreachable outside Cloud VPS, so CI
-runs only the offline tests (`python -m pytest`) and `ruff`.
+`daily`, `stream` and `smoke`; `toolforge.yaml` schedules `daily` and keeps `stream` running.
+
+`stream` is a continuous job: it listens to EventStreams `recentchange`, and when a
+deletion venue's day page (the event's day, the day before or after in UTC) is edited it
+re-reads the nominations there and snapshots categories, the Wikidata item with P31/P106
+and the page authors for pages it has not seen in the last three days. Articles closed within
+hours are thus captured before deletion. Snapshots are keyed by page (`page_topics`,
+`page_authors`) with first/last seen, not by nomination id, which changes on every refresh.
+A cheap `parse&prop=sections` check skips passes when only replies changed; the stream
+position is kept in `tool_state`, never moves past an event whose page is still queued, and is
+replayed with a two-minute overlap after a restart (at most 24 hours back). `migrate` copies
+the pre-2026-10-25 `topics` table (keyed by nomination id) into `page_topics` once.
 
 Licensed under Apache-2.0.
